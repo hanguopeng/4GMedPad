@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>化验结果</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/tool_fixed.css"/>
+    <style type="text/css">
+        table
+        {
+            border-collapse: collapse;
+            margin: 1rem auto;
+            text-align: center;
+        }
+        table td, table th
+        {
+            border: 1px solid #cad9ea;
+            color: #666;
+            height: 30px;
+        }
+        table thead th
+        {
+            background-color: #CCE8EB;
+            width: 100px;
+        }
+        table tr:nth-child(odd)
+        {
+            background: #fff;
+        }
+        table tr:nth-child(even)
+        {
+            background: #F5FAFA;
+        }
+        .font-controller{
+            font-size:0.7rem;
+        }
+    </style>
+</head>
+
+<body>
+  <header class="aui-bar aui-bar-nav" id="header">
+    <a class="aui-pull-left aui-btn" onclick="closeWin()">
+        <span class="aui-iconfont aui-icon-left"></span>
+    </a>
+    <div class="aui-title" id="title">
+      化验明细
+    </div>
+  </header>
+  <table width="90%" class="table font-controller">
+        <caption>
+            <h3 id="assayDetailName"></h3>
+        </caption>
+        <thead>
+           <tr>
+               <th>
+                 化验项
+               </th>
+               <th>
+                   化验结果
+               </th>
+               <th>
+                   参考值
+               </th>
+               <th>
+                  异常指示
+               </th>
+           </tr>
+        </thead>
+        <tbody id="hyjgMx">
+
+        </tbody>
+   </table>
+</body>
+<a href="#" class="search-person" tapmode onclick="openMyToolFrame()"></a>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/analysisDetail.js"></script>
+
+</html>

@@ -1,0 +1,119 @@
+/*1rem = 20px*/
+html,body{
+    height: 100%;
+}
+.full-body{
+    min-height: 100%;
+}
+.sign-info-intro{
+
+}
+.left-border{
+    border-left: 2px double #00BCD4;
+}
+.bottom-border{
+    border-bottom: 2px double #00BCD4;
+}
+.block-head{
+    height: 1.5rem;
+    line-height: 1.5rem;
+    border-bottom: 2px dotted #ccc;
+    font-weight: 800;
+    font-size: 0.5rem;
+    padding-left: 0.75rem;
+}
+.block-content-container{
+    min-height: 2.5rem;
+}
+.flex{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.flex .flex-item{
+    -webkit-box-flex: 1;
+    -webkit-box-flex: 1;
+    flex: 1;
+    text-align: center;
+}
+.sign-item{
+
+}
+.sign-item .sign-circular{
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    font-size: 0.5rem;
+    color: #fff;
+    margin: auto;
+}
+.sign-item .sign-circular.temperature{
+    background-color: #f46d6f;
+}
+.sign-item .sign-circular.breathing{
+    background-color: #e41d36;
+}
+.sign-item .sign-circular.pulse{
+    background-color: #94ce58;
+}
+.sign-item .sign-circular.bloodPressure{
+    background-color: #676bfb;
+}
+.sign-item .sign-circular.heartRate{
+    background-color: #269fd6;
+}
+.sign-item .sign-txt{
+    font-size: 0.4rem;
+}
+.ellipsis-content .aui-ellipsis-2{
+    -webkit-line-clamp: 4;
+    text-indent: 1em;
+    font-size: 0.4rem;
+}
+.basics-info-intro .basics-info-item{
+    font-size: 0.4rem;
+}
+.fee-info{
+    font-size: 0.4rem;
+}
+.infusion-info-container .infusion-img{
+    width: 1rem;
+}
+.infusion-info-container .infusion-item{
+    padding-right: 0.3rem;
+}
+.infusion-info-container .status-txt{
+    font-size: 0.4rem;
+}
+.infusion-info-container .cnt{
+    font-size: 0.4rem;
+}
+.infusion-info-container .flex{
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+}
+.btn-item-container .btn-item{
+    width: 2rem;
+    text-align: center;
+}
+.btn-item-container .btn-img{
+    width: 1.5rem;
+    margin: auto;
+    text-align: center;
+}
+.btn-item-container .btn-img img{
+    width: 100%;
+}
+.btn-item-container .btn-txt{
+    font-size: 0.4rem;
+}
+.btn-item-container .flex{
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+}

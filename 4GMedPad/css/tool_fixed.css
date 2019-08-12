@@ -1,0 +1,9 @@
+.search-person {
+    position: fixed;
+    right: 0px;
+    bottom: 10px;
+    display: block;
+    width: 48px;
+    height: 48px;
+    background: url(../image/focus.png) no-repeat;
+}

@@ -1,0 +1,232 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>医嘱列表</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/doctor_advice.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/page.css" />
+    <link rel="stylesheet" type="text/css" href="../css/tool_fixed.css" />
+    <style>
+        .aui-searchbar-1 {
+            display: -webkit-box;
+            -webkit-box-pack: center;
+            -webkit-box-align: center;
+            height: 2.2rem;
+            overflow: hidden;
+            width: 32%;
+            background-color: #ebeced;
+            color: #9e9e9e;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            margin-left: 8rem;
+        }
+        .table-head{padding-right:17px;background-color:#999;color:#000;}
+        .table-body{width:100%; height:300px;overflow-y:scroll;}
+        .table-head table,.table-body table{width:100%;}
+        .table-body table tr:nth-child(2n+1){background-color:#f2f2f2;}
+    </style>
+</head>
+<body>
+<div class="aui-content full-body">
+    <div class="aui-row full-body  aui-padded-l-15 aui-padded-r-15">
+        <div class="page-top">
+            <div class="aui-row">
+                <div class="flex-item aui-font-size-12 aui-margin-t-10">
+                    <input type="checkbox" id="fyzfy" class="aui-margin-l-10" checked value="非医嘱费用">非医嘱费用
+
+                    <input type="checkbox" id="wdzzsj" class="aui-margin-l-10" value="未到终止时间">未到终止时间
+
+                    <input type="checkbox" id="czh" class="aui-margin-l-10" value="重整后">重整后
+
+                    <input type="checkbox" id="wjz" class="aui-margin-l-10" value="未记账">未记账
+
+                    <input type="checkbox" id="reportFlag" class="aui-margin-l-10" value="1">需要报告
+
+                    <input type="checkbox" id="bxybg" class="aui-margin-l-10" value="不需要报告">不需要报告
+
+                    <input type="button" class="aui-margin-l-10" onclick="searcDet()" value="查 询">
+                </div>
+            </div>
+            <div class="tabContainer flex aui-margin-t-5" id="typeTabContainer">
+                <div id="all" data-id="" class="tab-item flex-item active typeTab" onclick="changeTab(this,'')">全部</div>
+                <div id="cqyz" data-id="" class="tab-item flex-item typeTab" value="长期医嘱" onclick="changeTab(this,'0')">长期医嘱</div>
+                <div id="lsyz" data-id="" class="tab-item flex-item typeTab" value="临时医嘱" onclick="changeTab(this,'1')">临时医嘱</div>
+            </div>
+            <div class="adviceTable table-head" style="margin-top: 10px">
+                <table class="table">
+                    <colgroup>
+                        <col style="width: 80px;" />
+                        <col />
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>
+                            期效
+                        </th>
+                        <th>
+                            生效时间
+                        </th>
+                        <th>
+                        </th>
+                        <th>
+                            医嘱内容
+                        </th>
+                        <th>
+                            总量
+                        </th>
+                        <th>
+                            单量
+                        </th>
+                        <th>
+                            天数
+                        </th>
+                        <th>
+                            频率
+                        </th>
+                        <th>
+                            用法
+                        </th>
+                        <th>
+                            医生嘱托
+                        </th>
+                        <th>
+                            执行时间
+                        </th>
+                        <th>
+                            终止时间
+                        </th>
+                        <th>
+                            执行科室
+                        </th>
+                        <th>
+                            执行性质
+                        </th>
+                        <th>
+                            上次执行
+                        </th>
+                        <th>
+                            状态
+                        </th>
+                        <th>
+                            开嘱医生
+                        </th>
+                        <th>
+                            开嘱时间
+                        </th>
+                        <th>
+                            校对护士
+                        </th>
+                        <th>
+                            校对时间
+                        </th>
+                        <th>
+                            停嘱医生
+                        </th>
+                        <th>
+                            停嘱时间
+                        </th>
+                        <th>
+                            停嘱护士
+                        </th>
+                        <th>
+                            确认停嘱时间
+                        </th>
+                        <th>
+                            基本药物
+                        </th>
+                    </tr>
+                    </thead>
+                    <colgroup><col style="width: 80px;" /><col /></colgroup>
+                    <tbody id="tbody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</div>
+<div id="pageDivContainer"></div>
+<a href="#" class="search-person" tapmode onclick="openMyToolFrame()"></a>
+<script id="content-tmpl" type="text/template">
+    <tr>
+        {{?it.size>0}}
+        <td  rowspan="{{=it.size}}" style="color:{{=it.fieldENName}}">{{=it.priorityName||''}}</td>
+        <td  rowspan="{{=it.size}}"style="color:{{=it.fieldENName}}">{{=it.adviceStart||''}}</td>
+        {{??}}
+        {{?it.show}}
+        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.priorityName||''}}</td>
+        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.adviceStart||''}}</td>
+        {{?}}
+        {{?}}
+        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.icon||''}}</td>
+        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.name||''}}</td>
+        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.num||''}}</td>
+        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.dosage||''}}</td>
+        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.dateNum||''}}</td>
+        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.frequencyName||''}}</td>
+        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.usageName||''}}</td>
+        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.entrustment||''}}</td>
+        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.executionTime||''}}</td>
+        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.TerminationTime||''}}</td>
+        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.acceptOrgName||''}}</td>
+        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.executiveNature||''}}</td>
+        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.lastExcecutiveTime||''}}</td>
+        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.statusName||''}}</td>
+        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.doctorName||''}}</td>
+        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.foundTime||''}}</td>
+        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.nurseName||''}}</td>
+        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.checkTime||''}}</td>
+        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.stopDocName||''}}</td>
+        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.stopTime||''}}</td>
+        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.stopNurseName||''}}</td>
+        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.stopConfirm||''}}</td>
+        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.drugs||''}}</td>
+    </tr>
+</script>
+    <script id="pageInfo-tmpl" type="text/template">
+        <div class="bottomPage">
+            <div>
+                <span>第</span>
+                <span>{{=(it.currPage-1) * it.pageSize + 1}}</span>
+                <span>到</span>
+                <span>{{=it.currPage * it.pageSize}}</span>
+                <span>条记录</span>
+                <span style="margin-left: 25px;">共</span>
+                <span>{{=it.totalCount}}</span>
+                <span>条记录</span>
+            </div>
+            <div id="pageNumContainer" class="pageNumContainer" data-currentPage="{{=it.currPage}}">
+                {{? parseInt(it.currPage)!=1}}
+                <span onclick="firstPage();">首页</span>
+                {{?}}
+                {{? parseInt(it.currPage)>1}}
+                <span onclick="prePage();" class="prePage">上一页</span>
+                {{?}}
+                <span class="pageNumItem active">{{=it.currPage}}</span>
+                {{? parseInt(it.totalPage)>parseInt(it.currPage)}}
+                <span class="pageNumItem" onclick="nextPage();">
+                {{=parseInt(it.currPage)+1}}
+                </span>
+                {{?}}
+                {{? parseInt(it.totalPage)>parseInt(it.currPage)}}
+                <span class="nextPage" onclick="nextPage();">下一页</span>
+                {{?}}
+            </div>
+
+        </div>
+    </script>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/doctorAdvice.js"></script>
+<script type="text/javascript">
+
+</script>
+</html>
+
+
+
+

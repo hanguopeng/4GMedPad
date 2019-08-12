@@ -1,0 +1,57 @@
+table
+{
+    border-collapse: collapse;
+    margin: 1rem auto;
+    text-align: center;
+}
+table td, table th
+{
+    border: 1px solid #cad9ea;
+    color: #666;
+    height: 30px;
+}
+table thead th
+{
+    background-color: #CCE8EB;
+    width: 100px;
+}
+table tr
+{
+    background: #fff;
+}
+.trActive{
+    background: #F5FAFA;
+}
+
+/*检查明细*/
+.detail-container{
+
+}
+.detail-item{
+}
+.detail-item-title{
+    color: #03a9f4;
+    font-size: 0.7rem;
+    font-weight: 800;
+}
+.detail-item-content{
+    color: #333;
+    font-size: 0.5rem;
+    text-indent: 2em;
+    line-height: 1rem;
+}
+.detail-item-content p{
+    color: #333;
+    font-size: 0.5rem;
+    text-indent: 2em;
+}
+.detail-item-content .detail-img-name{
+    color: #00BCD4;
+    text-decoration: underline;
+}
+.detail-item-content .detail-img-container{
+    overflow-y: scroll;
+}
+.detail-item-content .detail-img-container img{
+    width: 100%;
+}

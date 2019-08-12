@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>离线下载</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+</head>
+
+<body>
+  <header class="aui-bar aui-bar-nav" id="header">
+    <a class="aui-pull-left aui-btn" onclick="closeWin()">
+        <span class="aui-iconfont aui-icon-left"> </span>
+    </a>
+    <div class="aui-title" id="title">
+      离线下载
+    </div>
+  </header>
+
+  <div id="main">
+    <div id="showTime" class="aui-text-center aui-font-size-12" style="margin-top:80px;">
+
+    </div>
+		<div class="aui-text-center">
+			<i id="downloadIcon" class="iconfont icon-xiazai" style="font-size: 100px;"></i>
+		</div>
+
+    <div class="aui-text-center aui-font-size-12">
+      点击按钮，下载最新数据
+    </div>
+
+    <div class="aui-row aui-margin-t-10">
+      <div class="aui-col-xs-4">&nbsp;</div>
+      <div class="aui-col-xs-4 aui-list-item">
+        <div class="aui-list aui-form-list">
+          <div class="aui-text-center aui-list-item-inner">
+            <div class="  aui-list-item-label" style="width:50% !important;margin-left: 1.75rem !important;">
+                使用离线
+            </div>
+            <div class="aui-list-item-input">
+                <input id="offlineFlag" type="checkbox" class="aui-switch">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="aui-col-xs-4">&nbsp;</div>
+    </div>
+	</div>
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/win_download.js"></script>
+
+</html>

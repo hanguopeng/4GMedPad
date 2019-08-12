@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>检查结果明细</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/frm_inspection_result.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/tool_fixed.css"/>
+    <style type="text/css">
+        .font-size-controller{
+            font-size: 0.7rem;
+        }
+    </style>
+</head>
+
+<body>
+<header class="aui-bar aui-bar-nav" id="header">
+    <a class="aui-pull-left aui-btn" onclick="closeWin()">
+        <span class="aui-iconfont aui-icon-left"> </span>
+    </a>
+    <div class="aui-title" id="title">
+        检查明细
+    </div>
+</header>
+<div class="detail-container aui-padded-15 font-size-controller">
+    <div class="detail-item aui-padded-b-10">
+        <div class="detail-item-title">检查所见</div>
+        <div class="detail-item-content aui-padded-t-5" id="discover">
+        </div>
+    </div>
+    <div class="detail-item aui-padded-b-10">
+        <div class="detail-item-title">检查结果</div>
+        <div class="detail-item-content aui-padded-t-5" id="result">
+
+        </div>
+    </div>
+    <!--<div class="detail-item aui-padded-b-10">-->
+        <!--<div class="detail-item-title">检查图像</div>-->
+        <!--<div id="accessoryList">-->
+
+        <!--</div>-->
+        <!--<div class="detail-item-content aui-padded-t-5">
+            <a href="javascript:;" class="detail-img-name">影像001.JPG</a>
+            <div class="detail-img-container">
+                <img src="" alt="">
+            </div>
+        </div>-->
+    <!--</div>-->
+</div>
+</body>
+<a href="#" class="search-person" tapmode onclick="openMyToolFrame()"></a>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/inspectionDetail.js"></script>
+</html>

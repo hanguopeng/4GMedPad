@@ -1,0 +1,373 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>费用明细</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/tool_fixed.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/page.css" />
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+            margin: 1rem auto;
+            text-align: center;
+        }
+
+        table td, table th {
+            border: 1px solid #cad9ea;
+            color: #666;
+            height: 30px;
+        }
+
+        table thead th {
+            background-color: #CCE8EB;
+            width: 100px;
+        }
+
+        table tr {
+            background: #fff;
+        }
+
+        .trActive {
+            background: #F5FAFA;
+        }
+
+        .flex {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: justify;
+            -webkit-justify-content: space-between;
+            justify-content: space-between;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+
+        .flex .flex-item {
+            -webkit-box-flex: 2;
+            -webkit-box-flex: 2;
+            -webkit-box-flex: 1;
+            flex: 1;
+            text-align: center;
+        }
+
+        input.searchInput,select.searchInput {
+            display: inline-block;
+            border-bottom: 1px double #b9b9b9;
+            width: auto;
+            height: 1.5rem;
+        }
+
+        .feeDetailTable{
+            overflow-x: scroll;
+            font-size: 0.5rem;
+        }
+        .feeDetailTable::-webkit-scrollbar {/*滚动条整体样式*/
+            width: 1rem;     /*高宽分别对应横竖滚动条的尺寸*/
+            height: 0.2rem;
+        }
+        .feeDetailTable::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+            background: #289bd0;
+        }
+        .feeDetailTable::-webkit-scrollbar-track {/*滚动条里面轨道*/
+            -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            background: #EDEDED;
+        }
+        td {
+            width: 1px;
+            white-space: nowrap; /* 自适应宽度*/
+            word-break:  keep-all; /* 避免长单词截断，保持全部 */
+        }
+    </style>
+</head>
+
+<body>
+<!--<span>第</span>
+<span>{{=(it.currPage-1) * it.pageSize + 1}}</span>
+<span>到</span>
+<span>{{=it.currPage * it.pageSize}}</span>
+<span>条记录</span>
+<span style="margin-left: 25px;">共</span>
+<span>{{=it.totalCount}}</span>
+<span>条记录</span>-->
+<!--{{? parseInt(it.currPage)!=1}}<span onclick="firstPage();">首页</span>{{?}}
+{{? parseInt(it.currPage)>1}}<span onclick="prePage();" class="prePage">上一页</span>{{?}}
+<span class="pageNumItem active">{{=it.currPage}}</span>
+{{? parseInt(it.totalPage)>parseInt(it.currPage)}}
+<span class="pageNumItem" onclick="nextPage('{{=parseInt(it.currPage)+1}}');">
+                {{=parseInt(it.currPage)+1}}
+            </span>
+{{?}}
+{{? parseInt(it.totalPage)>parseInt(it.currPage)}}
+<span class="nextPage" onclick="nextPage('{{=parseInt(it.currPage)+1}}');">下一页</span>
+{{?}}-->
+<div class="aui-content">
+    <div class="aui-info aui-font-size-12 aui-padded-l-15 aui-padded-r-15" id="searchInfo">
+
+    </div>
+    <div class="aui-font-size-12 flex">
+        <!-- <div class="flex-item">
+             <span>医嘱优先级</span>
+             <select class="aui-font-size-12 searchInput aui-margin-l-5" name="" id="yzyzj">
+                 <option value="">全部</option>
+                 <option value="长期医嘱">长期医嘱</option>
+                 <option value="临时医嘱">临时医嘱</option>
+                 <option value="输液">输液</option>
+                 <option value="口服药物">口服药物</option>
+             </select>
+             <i class="aui-iconfont aui-icon-search" onclick="searchPersons()"></i>
+         </div>
+         <div class="flex-item">
+             <span>医嘱大类处方号</span>
+             <input class="aui-font-size-12 searchInput aui-margin-l-5" id="yzdlcfh" type="text" placeholder="医嘱大类处方号">
+             <i class="aui-iconfont aui-icon-search" onclick="searchPersons()"></i>
+         </div>-->
+        <!-- <div class="flex-item">
+         </div>-->
+    </div>
+</div>
+<div style="overflow-x:scroll;" class="aui-padded-l-15 aui-padded-r-15 feeDetailTable">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>日期</th>
+            <th>单据号</th>
+            <th>科室</th>
+            <th>结算方式</th>
+            <th>结算号码</th>
+            <th>预交金额</th>
+            <th>结账金额</th>
+            <th>剩余金额</th>
+            <!--<th>未发药数量</th>-->
+            <th>摘要</th>
+            <th>实际票号</th>
+            <th>操作员姓名</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+            <tr class="feeDetails" tapmode onclick="openFeeDetails()">
+                <td>2019-06-19</td>
+                <td>T923424</td>
+                <td>血液肿瘤</td>
+                <td>银联卡</td>
+                <td>6652</td>
+                <td>90000.00</td>
+                <td>88075.75</td>
+                <td>1924.93</td>
+                <!--<td>未发药数量</td>-->
+                <td>工行6526</td>
+                <td>0000065486</td>
+                <td>李红</td>
+            </tr>
+            <tr class="feeDetails" tapmode  onclick="openFeeDetails()">
+                <td>2019-06-19</td>
+                <td>T923424</td>
+                <td>血液肿瘤</td>
+                <td>银联卡</td>
+                <td>6652</td>
+                <td>90000.00</td>
+                <td>88075.75</td>
+                <td>1924.93</td>
+                <!--<td>未发药数量</td>-->
+                <td>工行6526</td>
+                <td>0000065486</td>
+                <td>李红</td>
+            </tr>
+            <tr class="feeDetails" tapmode onclick="openFeeDetails()">
+                <td>2019-06-19</td>
+                <td>T923424</td>
+                <td>血液肿瘤</td>
+                <td>银联卡</td>
+                <td>6652</td>
+                <td>90000.00</td>
+                <td>88075.75</td>
+                <td>1924.93</td>
+                <!--<td>未发药数量</td>-->
+                <td>工行6526</td>
+                <td>0000065486</td>
+                <td>李红</td>
+            </tr><tr class="feeDetails" onclick="openFeeDetails()">
+                <td>2019-06-19</td>
+                <td>T923424</td>
+                <td>血液肿瘤</td>
+                <td>银联卡</td>
+                <td>6652</td>
+                <td>90000.00</td>
+                <td>88075.75</td>
+                <td>1924.93</td>
+                <!--<td>未发药数量</td>-->
+                <td>工行6526</td>
+                <td>0000065486</td>
+                <td>李红</td>
+            </tr><tr class="feeDetails" onclick="openFeeDetails()">
+                <td>2019-06-19</td>
+                <td>T923424</td>
+                <td>血液肿瘤</td>
+                <td>银联卡</td>
+                <td>6652</td>
+                <td>90000.00</td>
+                <td>88075.75</td>
+                <td>1924.93</td>
+                <!--<td>未发药数量</td>-->
+                <td>工行6526</td>
+                <td>0000065486</td>
+                <td>李红</td>
+            </tr><tr class="feeDetails" onclick="openFeeDetails()">
+                <td>2019-06-19</td>
+                <td>T923424</td>
+                <td>血液肿瘤</td>
+                <td>银联卡</td>
+                <td>6652</td>
+                <td>90000.00</td>
+                <td>88075.75</td>
+                <td>1924.93</td>
+                <!--<td>未发药数量</td>-->
+                <td>工行6526</td>
+                <td>0000065486</td>
+                <td>李红</td>
+            </tr><tr class="feeDetails" onclick="openFeeDetails()">
+                <td>2019-06-19</td>
+                <td>T923424</td>
+                <td>血液肿瘤</td>
+                <td>银联卡</td>
+                <td>6652</td>
+                <td>90000.00</td>
+                <td>88075.75</td>
+                <td>1924.93</td>
+                <!--<td>未发药数量</td>-->
+                <td>工行6526</td>
+                <td>0000065486</td>
+                <td>李红</td>
+            </tr><tr class="feeDetails" onclick="openFeeDetails()">
+                <td>2019-06-19</td>
+                <td>T923424</td>
+                <td>血液肿瘤</td>
+                <td>银联卡</td>
+                <td>6652</td>
+                <td>90000.00</td>
+                <td>88075.75</td>
+                <td>1924.93</td>
+                <!--<td>未发药数量</td>-->
+                <td>工行6526</td>
+                <td>0000065486</td>
+                <td>李红</td>
+            </tr>
+            <tr class="feeDetails" onclick="openFeeDetails()">
+                <td>2019-06-19</td>
+                <td>T923424</td>
+                <td>血液肿瘤</td>
+                <td>银联卡</td>
+                <td>6652</td>
+                <td>90000.00</td>
+                <td>88075.75</td>
+                <td>1924.93</td>
+                <!--<td>未发药数量</td>-->
+                <td>工行6526</td>
+                <td>0000065486</td>
+                <td>李红</td>
+            </tr><tr class="feeDetails" onclick="openFeeDetails()">
+                <td>2019-06-19</td>
+                <td>T923424</td>
+                <td>血液肿瘤</td>
+                <td>银联卡</td>
+                <td>6652</td>
+                <td>90000.00</td>
+                <td>88075.75</td>
+                <td>1924.93</td>
+                <!--<td>未发药数量</td>-->
+                <td>工行6526</td>
+                <td>0000065486</td>
+                <td>李红</td>
+            </tr><tr class="feeDetails" onclick="openFeeDetails()">
+                <td>2019-06-19</td>
+                <td>T923424</td>
+                <td>血液肿瘤</td>
+                <td>银联卡</td>
+                <td>6652</td>
+                <td>90000.00</td>
+                <td>88075.75</td>
+                <td>1924.93</td>
+                <!--<td>未发药数量</td>-->
+                <td>工行6526</td>
+                <td>0000065486</td>
+                <td>李红</td>
+            </tr><tr class="feeDetails" onclick="openFeeDetails()">
+                <td>2019-06-19</td>
+                <td>T923424</td>
+                <td>血液肿瘤</td>
+                <td>银联卡</td>
+                <td>6652</td>
+                <td>90000.00</td>
+                <td>88075.75</td>
+                <td>1924.93</td>
+                <!--<td>未发药数量</td>-->
+                <td>工行6526</td>
+                <td>0000065486</td>
+                <td>李红</td>
+            </tr><tr class="feeDetails" onclick="openFeeDetails()">
+                <td>2019-06-19</td>
+                <td>T923424</td>
+                <td>血液肿瘤</td>
+                <td>银联卡</td>
+                <td>6652</td>
+                <td>90000.00</td>
+                <td>88075.75</td>
+                <td>1924.93</td>
+                <!--<td>未发药数量</td>-->
+                <td>工行6526</td>
+                <td>0000065486</td>
+                <td>李红</td>
+            </tr><tr class="feeDetails" onclick="openFeeDetails()">
+                <td>2019-06-19</td>
+                <td>T923424</td>
+                <td>血液肿瘤</td>
+                <td>银联卡</td>
+                <td>6652</td>
+                <td>90000.00</td>
+                <td>88075.75</td>
+                <td>1924.93</td>
+                <!--<td>未发药数量</td>-->
+                <td>工行6526</td>
+                <td>0000065486</td>
+                <td>李红</td>
+            </tr><tr class="feeDetails" onclick="openFeeDetails()">
+                <td>2019-06-19</td>
+                <td>T923424</td>
+                <td>血液肿瘤</td>
+                <td>银联卡</td>
+                <td>6652</td>
+                <td>90000.00</td>
+                <td>88075.75</td>
+                <td>1924.93</td>
+                <!--<td>未发药数量</td>-->
+                <td>工行6526</td>
+                <td>0000065486</td>
+                <td>李红</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div id="pageDivContainer"></div>
+<a href="#" class="search-person" tapmode onclick="openMyToolFrame()"></a>
+<script id="feeInfo-tmpl" type="text/template">
+    <span>预交金额:预交款:</span>
+    <!--<span>费用(元):{{=it.closedOrderMoney||''}}</span>-->
+    <!--<span>自付金额(元):{{=it.selfPay||''}}</span>-->
+    <span>未结费用:</span>
+    <span>预结费用:</span>
+    <span>自付费用:</span>
+    <span>剩余款:</span>
+</script>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/fee.js"></script>
+</html>

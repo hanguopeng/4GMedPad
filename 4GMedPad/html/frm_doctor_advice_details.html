@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>费用明细</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/doctor_advice.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/page.css" />
+    <link rel="stylesheet" type="text/css" href="../css/tool_fixed.css" />
+    <style>
+        .aui-searchbar-1 {
+            display: -webkit-box;
+            -webkit-box-pack: center;
+            -webkit-box-align: center;
+            height: 2.2rem;
+            overflow: hidden;
+            width: 32%;
+            background-color: #ebeced;
+            color: #9e9e9e;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            margin-left: 8rem;
+        }
+        .table-head{padding-right:17px;background-color:#999;color:#000;}
+        .table-body{width:100%; height:300px;overflow-y:scroll;}
+        .table-head table,.table-body table{width:100%;}
+        .table-body table tr:nth-child(2n+1){background-color:#f2f2f2;}
+    </style>
+</head>
+
+<body class="aui-font-size-12">
+<div class="tabContainer flex aui-margin-t-10" id="typeTabContainer">
+    <div id="yzjj" class="yzjj tab-item flex-item typeTab active" value="医嘱计价内容" onclick="changeTab(this)">医嘱计价内容</div>
+    <div id="yzfs" class="yzfs tab-item flex-item typeTab" value="医嘱发送记录" onclick="changeTab(this)">医嘱发送记录</div>
+</div>
+<div style="overflow-x:scroll;" class="aui-padded-l-15 feeDetailTable" style="padding-right: 5rem;">
+    <table class="table">
+        <thead id="thead">
+        </thead>
+        <tbody id="tbody">
+        </tbody>
+    </table>
+</div>
+<div id="pageDivContainer" class="aui-margin-l-5"></div>
+<script id="thead1-tmpl" type="text/template">
+    <tr>
+        <th>计价医嘱</th>
+        <th>类别</th>
+        <th>收费项目</th>
+        <th>单位</th>
+        <th>计价数量</th>
+        <th>单价</th>
+        <th>执行科室</th>
+        <th>费用类型</th>
+        <th>从项</th>
+        <th>收费方式</th>
+    </tr>
+</script>
+<script id="thead2-tmpl" type="text/template">
+    <tr>
+        <th>发送时间</th>
+        <th>单据号</th>
+        <th>发送医嘱</th>
+        <th>收费项目</th>
+        <th>发送数次</th>
+        <th>计费状态</th>
+        <th>执行状态</th>
+        <th>执行科室</th>
+        <th>执行人</th>
+        <th>执行时间</th>
+        <th>执行说明</th>
+        <th>首次时间</th>
+        <th>末次时间</th>
+        <th>发送人</th>
+    </tr>
+</script>
+<script id="trInfo1-tmpl" type="text/template">
+    <tr>
+        <td id="">护理医嘱-III级护理</td>
+        <td>护理</td>
+        <td>III级护理</td>
+        <td>日</td>
+        <td>1</td>
+        <td>9.000000</td>
+        <td>胸泌甲状腺</td>
+        <td></td>
+        <td></td>
+        <td>正常收取</td>
+    </tr>
+</script>
+<script id="trInfo2-tmpl" type="text/template">
+    <tr>
+        <td>{{=data.sendTime||''}}</td>
+        <td>{{=data.costListId||''}}</td>
+        <td>{{=data.sendName||''}}</td>
+        <td>{{=data.costListType||''}}</td>
+        <td>{{=data.sendNum||''}}</td>
+        <td>{{=data.sendBillStatus||''}}</td>
+        <td>{{=data.executeStatus||''}}</td>
+        <td>{{=data.executeDepartment||''}}</td>
+        <td>{{=data.executor||''}}</td>
+        <td>{{=data.executeTime||''}}</td>
+        <td>{{=data.||''}}</td>
+        <td>{{=data.firstTime||''}}</td>
+        <td>{{=data.lastTime||''}}</td>
+        <td>{{=data.sentor||''}}</td>
+    </tr>
+</script>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/aui-tab.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/doctor_advice_details.js"></script>
+
+</html>
+
+
+

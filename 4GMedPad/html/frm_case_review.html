@@ -1,0 +1,1130 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>病历查阅</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/tool_fixed.css"/>
+    <style>
+      .parent{
+        height: 100%;
+        display: flex;
+        align-items:stretch;
+        display: -webkit-flex;
+        flex-direction: row;
+        -webkit-flex-direction: row;
+        -webkit-align-content: stretch;
+      }
+      .left{
+        width: 300px;
+      }
+
+      .child{
+        width:300px;
+        height:100%;
+        position:absolute;
+      }
+      .right{
+        -webkit-flex: 1;
+        flex:1;
+        position:relative;
+      }
+    </style>
+</head>
+<body>
+<div class="aui-content full-body">
+  <div class="parent">
+    <div class="left">
+      <div id="left" class="child aui-border-r">
+
+      </div>
+    </div>
+    <div id="right" class="right">
+
+    </div>
+  </div>
+</div>
+
+<script type="text/template" id="index-tpl">
+  <div class="aui-content aui-margin-b-15">
+    <ul class="aui-list aui-list-in">
+        <li class="aui-list-header">
+            病案信息
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">医疗付费方式</div>
+                <div class="aui-list-item-right">{{=it['医疗付费方式'] || ''}}</div>
+            </div>
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">健康卡号</div>
+                <div class="aui-list-item-right">{{=it['健康卡号'] || ''}}</div>
+            </div>
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">住院次数</div>
+                <div class="aui-list-item-right">{{=it['住院次数'] || ''}}</div>
+            </div>
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">住院号</div>
+                <div class="aui-list-item-right">{{=it['住院号'] || ''}}</div>
+            </div>
+        </li>
+    </ul>
+  </div>
+  <div class="aui-content aui-margin-b-15">
+    <ul class="aui-list aui-list-in">
+        <li class="aui-list-header">
+            基本信息
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">姓名</div>
+                <div class="aui-list-item-right">{{=it.name || ''}}</div>
+            </div>
+        </li>
+        {{? it['年龄'] }}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">年龄</div>
+                <div class="aui-list-item-right">{{=it['年龄'] || ''}}</div>
+            </div>
+        </li>
+        {{?}}
+        {{? it['年龄N月'] || it['年龄N小时'] }}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">年龄</div>
+                <div class="aui-list-item-right">{{=it['年龄N月'] || ' - '}}月 {{=it['年龄N小时'] || ' - '}}小时</div>
+            </div>
+        </li>
+        {{?}}
+        {{? it['新生儿出生体重'] }}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">新生儿出生体重</div>
+                <div class="aui-list-item-right">{{=it['新生儿出生体重'] || ''}}克</div>
+            </div>
+        </li>
+        {{?}}
+        {{? it['新生儿入院体重'] }}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">新生儿入院体重</div>
+                <div class="aui-list-item-right">{{=it['新生儿入院体重'] || ''}}克</div>
+            </div>
+        </li>
+        {{?}}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">性别</div>
+                <div class="aui-list-item-right">{{=it['性别'] || ''}}</div>
+            </div>
+        </li>
+        {{? it['出生日期'] }}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">出生日期</div>
+                <div class="aui-list-item-right">{{=it['出生日期'] || ''}}</div>
+            </div>
+        </li>
+        {{?}}
+        {{? it['国籍'] }}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">国籍</div>
+                <div class="aui-list-item-right">{{=it['国籍'] || ''}}</div>
+            </div>
+        </li>
+        {{?}}
+        {{? it['出生地_省'] || it['出生地_市'] || it['出生地_县'] }}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">出生地</div>
+                <div class="aui-list-item-right">{{=it['出生地_省'] || ' - '}}省 {{=it['出生地_市'] || ' - '}}市 {{=it['出生地_县'] || ' - '}} 县</div>
+            </div>
+        </li>
+        {{?}}
+        {{? it['籍贯_省'] || it['籍贯_市'] }}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">籍贯</div>
+                <div class="aui-list-item-right">{{=it['籍贯_省'] || ' - '}}省 {{=it['籍贯_市'] || ' - '}}市</div>
+            </div>
+        </li>
+        {{?}}
+        {{? it['民族'] }}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">民族</div>
+                <div class="aui-list-item-right">{{=it['民族'] || ''}}</div>
+            </div>
+        </li>
+        {{?}}
+        {{? it['身份证号'] }}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">身份证号</div>
+                <div class="aui-list-item-right">{{=it['身份证号'] || ''}}</div>
+            </div>
+        </li>
+        {{?}}
+        {{? it['职业'] }}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">职业</div>
+                <div class="aui-list-item-right">{{=it['职业'] || ''}}</div>
+            </div>
+        </li>
+        {{?}}
+        {{? it['婚姻'] }}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">婚姻</div>
+                <div class="aui-list-item-right">{{=it['婚姻'] || ''}}</div>
+            </div>
+        </li>
+        {{?}}
+        {{? it['现住址_省'] || it['现住址_市'] || it['现住址_县'] }}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">现住址</div>
+                <div class="aui-list-item-right">{{=it['现住址_省'] || ' - '}}省 {{=it['现住址_市'] || ' - '}}市 {{=it['现住址_县'] || ' - '}} 县</div>
+            </div>
+        </li>
+        {{?}}
+        {{? it['现住址_电话'] }}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">现住址电话</div>
+                <div class="aui-list-item-right">{{=it['现住址_电话'] || ''}}</div>
+            </div>
+        </li>
+        {{?}}
+        {{? it['现住址_邮编'] }}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">现住址邮编</div>
+                <div class="aui-list-item-right">{{=it['现住址_邮编'] || ''}}</div>
+            </div>
+        </li>
+        {{?}}
+        {{? it['户口地址_省'] || it['户口地址_市'] || it['户口地址_县'] }}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">户口地址</div>
+                <div class="aui-list-item-right">{{=it['户口地址_省'] || ' - '}}省 {{=it['户口地址_市'] || ' - '}}市 {{=it['户口地址_县'] || ' - '}} 县</div>
+            </div>
+        </li>
+        {{?}}
+        {{? it['户口地址_邮编'] }}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">户口地址邮编</div>
+                <div class="aui-list-item-right">{{=it['户口地址_邮编'] || ''}}</div>
+            </div>
+        </li>
+        {{?}}
+        {{? it['工作单位及地址'] }}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">工作单位及地址</div>
+                <div class="aui-list-item-right">{{=it['工作单位及地址'] || ''}}</div>
+            </div>
+        </li>
+        {{?}}
+        {{? it['工作单位及地址_电话'] }}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">工作单位电话</div>
+                <div class="aui-list-item-right">{{=it['工作单位及地址_电话'] || ''}}</div>
+            </div>
+        </li>
+        {{?}}
+        {{? it['联系人姓名'] }}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">联系人姓名</div>
+                <div class="aui-list-item-right">{{=it['联系人姓名'] || ''}}</div>
+            </div>
+        </li>
+        {{?}}
+        {{? it['联系人关系'] }}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">联系人关系</div>
+                <div class="aui-list-item-right">{{=it['联系人关系'] || ''}}</div>
+            </div>
+        </li>
+        {{?}}
+        {{? it['联系人地址'] }}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">联系人地址</div>
+                <div class="aui-list-item-right">{{=it['联系人地址'] || ''}}</div>
+            </div>
+        </li>
+        {{?}}
+        {{? it['联系人电话'] }}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">联系人电话</div>
+                <div class="aui-list-item-right">{{=it['联系人电话'] || ''}}</div>
+            </div>
+        </li>
+        {{?}}
+    </ul>
+    </div>
+
+    <div class="aui-content aui-margin-b-15">
+      <ul class="aui-list aui-list-in">
+          <li class="aui-list-header">
+              住院信息
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner">
+                  <div class="aui-list-item-title">入院途径</div>
+                  <div class="aui-list-item-right">{{=it['入院途径'] || ''}}</div>
+              </div>
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner">
+                  <div class="aui-list-item-title">入院时间</div>
+                  <div class="aui-list-item-right">{{=it['入院时间'] || ''}}</div>
+              </div>
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner">
+                  <div class="aui-list-item-title">入院科室</div>
+                  <div class="aui-list-item-right">{{=it['入院科室'] || ''}}</div>
+              </div>
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner">
+                  <div class="aui-list-item-title">入院病房</div>
+                  <div class="aui-list-item-right">{{=it['入院病房'] || ''}}</div>
+              </div>
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner">
+                  <div class="aui-list-item-title">转科科别</div>
+                  <div class="aui-list-item-right">{{=it['转科科别'] || ''}}</div>
+              </div>
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner">
+                  <div class="aui-list-item-title">出院时间</div>
+                  <div class="aui-list-item-right">{{=it['出院时间'] || ''}}</div>
+              </div>
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner">
+                  <div class="aui-list-item-title">出院科室</div>
+                  <div class="aui-list-item-right">{{=it['出院科室'] || ''}}</div>
+              </div>
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner">
+                  <div class="aui-list-item-title">出院病房</div>
+                  <div class="aui-list-item-right">{{=it['出院病房'] || ''}}</div>
+              </div>
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner">
+                  <div class="aui-list-item-title">实际住院天数</div>
+                  <div class="aui-list-item-right">{{=it['实际住院天数'] || ''}}</div>
+              </div>
+          </li>
+      </ul>
+      </div>
+
+      <div class="aui-content aui-margin-b-15">
+        <ul class="aui-list aui-list-in">
+            <li class="aui-list-header">
+                 门急诊信息
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">诊断编码</div>
+                    <div class="aui-list-item-right">{{=it['诊断编码'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title">门急诊诊断</div>
+                        </div>
+                        <div class="aui-list-item-text">
+                          {{=it['门急诊诊断'] || ''}}
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+      </div>
+
+      <div class="aui-content aui-margin-b-15">
+        <ul class="aui-list aui-list-in">
+            <li class="aui-list-header">
+                 诊断信息
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">出院主诊断_疾病编码</div>
+                    <div class="aui-list-item-right">{{=it['出院主诊断_疾病编码'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">出院主诊断_入院病情</div>
+                    <div class="aui-list-item-right">{{=it['出院主诊断_入院病情'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title">出院主诊断</div>
+                        </div>
+                        <div class="aui-list-item-text">
+                          {{=it['出院主诊断'] || ''}}
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+      </div>
+
+      <!-- todo 这里是多行，确认如何判断该信息 -->
+      <div class="aui-content aui-margin-b-15">
+        <ul class="aui-list aui-list-in">
+            <li class="aui-list-header">
+                 出院其他诊断信息[多个显示1,2,3]
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">出院其他诊断_疾病编码</div>
+                    <div class="aui-list-item-right">{{=it['出院其他诊断_疾病编码'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">出院其他诊断_入院病情</div>
+                    <div class="aui-list-item-right">{{=it['出院其他诊断_入院病情'] || ''}}</div>
+                </div>
+            </li>
+        </ul>
+      </div>
+
+      <div class="aui-content aui-margin-b-15">
+        <ul class="aui-list aui-list-in">
+            <li class="aui-list-header">
+                 信息
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">损伤、中毒的外部因素</div>
+                    <div class="aui-list-item-right">{{=it['损伤中毒的外部因素'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">frm_audio_list.js
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">损伤、中毒的外部因素_疾病编码</div>
+                    <div class="aui-list-item-right">{{=it['损伤中毒的外部因素_疾病编码'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title">病理诊断</div>
+                        </div>
+                        <div class="aui-list-item-text">
+                          {{=it['病理诊断'] || ''}}
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">病理编码</div>
+                    <div class="aui-list-item-right">{{=it['病理编码'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">病理号</div>
+                    <div class="aui-list-item-right">{{=it['病理号'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">药物过敏</div>
+                    <div class="aui-list-item-right">{{=it['药物过敏'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">死亡患者尸检</div>
+                    <div class="aui-list-item-right">{{=it['死亡患者尸检'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">ABO血型</div>
+                    <div class="aui-list-item-right">{{=it['ABO血型'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">RH型</div>
+                    <div class="aui-list-item-right">{{=it['RH型'] || ''}}</div>
+                </div>
+            </li>
+        </ul>
+      </div>
+
+
+      <div class="aui-content aui-margin-b-15">
+        <ul class="aui-list aui-list-in">
+            <li class="aui-list-header">
+                 医生信息
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">科主任</div>
+                    <div class="aui-list-item-right">{{=it['科主任'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">主（副主）任医师</div>
+                    <div class="aui-list-item-right">{{=it['主（副主）任医师'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">主治医师</div>
+                    <div class="aui-list-item-right">{{=it['主治医师'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">住院医师</div>
+                    <div class="aui-list-item-right">{{=it['住院医师'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">责任护士</div>
+                    <div class="aui-list-item-right">{{=it['责任护士'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">进修医师</div>
+                    <div class="aui-list-item-right">{{=it['进修医师'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">实习医师</div>
+                    <div class="aui-list-item-right">{{=it['实习医师'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">编码员</div>
+                    <div class="aui-list-item-right">{{=it['编码员'] || ''}}</div>
+                </div>
+            </li>
+        </ul>
+      </div>
+
+      <div class="aui-content aui-margin-b-15">
+        <ul class="aui-list aui-list-in">
+            <li class="aui-list-header">
+                 质控信息
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">病案质量</div>
+                    <div class="aui-list-item-right">{{=it['病案质量'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">质控医师</div>
+                    <div class="aui-list-item-right">{{=it['质控医师'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">质控护士</div>
+                    <div class="aui-list-item-right">{{=it['质控护士'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">质控日期</div>
+                    <div class="aui-list-item-right">{{=it['质控日期'] || ''}}</div>
+                </div>
+            </li>
+        </ul>
+      </div>
+
+      <!-- todo 多条信息 -->
+      <div class="aui-content aui-margin-b-15">
+        <ul class="aui-list aui-list-in">
+            <li class="aui-list-header">
+                 手术信息信息
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">手术编码</div>
+                    <div class="aui-list-item-right">{{=it['手术编码'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">手术日期</div>
+                    <div class="aui-list-item-right">{{=it['手术日期'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">手术级别</div>
+                    <div class="aui-list-item-right">{{=it['手术级别'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">手术有创操作名称</div>
+                    <div class="aui-list-item-right">{{=it['手术有创操作名称'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">手术医师—术者</div>
+                    <div class="aui-list-item-right">{{=it['手术医师—术者'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">手术医师-1助</div>
+                    <div class="aui-list-item-right">{{=it['手术医师-1助'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">手术医师-2助</div>
+                    <div class="aui-list-item-right">{{=it['手术医师-2助'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">麻醉方式</div>
+                    <div class="aui-list-item-right">{{=it['麻醉方式'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">麻醉医师</div>
+                    <div class="aui-list-item-right">{{=it['麻醉医师'] || ''}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">切口愈合等级</div>
+                    <div class="aui-list-item-right">{{=it['切口愈合等级'] || ''}}</div>
+                </div>
+            </li>
+        </ul>
+      </div>
+</script>
+
+<script type="text/template" id="checkin-tpl">
+  <div class="aui-content aui-margin-b-15">
+    <ul class="aui-list aui-list-in">
+        <li class="aui-list-header">
+            基本信息
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">姓名</div>
+                <div class="aui-list-item-right">{{=it.name || ''}}</div>
+            </div>
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">年龄</div>
+                <div class="aui-list-item-right">{{=it['年龄'] || ''}}</div>
+            </div>
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">性别</div>
+                <div class="aui-list-item-right">{{=it['性别'] || ''}}</div>
+            </div>
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">科室</div>
+                <div class="aui-list-item-right">{{=it['科室'] || ''}}</div>
+            </div>
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">住院号</div>
+                <div class="aui-list-item-right">{{=it['住院号'] || ''}}</div>
+            </div>
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">入院时间</div>
+                <div class="aui-list-item-right">{{=it['入院时间'] || ''}}</div>
+            </div>
+        </li>
+        {{? it['记录日期'] }}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">记录日期</div>
+                <div class="aui-list-item-right">{{=it['记录日期'] || ''}}</div>
+            </div>
+        </li>
+        {{?}}
+        {{? it['病史陈述者'] }}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">病史陈述者</div>
+                <div class="aui-list-item-right">{{=it['病史陈述者'] || ''}}</div>
+            </div>
+        </li>
+        {{?}}
+        {{? it['婚姻'] }}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">婚姻</div>
+                <div class="aui-list-item-right">{{=it['婚姻'] || ''}}</div>
+            </div>
+        </li>
+        {{?}}
+        {{? it['可靠性'] }}
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">可靠性</div>
+                <div class="aui-list-item-right">{{=it['可靠性'] || ''}}</div>
+            </div>
+        </li>
+        {{?}}
+    </ul>
+    </div>
+    <div class="aui-content aui-margin-b-15">
+        <ul class="aui-list aui-media-list">
+            <li class="aui-list-header">
+                详细信息
+                <div class="aui-pull-right">
+                    医师签名： {{=it['三级医师审核'] || '-'}}
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title">主诉</div>
+                        </div>
+                        <div class="aui-list-item-text">
+                          {{=it['主诉'] || ''}}
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title">现病史</div>
+                        </div>
+                        <div class="aui-list-item-text">
+                          {{=it['现病史'] || ''}}
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title">既往史</div>
+                        </div>
+                        <div class="aui-list-item-text">
+                          {{=it['既往史'] || ''}}
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title">个人史</div>
+                        </div>
+                        <div class="aui-list-item-text">
+                          {{=it['个人史'] || ''}}
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title">婚姻史</div>
+                        </div>
+                        <div class="aui-list-item-text">
+                          {{=it['婚姻史'] || ''}}
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title">月经史</div>
+                        </div>
+                        <div class="aui-list-item-text">
+                          初潮年龄{{=it['初潮年龄'] || '-'}}岁
+                          {{=it['行经期天数'] || '-'}}
+                          {{=it['间隔天数'] || '-'}}
+                          {{=it['末次月经时间'] || '-'}}
+                          {{=it['绝经年龄'] || '-'}}
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title">生育史</div>
+                        </div>
+                        <div class="aui-list-item-text">
+                          {{=it['生育史'] || ''}}
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title">家族史</div>
+                        </div>
+                        <div class="aui-list-item-text">
+                          {{=it['家族史'] || ''}}
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title">体格检查</div>
+                        </div>
+                        <div class="aui-list-item-text">
+                          T:{{=it['体温'] || '[ - ]'}}℃ P:{{=it['脉搏'] || '[ - ]'}}次/分 R:{{=it['呼吸'] || '[ - ]'}}次/分 Bp:{{=it['收缩压'] || '[ - ]'}}/{{=it['舒张压'] || '[ - ]'}}mmHg
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title">专科情况</div>
+                        </div>
+                        <div class="aui-list-item-text">
+                          {{=it['专科情况'] || ''}}
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title">初步诊断</div>
+                        </div>
+                        <div class="aui-list-item-text">
+                          {{=it['初步诊断'] || ''}}
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+</script>
+
+<script type="text/template" id="record-tpl">
+  <div class="aui-content aui-margin-b-15">
+    <ul class="aui-list aui-list-in">
+        <li class="aui-list-header">
+            基本信息
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">姓名</div>
+                <div class="aui-list-item-right">{{=it.name || ''}}</div>
+            </div>
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">年龄</div>
+                <div class="aui-list-item-right">{{=it['年龄'] || ''}}</div>
+            </div>
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">性别</div>
+                <div class="aui-list-item-right">{{=it['性别'] || ''}}</div>
+            </div>
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">科室</div>
+                <div class="aui-list-item-right">{{=it['科室'] || ''}}</div>
+            </div>
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">病案号</div>
+                <div class="aui-list-item-right">{{=it['病案号'] || ''}}</div>
+            </div>
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">入院时间</div>
+                <div class="aui-list-item-right">{{=it['入院时间'] || ''}}</div>
+            </div>
+        </li>
+    </ul>
+  </div>
+  <div class="aui-content aui-margin-b-15">
+      <ul class="aui-list aui-media-list">
+          <li class="aui-list-header">
+              详细信息
+              <div class="aui-pull-right">
+                  医师签名： {{=it['医师签名'] || '-'}}
+              </div>
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-inner">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title">主诉病史</div>
+                      </div>
+                      <div class="aui-list-item-text">
+                        {{=it['主诉病史'] || ''}}
+                      </div>
+                  </div>
+              </div>
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-inner">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title">病历特点</div>
+                      </div>
+                      <div class="aui-list-item-text">
+                        {{=it['病历特点'] || ''}}
+                      </div>
+                  </div>
+              </div>
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-inner">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title">拟诊讨论</div>
+                      </div>
+                      <div class="aui-list-item-text">
+                        {{=it['拟诊讨论'] || ''}}
+                      </div>
+                  </div>
+              </div>
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-inner">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title">诊疗计划</div>
+                      </div>
+                      <div class="aui-list-item-text">
+                        {{=it['诊疗计划'] || ''}}
+                      </div>
+                  </div>
+              </div>
+          </li>
+      </ul>
+  </div>
+</script>
+
+<script type="text/template" id="checkout-tpl">
+  <div class="aui-content aui-margin-b-15">
+    <ul class="aui-list aui-list-in">
+        <li class="aui-list-header">
+            基本信息
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">姓名</div>
+                <div class="aui-list-item-right">{{=it.name || ''}}</div>
+            </div>
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">年龄</div>
+                <div class="aui-list-item-right">{{=it['年龄'] || ''}}</div>
+            </div>
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">性别</div>
+                <div class="aui-list-item-right">{{=it['性别'] || ''}}</div>
+            </div>
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">科室</div>
+                <div class="aui-list-item-right">{{=it['科室'] || ''}}</div>
+            </div>
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">病案号</div>
+                <div class="aui-list-item-right">{{=it['病案号'] || ''}}</div>
+            </div>
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">入院时间</div>
+                <div class="aui-list-item-right">{{=it['入院时间'] || ''}}</div>
+            </div>
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">出院时间</div>
+                <div class="aui-list-item-right">{{=it['出院时间'] || ''}}</div>
+            </div>
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">住院天数</div>
+                <div class="aui-list-item-right">{{=it['住院天数'] || ''}}</div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="aui-content aui-margin-b-15">
+    <ul class="aui-list aui-media-list">
+        <li class="aui-list-header">
+            详细信息
+            <div class="aui-pull-right">
+                医师签名： {{=it['医师签名'] || '-'}}
+            </div>
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-media-list-item-inner">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-text">
+                        <div class="aui-list-item-title">入院情况</div>
+                    </div>
+                    <div class="aui-list-item-text">
+                      {{=it['入院情况'] || ''}}
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-media-list-item-inner">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-text">
+                        <div class="aui-list-item-title">入院诊断</div>
+                    </div>
+                    <div class="aui-list-item-text">
+                      {{=it['入院诊断'] || ''}}
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-media-list-item-inner">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-text">
+                        <div class="aui-list-item-title">诊疗经过</div>
+                    </div>
+                    <div class="aui-list-item-text">
+                      {{=it['诊疗经过'] || ''}}
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-media-list-item-inner">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-text">
+                        <div class="aui-list-item-title">出院诊断</div>
+                    </div>
+                    <div class="aui-list-item-text">
+                      {{=it['出院诊断'] || ''}}
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-media-list-item-inner">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-text">
+                        <div class="aui-list-item-title">出院情况</div>
+                    </div>
+                    <div class="aui-list-item-text">
+                      {{=it['出院情况'] || ''}}
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="aui-list-item">
+            <div class="aui-media-list-item-inner">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-text">
+                        <div class="aui-list-item-title">出院医嘱</div>
+                    </div>
+                    <div class="aui-list-item-text">
+                      {{=it['出院医嘱'] || ''}}
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+</script>
+<a href="#" class="search-person" tapmode onclick="openMyToolFrame()"></a>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/frm_case_review.js"></script>
+</html>

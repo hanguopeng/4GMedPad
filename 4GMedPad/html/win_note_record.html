@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>Hello APP</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+
+    <style>
+        .searchBox {    border: 1px solid #dddddd; height: 30px; margin: 10px 10px 0px 10px;}
+        .searchBox input {height: 30px; line-height: 30px; font-size: 18px;outline: none;}
+        .searchBox img {height: 30px; position: absolute; right: 0; top: 5px;}
+
+        .textarea {height: 200px;}
+        textarea {width: 100%;font-size: 18px;outline: none;}
+
+        .btn {height: 40px;line-height: 40px;color: #fff;background-color: #4DC060;font-size: 16px;margin: 10px 10px 0 10px;text-align: center;}
+        /* 悬浮样式 */
+        .itemhover {background-color: #25A044 !important;}
+        .headerhover {background-color: #36A8DC !important;}
+    </style>
+</head>
+<body style="background-color:#fff">
+  <header class="aui-bar aui-bar-nav" id="header">
+      <a class="aui-pull-left aui-btn" onclick="closeWin()">
+          <span class="aui-iconfont aui-icon-left"></span>
+      </a>
+      <div class="aui-title">
+          记事本
+      </div>
+  </header>
+    <div class="searchBox"><input id="title" type="text" placeholder="请输入标题"></div>
+    <div class="searchBox textarea">
+        <textarea  id="content" style="height: 7rem;" rows="10" cols="50" placeholder="备忘内容"></textarea>
+    </div>
+
+  <div class="aui-text-center" style="margin-top:80px;">
+      <!--<div id="cameraBtn" class="aui-btn aui-btn-info" style="width: 80%;" tapmode onclick="cameraShot()" >拍照</div>-->
+  </div>
+    <div class="aui-text-center" style="margin-top:80px;">
+      <div id="startBtn" class="aui-btn aui-btn-info" style="width: 80%;" tapmode onclick="saveNote()" >提交</div>
+    </div>
+
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript">
+    var db;
+
+    apiready = function() {
+      api.parseTapmode();
+      db = api.require('db');
+      //var cameraTool = api.requre('cameraTool');
+
+    };
+
+    function closeWin(){
+      api.closeWin();
+    }
+    function cameraShot(){
+        cameraTool.openCamera(function(ret, err) { api.prompt({ title: "信息", msg: "图片路径：" + ret.imgPath, buttons: ["取消", "确定"] }); });
+    }
+    function saveNote(){
+      var title = $api.trim($api.val($api.byId('title')));
+      //console.log("title="+title);
+      if(!title){
+        api.toast({
+            msg: '请填写标题',
+            duration: 2000,
+            location: 'bottom'
+        });
+        return;
+      }
+
+      if(title.length > 100){
+        api.toast({
+            msg: '标题不能超过100字',
+            duration: 2000,
+            location: 'bottom'
+        });
+        return;
+      }
+
+      var content = $api.trim($api.val($api.byId('content')));
+      if(!content){
+        api.toast({
+            msg: '请填写内容',
+            duration: 2000,
+            location: 'bottom'
+        });
+        return;
+      }
+
+      var currentDate = new Date();
+      var createDate = formatCurrentDate(currentDate);
+      var timestamp = currentDate.getTime();
+      var person = $api.getStorage(storageKey.currentPerson);
+      var id = person.id + "" + timestamp;
+      var userId = $api.getStorage(storageKey.userId);
+      var personId = person.id;
+
+      //插入到数据库中一条记录
+      db.executeSql({
+          name: cmcdb.name,
+          sql: "INSERT INTO " + cmcdb.resTable + "(id,res_name,res_type,create_date,user_id,content,person_id,status) "+
+               "VALUES ('"+ id +"','"+ title +"',1,'"+ createDate +"','"+ userId +"','"+ content + "','"+ personId +"',0)"
+      }, function(ret, err) {
+          if (ret.status) {
+            api.alert({
+              title: '提示',
+              msg: '保存成功',
+            }, function(ret, err) {
+              closeWin();
+            });
+          } else {
+            api.alert({
+              title: '错误',
+              msg: '保存失败！'+err.msg,
+            });
+          }
+      });
+    }
+
+    function formatCurrentDate(date){
+    	var hours = date.getHours();
+    	var mins = date.getMinutes();
+    	var secs = date.getSeconds();
+    	// var msecs = date.getMilliseconds();
+    	if(hours<10) hours = "0"+hours;
+    	if(mins<10) mins = "0"+mins;
+    	if(secs<10) secs = "0"+secs;
+    	return formatDateToStringWithHyphen(date)+" "+hours+":"+mins+":"+secs;
+    }
+
+    function formatDateToStringWithHyphen(date){
+    	var year = date.getFullYear();
+    	var month = date.getMonth()+1;
+    	var day = date.getDate();
+    	if(month<10) month = "0"+month;
+    	if(day<10) day = "0"+day;
+    	return year+"-"+month+"-"+day;
+    }
+</script>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>移动查房</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <style>
+      .shirk-line{
+         min-height: 1.2rem !important;
+         padding: 0 0 !important;
+      }
+      .flex-container{
+        display:-webkit-box;
+        display:flex;
+        display:-ms-flex;
+        display:-webkit-flex;
+        width:100%;
+        flex-wrap: wrap;
+        -webkit-flex-wrap: wrap;
+      }
+      .flex-item{
+        width:24%;
+        box-sizing: border-box;
+        margin: 10px 0.5% 0px 0.5%;
+      }
+      .forbid{
+        color: white !important;
+      }
+      .person-main-weight{
+        font-weight: bolder;
+      }
+        #zdslh{
+            white-space:nowrap;!important;
+            text-overflow: ellipsis;
+            font-size:0.5rem;!important;
+        }
+        .iconfont{
+            margin-right: 0px;
+        }
+      .itemStatusIcon{
+          border-top: 25px solid;
+          border-left:25px solid transparent;
+          position: absolute;
+          right: 0rem;
+          top: 0rem;
+          vertical-align: top;
+          display: inline-block;
+          text-align: center;
+          padding: 0rem;
+          width: 1.08rem;
+          height: 1.08rem;
+          font-size: 0.6rem;
+          line-height: 0.6rem;
+          float:right;
+      }
+    </style>
+</head>
+
+<body>
+  <section id="searchSection" class="aui-content" style="background-color: #ffffff !important;">
+    <div class="aui-row aui-list aui-form-list" style="font-size: 18px !important;">
+      <div class="aui-col-xs-3 aui-list-item" style="padding-left:0rem !important;">
+        <div class="aui-list-item-inner offline-hide aui-font-size-12">
+          <div class="aui-list-item-label aui-margin-l-15 " style="width: 50% !important;">
+                  主治医生
+              </div>
+            <div class="aui-list-item-input">
+                <input id="doctorName" type="text" class="aui-font-size-12" placeholder="请输入医生名称">
+            </div>
+            <div class="aui-list-item-label-icon">
+                <i class="aui-iconfont aui-icon-search" onclick="searchPersons()"></i>
+            </div>
+        </div>
+      </div>
+      <div class="aui-col-xs-3 aui-list-item aui-font-size-12" style="padding-left:0rem !important;">
+        <div class="aui-list-item-inner offline-hide">
+              <div class="aui-list-item-label" style="width: 50% !important;">
+                  主管护士
+              </div>
+            <div class="aui-list-item-input" >
+                <input id="nurseName" type="text" class="aui-font-size-12" placeholder="请输入护士名称">
+            </div>
+            <div class="aui-list-item-label-icon">
+                <i class="aui-iconfont aui-icon-search" onclick="searchPersons()"></i>
+            </div>
+        </div>
+      </div>
+      <div class="aui-col-xs-3 aui-list-item aui-font-size-12" style="padding-left:0rem !important;">
+        <div class="aui-list-item-inner offline-hide">
+          <div class="">
+                  <label class=""><input class="aui-radio" type="radio" onchange="searchPersons()" name="patientFlag" value="0" checked> 所有病人</label>
+                  <label class="aui-margin-l-5"><input class="aui-radio" type="radio" onchange="searchPersons()" name="patientFlag" value="1"> 我的病人</label>
+              </div>
+        </div>
+      </div>
+      <div class="aui-col-xs-2 aui-list-item aui-font-size-12" style="padding-left:0rem !important;">
+        <div class="aui-list-item-inner offline-hide">
+          <div class="aui-list-item-label" style="width: 50% !important;">
+                  空床
+              </div>
+              <div class="aui-list-item-input">
+                  <input id="emptyBed" type="checkbox" class="aui-switch" onchange="searchPersons()">
+              </div>
+        </div>
+      </div>
+      <div class="aui-col-xs-1 aui-list-item" style="padding-left:0rem !important;">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-input">
+              <i class="iconfont icon-shuaxin" style="color: #03a9f4;font-size: 30px;" tapmode onclick="refresh()"></i>
+          </div>
+          <div class="aui-list-item-input">
+              <!--<i class="iconfont icon-xiazai" style="color: #03a9f4;font-size: 30px;" tapmode onclick="download()"></i>-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="nurseLevelContent" class="aui-content aui-bg-default aui-padded-5 aui-font-size-12" style="color: #757575;background-color: #ffffff !important;">
+  </section>
+
+  <section  class="aui-content aui-margin-t-0">
+    <div class="flex-container" id="personContent">
+    </div>
+  </section>
+</body>
+<script id="nurse-level-tpl" type="text/template">
+  <!--<i class="iconfont icon-hongyuan" style="color:red"></i><span>特级护理</span><span>({{=it.nurseLevelNum0 || '0'}})</span>-->
+  <!--<i class="iconfont icon-hongyuan aui-margin-l-5" style="color:orange"></i><span>一级护理</span><span>({{=it.nurseLevelNum1 || '0'}})</span>-->
+  <!--<i class="iconfont icon-hongyuan aui-margin-l-5" style="color:blue"></i><span>二级护理</span><span>({{=it.nurseLevelNum2 || '0'}})</span>-->
+  <!--<i class="iconfont icon-hongyuan aui-margin-l-5" style="color:#34ec32"></i><span>三级护理</span><span>({{=it.nurseLevelNum3 || '0'}})</span>-->
+  <!--<i class="iconfont icon-jiantou aui-margin-l-5" style="color:red"></i><span>发热病人</span><span>({{=it.feverNum || '0'}})</span>-->
+
+
+  <i class="aui-margin-l-5"></i><span>在院患者({{=it.inHospital || '0'}})</span>
+  <span>空床({{=it.emptyBedNum || '0'}})</span>
+  <span>重症监护理({{=it.nurseLevelNum0 || '0'}})</span>
+  <span>保护性隔离护理({{=it.nurseLevelNum4 || '0'}})</span>
+  <span>新开医嘱({{=it.newAdviceNum || '0'}})</span>
+
+  <!--<i class="iconfont icon-jiahao aui-margin-l-5" style="color:blue"></i><span>新开医嘱</span><span>({{=it.newAdviceNum || '0'}})</span>
+  <i class="iconfont icon-tanhao1 aui-margin-l-5" style="color:#1afa29"></i><span>待办事项</span><span>({{=it.backlogNum || '0'}})</span>
+  <i class="iconfont icon-tanhao aui-margin-l-5" style="color:red"></i><span>高风险</span><span>({{=it.highRiskNum || '0'}})</span>-->
+</script>
+<script id="person-info-tpl" type="text/template">
+{{~it.list:info:index}}
+  {{? info.id
+}}
+  <div class="flex-item" tapmode onclick="openPersonCenter({{= index }})">
+    <div class="aui-card-list" style="margin-bottom: 0rem !important;">
+        <div class="aui-card-list-header shirk-line">
+            <div class="aui-list-item-right aui-font-size-10" style="font-size:16px;font-weight:bolder;float:left;margin-left:1rem">{{= info.medBedName}}</div>
+            <div class="" style="font-size:16px;font-weight:bolder;margin-right: 0px;">{{= info.name }}</div>
+            <div>
+                <span class="itemStatusIcon" style="color:{{=info.nurseLevelColor}}"></span>
+            </div>
+        </div>
+      <div class="aui-card-list-content">
+          <ul class="aui-list aui-media-list">
+              {{?info.patientColor}}
+              <li class="aui-list-item aui-list-item-middle" style="border-top:2px solid {{=info.patientColor}};margin-top: -6px">
+              {{??}}
+              <li class="aui-list-item aui-list-item-middle" style="border-top:2px solid white};margin-top: -6px">
+              {{?}}
+                  <div class="aui-media-list-item-inner">
+                      <div class="aui-list-item-inner" style="min-height:100px">
+                          <div class="aui-list-item-text">
+                              <div class="aui-list-item-title">
+                                  {{= info.registerNumber}}
+                              </div>
+                              <div class="aui-list-item-title" style="color: #2e20ff">
+                                  {{? info.sex=="1"}}
+                                  <!-- 判断性别标示 -->
+                                  男
+                                  {{??}}
+                                  女
+                                  {{?}}
+                              </div>
+                              <div class="aui-list-item-title">{{= info.age}}</div>
+                          </div>
+                          <div class="aui-list-item-text">
+                              <div class="aui-list-item-title ">主治医生</div>
+                              <div class="aui-list-item-title">{{= info.doctorName}}</div>
+                          </div>
+                          <div class="aui-list-item-text">
+                              <div class="aui-list-item-title ">主管护士</div>
+                              <div class="aui-list-item-title">{{= info.nurseName}}</div>
+                          </div>
+                          <div class="aui-list-item-text">
+                              <div class="aui-list-item-title">{{=subStrDate(info.inHospitalTime)}}</div>
+                              <div class="aui-list-item-title" style="color: blue">{{=info.hospitalizationDays}}天</div>
+                          </div>
+                          <div class="aui-list-item-text">
+                              <div class="aui-list-item-title">余额</div>
+                              <div class="aui-list-item-title">
+                                  {{if(info.balance<0){}}
+                                  <span style="float: right;color: red">{{=info.balance}}</span>
+                                  {{}else{}}
+                                  <span style="float: right">{{=info.balance|| '0'}}</span>
+                                  {{}}}
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+  {{??}}
+  <div class="flex-item" tapmode="forbid">
+    <div class="aui-card-list" style="margin-bottom: 0rem !important;">
+        <div class="aui-card-list-header shirk-line">
+            <div class="aui-list-item-right aui-font-size-10" style="font-size:16px;font-weight:bolder;float:left;margin-left:1rem">{{= info.medBedName}}</div>
+            </div>
+        </div>
+        <div class="aui-card-list-content">
+            <ul class="aui-list aui-media-list">
+                <li class="aui-list-item aui-list-item-middle" style="border-top: 2px solid white;margin-top: -6px">
+                    <div class="aui-media-list-item-inner">
+                        <div class="aui-list-item-inner" style="min-height:140px">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+  </div>
+  {{?}}
+
+{{~}}
+</script>
+<script id="offline-person-info-tpl" type="text/template">
+{{~it:info:index}}
+  {{? info.id}}
+  <div class="flex-item" tapmode onclick="openPersonCenter({{= index }})">
+    <div class="aui-card-list" style="margin-bottom: 0rem !important;">
+      <div class="aui-card-list-header shirk-line">
+          <div>
+            {{? info.nurse_level_code=="A" || info.nurseLevelCode=="A"}}
+              <i class="iconfont icon-hongyuan" style="color:red"></i>
+            {{?}}
+            {{? info.nurse_level_code=="B" || info.nurseLevelCode=="B"}}
+              <i class="iconfont icon-hongyuan" style="color:rgb(255,0,0)"></i>
+            {{?}}
+            {{? info.nurse_level_code=="C" || info.nurseLevelCode=="C"}}
+              <i class="iconfont icon-hongyuan" style="color:rgb(0,0,255)"></i>
+            {{?}}
+            {{? info.nurse_level_code=="D" || info.nurseLevelCode=="D"}}
+              <i class="iconfont icon-hongyuan" style="color:rgb(255,255,255)"></i>
+            {{?}}
+            {{? info.feverFlag==true || info.fever_flag==="true"}}
+              <i class="iconfont icon-jiantou" style="color:red"></i>
+            {{?}}
+            {{? info.newAdviceFlag==true || info.new_advice_flag==="true"}}
+              <i class="iconfont icon-jiahao" style="color:blue"></i>
+            {{?}}
+            {{? info.backlogFlag==true ||  info.backlog_flag==="true"}}
+              <i class="iconfont icon-tanhao1" style="color:#1afa29"></i>
+            {{?}}
+            {{? info.highRiskFlag==true || info.high_risk_flag==="true"}}
+              <i class="iconfont icon-tanhao" style="color:red"></i>
+            {{?}}
+          </div>
+      </div>
+      <div class="aui-card-list-content">
+          <ul class="aui-list aui-media-list">
+              <li class="aui-list-item aui-list-item-middle">
+                  <div class="aui-media-list-item-inner">
+                      <div class="aui-list-item-media" style="width: 2.5rem !important;">
+                        {{? info.sex=="1"}}
+                        <!-- todo 这里判断是字符串 -->
+                          <i class="iconfont icon-nanxing" style="color:blue;font-size:40px"></i>
+                        {{??}}
+                          <i class="iconfont icon-iconfontnvtouxiang" style="color:pink;font-size:40px"></i>
+                        {{?}}
+
+                      </div>
+                      <div class="aui-list-item-inner">
+                          <div class="aui-list-item-text">
+                              <div class="aui-list-item-title aui-font-size-10 aui-ellipsis-1">{{= info.name }}</div>
+                              <div class="aui-list-item-right aui-font-size-10" style="font-weight:bold">{{= info.med_bed_name}}床</div>
+                          </div>
+                          <div class="aui-list-item-text">
+                              <div class="aui-list-item-title aui-font-size-12">{{= info.health_type_name}}</div>
+                              <div class="aui-list-item-right aui-font-size-12">{{= info.age}}岁</div>
+                          </div>
+                      </div>
+                  </div>
+              </li>
+              <li class="aui-list-item aui-list-item-middle">
+                  <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title aui-font-size-14">主治医生</div>
+                            <div class="aui-list-item-right">{{= info.doctor_name}}</div>
+                        </div>
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title aui-font-size-14">主管护士</div>
+                            <div class="aui-list-item-right">{{= info.nurse_name}}</div>
+                        </div>
+                        <div class="aui-list-item-text">
+                          <span class="aui-ellipsis-2 aui-font-size-12">诊断: {{= info.diagnose}}</span>
+                        </div>
+                    </div>
+                  </div>
+              </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+  {{??}}
+  <div class="flex-item" tapmode="forbid">
+    <div class="aui-card-list" style="margin-bottom: 0rem !important;">
+      <div class="aui-card-list-header shirk-line">
+          <div>
+          </div>
+      </div>
+      <div class="aui-card-list-content">
+          <ul class="aui-list aui-media-list">
+              <li class="aui-list-item aui-list-item-middle">
+                  <div class="aui-media-list-item-inner">
+                      <div class="aui-list-item-media" style="width: 2.5rem !important;">
+                        <i class="iconfont" style="color:white;font-size:40px">　</i>
+                      </div>
+                      <div class="aui-list-item-inner">
+                          <div class="aui-list-item-text">
+                              <div class="aui-list-item-title aui-font-size-10">　</div>
+                              <div class="aui-list-item-right aui-font-size-10" style="font-weight:bold">{{= info.med_bed_name}}床</div>
+                          </div>
+                          <div class="aui-list-item-text">
+                              <div class="aui-list-item-title aui-font-size-12">　</div>
+                              <div class="aui-list-item-right aui-font-size-12">　</div>
+                          </div>
+                      </div>
+                  </div>
+              </li>
+              <li class="aui-list-item aui-list-item-middle">
+                  <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title aui-font-size-14">　</div>
+                            <div class="aui-list-item-right">　</div>
+                        </div>
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title aui-font-size-14">　</div>
+                            <div class="aui-list-item-right">　</div>
+                        </div>
+                        <div class="aui-list-item-text">
+                          <span class="aui-ellipsis-2 aui-font-size-12">　</span>
+                        </div>
+                    </div>
+                  </div>
+              </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+  {{?}}
+
+{{~}}
+</script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/frm_main_content.js"></script>
+</html>

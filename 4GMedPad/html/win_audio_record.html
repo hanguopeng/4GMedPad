@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+	<title>语音</title>
+	<link rel="stylesheet" type="text/css" href="../css/aui.css" />
+	<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+	<style>
+		html,body{height: 100%; background: transparent;}
+		body{
+			background-color: rgba(255,255,255,1);
+		}
+		#header h1{
+			padding: 60px 0 20px; font-size: 20px; text-align: center;
+		}
+		#main{
+			margin-top: 80px;
+		}
+		.microphone{
+			text-align: center; font-size: 60px; position: relative;
+		}
+		.microphone i{
+			color: #ff8c03; background-color: #efd4b3; width: 100px; height: 100px;
+			border-radius: 100px; border: 1px solid #f3cb8e; line-height: 100px;
+		}
+		@-webkit-keyframes  ripple{
+			0% {
+				-webkit-transform: scale(1);
+				        transform: scale(1);
+				opacity: 1;
+			}
+			100% {
+				-webkit-transform: scale(3);
+				        transform: scale(3);
+				opacity: 0;
+			}
+		}
+		@keyframes  ripple{
+			0% {
+				-webkit-transform: scale(1);
+				        transform: scale(1);
+				opacity: 1;
+			}
+			100% {
+				-webkit-transform: scale(3);
+				        transform: scale(3);
+				opacity: 0;
+			}
+		}
+		.wave{
+			position: absolute; margin: auto; left: 0; right: 0;
+			width: 100px; height: 100px;
+			border-radius: 100px;
+			display: inline-block; border: 1px solid #f3cb8e;
+		}
+		.ripple{
+			-webkit-animation: ripple 1s infinite;
+			        animation: ripple 1s infinite;
+		}
+
+	</style>
+</head>
+<body>
+	<header class="aui-bar aui-bar-nav" id="header">
+	    <a class="aui-pull-left aui-btn" tapmode onclick="closeWin()">
+	        <span class="aui-iconfont aui-icon-left"></span>
+	    </a>
+	    <div class="aui-title" id="title">
+	        语音记录
+	    </div>
+	</header>
+	<div id="main">
+		<div class="microphone">
+			<i class="iconfont icon-microphone" style="font-size: 100px;"></i>
+			<span class="wave"></span>
+		</div>
+
+    <div class="aui-text-center" style="margin-top:80px;">
+      <div id="startBtn" class="aui-btn aui-btn-info" style="width: 80%;" tapmode onclick="startRecord()">开始录制</div>
+      <div id="stopBtn" class="aui-btn aui-btn-warning" style="width: 80%;display:none;" tapmode onclick="stopRecord()">停止录制</div>
+    </div>
+	</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/zepto.min.js"></script>
+<script>
+  var fs;
+	var db;
+	apiready = function(){
+    api.parseTapmode();
+		// var header = document.querySelector('#header');
+    // $api.fixStatusBar(header);
+    fs = api.require("fs");
+		db = api.require('db');
+	};
+
+  function stopRecord(){
+    $("#startBtn").show();
+    $("#stopBtn").hide();
+		$('.wave').removeClass('ripple');
+    api.stopRecord(function(ret, err){
+      if (ret) {
+          var path = ret.path;
+          var duration = ret.duration;
+          if(duration < 1){
+            api.toast({
+                msg: '录制时间过短',
+                duration: 3000,
+                location: 'center'
+            });
+            return;
+          }
+
+          //text中修改为病人名称和日期
+					var currentDate = new Date();
+					var formateDate = formatDateToString(currentDate);
+					var createDate = formatCurrentDate(currentDate);
+          var person = $api.getStorage(storageKey.currentPerson);
+          var defaultText = person.name + "-" + formateDate;
+          api.prompt({
+            buttons: ['保存', '删除'],
+            title:"保存信息",
+            text:defaultText
+            }, function(ret, err) {
+              var index = ret.buttonIndex;
+              var text = ret.text;
+              if(index==0){
+                 //返回键或者删除
+                 fs.remove({
+                      path: 'fs://temp.amr'
+                  }, function(ret, err) {});
+              }else if(index==2){
+                fs.remove({
+                     path: 'fs://temp.amr'
+                 }, function(ret, err) {
+                     if (ret.status) {
+                       api.toast({
+                           msg: '删除成功',
+                           duration: 3000,
+                           location: 'center'
+                       });
+                     } else {
+                       api.alert(err.msg);
+                     }
+                 });
+              }else if(index==1){
+								var userId = $api.getStorage(storageKey.userId);
+                fs.rename({
+                    oldPath: 'fs://temp.amr',
+										//根据不同用户存放音频
+                    newPath: 'fs://'+ userId+"/"+ text +".amr"
+                }, function(ret, err) {
+                    if (ret.status) {
+											//构造数据
+											var timestamp = currentDate.getTime();
+											var id = person.id + "" + timestamp;
+											var userId = $api.getStorage(storageKey.userId);
+											var personId = person.id;
+
+											//插入到数据库中一条记录
+											db.executeSql({
+									        name: cmcdb.name,
+									        sql: "INSERT INTO " + cmcdb.resTable + "(id,res_name,res_type,create_date,user_id,person_id,duration,status) "+
+															 "VALUES ('"+ id +"','"+ text +"',0,'"+ createDate +"','"+ userId +"','"+ personId +"','"+ duration +"',0)"
+									    }, function(ret, err) {
+									        if (ret.status) {
+														api.alert({
+															title: '提示',
+															msg: '保存成功',
+														}, function(ret, err) {
+															closeWin();
+														});
+									        } else {
+														api.alert({
+															title: '错误',
+															msg: '保存失败！'+err.msg,
+														}, function(ret, err) {
+															fs.remove({
+															    path: 'fs://'+ text +".amr"
+															}, function(ret, err) {});
+														});
+									        }
+											});
+                    } else {
+                        api.alert(err.msg);
+                    }
+                });
+              }
+          });
+
+
+      }else{
+        api.toast({
+            msg: '录制错误，请联系管理员'+err.msg,
+            duration: 3000,
+            location: 'center'
+        });
+      }
+    });
+	}
+
+  function startRecord(){
+    $("#startBtn").hide();
+    $("#stopBtn").show();
+    $('.wave').addClass('ripple');
+    fs.remove({
+         path: 'fs://temp.amr'
+     }, function(ret, err) {});
+    api.startRecord({
+        path: 'fs://temp.amr'
+    });
+  }
+
+  function formatDateToString(date){
+    var year = date.getFullYear();
+    var month = date.getMonth()+1;
+    var day = date.getDate();
+    if(month<10) month = "0"+month;
+    if(day<10) day = "0"+day;
+    return year+month+day;
+}
+
+function formatDateToStringWithHyphen(date){
+	var year = date.getFullYear();
+	var month = date.getMonth()+1;
+	var day = date.getDate();
+	if(month<10) month = "0"+month;
+	if(day<10) day = "0"+day;
+	return year+"-"+month+"-"+day;
+}
+function formateDateAndTimeToString(date)
+{
+    var hours = date.getHours();
+    var mins = date.getMinutes();
+    var secs = date.getSeconds();
+    // var msecs = date.getMilliseconds();
+    if(hours<10) hours = "0"+hours;
+    if(mins<10) mins = "0"+mins;
+    if(secs<10) secs = "0"+secs;
+    // if(msecs<10) secs = "0"+msecs;
+    return formatDateToString(date)+hours+mins+secs;
+}
+
+function formatCurrentDate(date){
+	var hours = date.getHours();
+	var mins = date.getMinutes();
+	var secs = date.getSeconds();
+	// var msecs = date.getMilliseconds();
+	if(hours<10) hours = "0"+hours;
+	if(mins<10) mins = "0"+mins;
+	if(secs<10) secs = "0"+secs;
+	return formatDateToStringWithHyphen(date)+" "+hours+":"+mins+":"+secs;
+}
+
+function closeWin() {
+    api.closeWin();
+}
+</script>
+</html>

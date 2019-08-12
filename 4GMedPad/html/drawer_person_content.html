@@ -1,0 +1,318 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>用户信息</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+</head>
+
+<body>
+  <header class="aui-bar aui-bar-nav">
+    <div id="header-left" class="aui-pull-left">
+
+    </div>
+    <a class="aui-pull-right">
+        <span class="aui-iconfont aui-icon-home aui-btn" tapmode="active" onclick="closeFrameGroup()"></span>
+        <span class="aui-iconfont aui-icon-refresh aui-btn" tapmode="active" onclick="refreshCurrenFrame()"></span>
+        <span class="iconfont icon-wangyuanjing aui-btn" style="font-size: 32px;" tapmode="active" onclick="openPersonSearchFrame()"></span>
+    </a>
+  </header>
+</body>
+
+<script id="header-tpl" type="text/template">
+  <span class="aui-iconfont aui-icon-left aui-btn" style="font-weight:bold" onclick="prePerson()" tapmode="active"></span>
+  {{? it.person.sex == "1"}}
+    <img class="aui-btn" style="color:pink;font-size:40px" tapmode onclick="backHome()" src="../image/u64.png">
+  {{??}}
+    <img class="aui-btn" style="color:blue;font-size:40px" tapmode onclick="backHome()" src="../image/u37.png">
+  {{?}}
+
+  <span class="aui-iconfont aui-icon-right aui-btn" style="font-weight:bold" onclick="nextPerson()"></span>
+  <div class="aui-content aui-font-size-12">
+    <span class="aui-margin-r-10">{{=it.person.name || '--'}}</span>
+    <span class="aui-margin-r-10">{{=it.person.age || '--'}}</span>
+    <span class="aui-margin-r-10">{{?it.person.sex=="1"}}男{{??it.person.sex=="2"}}女{{??}}--{{?}}
+    </span>
+    <span class="aui-margin-r-10">{{=it.person.medBedName || it.person.med_bed_name || '--'}}床</span>
+    <span class="aui-margin-r-10">{{=it.person.registerNumber || it.person.register_number || '--'}}</span>
+    <span class="aui-margin-r-5">医保:{{=it.person.costType || it.person.cost_Type || '--'}}</span>
+  </div>
+</script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript">
+  var currentFrame = 0; //当前打开的frame的序号
+  var headerH = 0;
+  apiready = function() {
+    api.parseTapmode();
+    var header = $api.dom('header');
+    headerH = $api.offset(header).h;
+    freshHeaderInfo();
+      $api.addEvt($api.dom('body'), 'click', function () {
+          api.closeFrame({
+              name: 'frm_fee_detail',
+          });
+          api.closeFrame({
+              name: 'frm_doctor_advice_details',
+          });
+      });
+    //打开frame窗口，默认打开第一个
+    api.openFrameGroup({
+      name: 'group',
+      scrollEnabled:false,
+      index: 0, //默认第一个frame
+      preload: 0, //预加载数量，下次切换不会改变，右侧用户列表点击之后，导致预加载的还是原来病人的，这里设置成不加载
+      rect: {
+          x: 0,
+          y: headerH,
+          w: 'auto',
+          h: api.winHeight - headerH
+      },
+      frames: [{
+          name: 'frm_person_center',
+          url: 'frm_person_center.html',
+          bounces:true
+      }, {
+          name: 'frm_temperature_chart',
+          url: 'frm_temperature_chart.html',
+          bounces:true
+      },{
+          name: 'frm_analysis_result',
+          url: 'frm_analysis_result.html',
+          bounces:true
+      },{
+          name: 'frm_inspection_result',
+          url: 'frm_inspection_result.html',
+          bounces:true
+      },{
+        name: 'frm_blood_glucose',
+        url: 'frm_blood_glucose.html',
+        bounces:true
+      },{
+        name: 'frm_fee',
+        url: 'frm_fee.html',
+        bounces:false
+      },{
+        name: 'frm_nurse',
+        url: 'frm_nurse.html',
+        bounces:false
+      },{
+        name: 'frm_audio_list',
+        url: 'frm_audio_list.html',
+        bounces:false
+      },{
+        name: 'frm_note_list',
+        url: 'frm_note_list.html',
+        bounces:false
+      },{
+          name: 'frm_doctor_advice',
+          url: 'frm_doctor_advice.html',
+          bounces:false
+      },{
+          name: 'frm_case_review',
+          url: 'frm_case_review.html',
+          bounces:false
+      },{
+          name: 'frm_smtzjcjld',
+          url: 'frm_smtzjcjld.html',
+          bounces:false
+      },,{
+          name: 'frm_ydsbjlb',
+          url: 'frm_ydsbjlb.html',
+          bounces:false
+      },{
+          name: 'frm_blood_sugar',
+          url: 'frm_blood_sugar.html',
+          bounces:false
+      },{
+          name: 'frm_criticallyIll',
+          url: 'frm_criticallyIll.html',
+          bounces:false
+      },{
+          name: 'frm_boneCriticallyIll',
+          url: 'frm_boneCriticallyIll.html',
+          bounces:false
+      }]
+    },
+      function(ret, err) {
+        //变换时进行处理
+        currentFrame = ret.index;
+      }
+    );
+
+    //监听病人列表查询点击切换
+    api.addEventListener({
+        name: eventName.personChoosed
+    }, function(ret, err){
+        $api.setStorage(storageKey.currentIdx, ret.value.index);
+        var allPersons = $api.getStorage(storageKey.persons);
+        $api.setStorage(storageKey.currentPerson, allPersons[ret.value.index]);
+        freshHeaderInfo();
+        refreshCurrenFrame();
+    });
+
+
+
+    //监听关闭侧边栏的事件
+    api.addEventListener({
+        name: 'functionBtn'
+      }, function(ret, err) {
+        api.closeDrawerPane();
+        api.setFrameGroupIndex({
+            name: 'group',
+            index: ret.value.idx,
+            reload: true
+        });
+    });
+
+    //点击返回键关闭当前window窗口
+    api.addEventListener({
+        name: 'keyback'
+      },function(ret, err) {
+        // api.sendEvent({
+        //     //病区页面刷新
+        //     name:  eventName.mainRefresh
+        // });
+
+        api.closeWin();
+    });
+
+  };
+
+  function freshHeaderInfo(){
+    //获取当前的病人信息
+    var person = $api.getStorage(storageKey.currentPerson);
+    var personIndex = $api.getStorage(storageKey.currentIdx);
+    var personData = {
+        "person": person,
+        "personIndex": personIndex
+    };
+
+    var headerInfo = doT.template($api.text($api.byId('header-tpl')));
+    $api.html($api.byId('header-left'), headerInfo(personData));
+    api.sendEvent({
+        name: eventName.personChanged
+    });
+
+  }
+
+  //左箭头点击选择上一个病人
+  function prePerson(){
+    var personIndex = Number($api.getStorage(storageKey.currentIdx));
+    if(personIndex<=0){
+      api.toast({
+        msg : '已经是第一个病人了'
+      });
+    }else{
+      var allPersons = $api.getStorage(storageKey.persons);
+      personIndex = personIndex - 1;
+      while(personIndex>0 && !allPersons[personIndex].id /*空床位*/){
+        personIndex = personIndex - 1;
+      }
+      if(allPersons[personIndex].id){
+        $api.setStorage(storageKey.currentIdx, personIndex);
+        $api.setStorage(storageKey.currentPerson, allPersons[personIndex]);
+        freshHeaderInfo();
+        refreshCurrenFrame();
+      }else{
+        api.toast({
+          msg : '已经是第一个病人了'
+        });
+      }
+    }
+
+
+  }
+
+  //右箭头点击选择下一个病人
+  function nextPerson(){
+    var idx = Number($api.getStorage('currentIdx'));
+    var lastIdx = Number($api.getStorage('lastIdx'));
+    if(idx>=lastIdx){
+      api.toast({
+        msg : '已经是最后一个病人了'
+      });
+    }else{
+      var allPersons = $api.getStorage('persons');
+      idx = idx+1;
+      while(idx<lastIdx && !allPersons[idx].id /*空床位*/){
+        idx = idx+1;
+      }
+      if(allPersons[idx].id){
+        $api.setStorage('currentIdx', idx);
+        $api.setStorage('currentPerson', allPersons[idx]);
+        freshHeaderInfo();
+        refreshCurrenFrame();
+      }else{
+        api.toast({
+          msg : '已经是最后一个病人了'
+        });
+      }
+    }
+  }
+
+  //点击用户头像，判断是否首页，如果不是，跳转到首页
+  function backHome(){
+    if(currentFrame!=0){
+      api.setFrameGroupIndex({
+          name: 'group',
+          index: 0,
+          reload: true
+      });
+    }
+  }
+
+  //关闭framegroup
+  function closeFrameGroup(){
+    //给病区主页面发送页面刷新事件
+    // api.sendEvent({
+    //     name: eventName.mainRefresh
+    // });
+
+    api.closeWin();
+  }
+
+  //刷新当前frame
+  function refreshCurrenFrame(){
+    api.setFrameGroupIndex({
+        name: 'group',
+        index: currentFrame,
+        reload: true
+    });
+  }
+
+  //打开病人查询页面
+  function openPersonSearchFrame(){
+    api.openFrame({
+        name: 'frm_person_search',
+        url: './frm_person_search.html',
+        rect: {
+            x: api.winWidth-300,
+            y: headerH + 20,
+            w: 300,
+            h: api.winHeight - headerH
+        },
+        progress: {
+          type:"default",
+          title:"",
+          text:"正在加载数据"
+        },
+        animation:{
+          type:"flip",
+          subType:"from_bottom"
+        },
+        vScrollBarEnabled: false,
+        hScrollBarEnabled: false
+    });
+
+  }
+
+
+</script>
+
+</html>

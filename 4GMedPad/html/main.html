@@ -1,0 +1,565 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>移动查房</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <style>
+      .shirk-line{
+         min-height: 1.2rem !important;
+         padding: 0 0 !important;
+      }
+      .flex-container{
+        display:-webkit-box;
+        display:flex;
+        display:-ms-flex;
+        display:-webkit-flex;
+        width:100%;
+        flex-wrap: wrap;
+        -webkit-flex-wrap: wrap;
+      }
+      .flex-item{
+        width:24%;
+        box-sizing: border-box;
+        margin: 10px 0.5% 0px 0.5%;
+      }
+    </style>
+</head>
+
+<body>
+  <header class="aui-bar aui-bar-nav" id="aui-header">
+    <a class="aui-btn aui-pull-left" ></a>
+    <div class="aui-title" id="title">
+      移动查房
+    </div>
+    <span class="aui-content aui-pull-right aui-font-size-12">欢迎您：系统管理员</span>
+    <a class="aui-btn aui-pull-right aui-font-size-12">
+       <!-- <i class="dock"></i> -->
+       <span>
+         <div class="select" style="margin-top:0px;outline:none;border:1px solid #03a9f4;border-radius:4px;position:relative;">
+          <select id="orderTimeDataSel" class="text" style="height:30px;-webkit-appearance:none;appearance:none;border:none;font-size:18px;padding:0px 10px;display:block;width:100%;-webkit-box-sizing:border-box;box-sizing:border-box;background-color: #FFFFFF;color:#333333;border-radius:4px;">
+          <option>泌尿科二疗区</option>
+          <option>三疗区</option>
+          <option>四疗区</option>
+          </select>
+        </div>
+      </span>
+    </a>
+  </header>
+
+
+  <section class="aui-content" style="background-color: #ffffff !important;">
+    <div class="aui-row aui-list aui-form-list" style="font-size: 18px !important;">
+      <div class="aui-col-xs-2 aui-list-item">
+        <div class="aui-list-item-inner">
+            <div class="aui-list-item-input">
+                <input type="text" placeholder="主治医生">
+            </div>
+            <div class="aui-list-item-label-icon">
+                <i class="aui-iconfont aui-icon-search"></i>
+            </div>
+        </div>
+      </div>
+      <div class="aui-col-xs-2 aui-list-item">
+        <div class="aui-list-item-inner">
+            <div class="aui-list-item-input">
+                <input type="text" placeholder="主管护士">
+            </div>
+            <div class="aui-list-item-label-icon">
+                <i class="aui-iconfont aui-icon-search"></i>
+            </div>
+        </div>
+      </div>
+      <div class="aui-col-xs-4 aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-input">
+                  <label class="aui-margin-l-15"><input class="aui-radio" type="radio" name="paient" checked> 所有病人</label>
+                  <label class="aui-margin-l-15"><input class="aui-radio" type="radio" name="paient"> 我的病人</label>
+              </div>
+        </div>
+      </div>
+      <div class="aui-col-xs-2 aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-label" style="width: 50% !important;">
+                  空床
+              </div>
+              <div class="aui-list-item-input">
+                  <input type="checkbox" class="aui-switch">
+              </div>
+        </div>
+      </div>
+      <div class="aui-col-xs-2 aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-input">
+              <i class="iconfont icon-shuaxin" style="color: #03a9f4;font-size: 30px;" tapmode onclick="javascript:alert(1);"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="aui-content aui-bg-default aui-padded-5 aui-font-size-12" style="color: #757575;background-color: #ffffff !important;">
+      <i class="iconfont icon-hongyuan" style="color:red"></i><span>特级护理</span><span>(12)</span>
+      <i class="iconfont icon-hongyuan" style="color:orange"></i><span>一级护理</span><span>(12)</span>
+      <i class="iconfont icon-hongyuan" style="color:blue"></i><span>二级护理</span><span>(12)</span>
+      <i class="iconfont icon-hongyuan" style="color:#34ec32"></i><span>三级护理</span><span>(12)</span>
+      <!--<i class="iconfont icon-jiantou" style="color:red"></i><span>发热病人</span><span>(21)</span>
+      <i class="iconfont icon-jiahao" style="color:blue"></i><span>新开医嘱</span><span>(12)</span>
+      <i class="iconfont icon-tanhao1" style="color:#1afa29"></i><span>待办事项</span><span>(21)</span>-->
+      <i class="iconfont icon-tanhao" style="color:red"></i><span>高风险</span><span>(21)</span>
+  </section>
+
+  <section class="aui-content aui-margin-t-0">
+    <div class="flex-container">
+      <div class="flex-item" tapmode onclick="openPersonCenter(0)">
+        <div class="aui-card-list" style="margin-bottom: 0rem !important;">
+          <div class="aui-card-list-header shirk-line">
+              <div>
+                <i class="iconfont icon-hongyuan" style="color:red"></i>
+                <i class="iconfont icon-hongyuan" style="color:orange"></i>
+              </div>
+          </div>
+          <div class="aui-card-list-content">
+              <ul class="aui-list aui-media-list">
+                  <li class="aui-list-item aui-list-item-middle">
+                      <div class="aui-media-list-item-inner">
+                          <div class="aui-list-item-media" style="width: 2.5rem !important;">
+                            <i class="iconfont icon-iconfontnvtouxiang" style="color:pink;font-size:40px "></i>
+                          </div>
+                          <div class="aui-list-item-inner">
+                              <div class="aui-list-item-text">
+                                  <div class="aui-list-item-title aui-font-size-14">张爱勤</div>
+                                  <div class="aui-list-item-right" style="font-weight:bold">001床</div>
+                              </div>
+                              <div class="aui-list-item-text">
+                                  <div class="aui-list-item-title aui-font-size-14">现金</div>
+                                  <div class="aui-list-item-right">54岁</div>
+                              </div>
+                          </div>
+                      </div>
+                  </li>
+                  <li class="aui-list-item aui-list-item-middle">
+                      <div class="aui-media-list-item-inner">
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-text">
+                                <div class="aui-list-item-title aui-font-size-14">主治医生</div>
+                                <div class="aui-list-item-right">张三</div>
+                            </div>
+                            <div class="aui-list-item-text">
+                                <div class="aui-list-item-title aui-font-size-14">主管护士</div>
+                                <div class="aui-list-item-right">李四</div>
+                            </div>
+                            <div class="aui-list-item-text">
+                              <span class="aui-ellipsis-2 aui-font-size-12">诊断: 全身疼，头也疼，眼睛也疼，脑袋大，身体酸软，全身无力，我估计是要gg思密达了</span>
+                            </div>
+                        </div>
+                      </div>
+                  </li>
+              </ul>
+          </div>
+        </div>
+      </div>
+      <div class="flex-item" tapmode onclick="openPersonCenter(1)">
+        <div class="aui-card-list" style="margin-bottom: 0rem !important;">
+          <div class="aui-card-list-header shirk-line">
+              <div>
+                <i class="iconfont icon-hongyuan" style="color:red"></i>
+                <i class="iconfont icon-hongyuan" style="color:orange"></i>
+              </div>
+          </div>
+          <div class="aui-card-list-content">
+              <ul class="aui-list aui-media-list">
+                  <li class="aui-list-item aui-list-item-middle">
+                      <div class="aui-media-list-item-inner">
+                          <div class="aui-list-item-media" style="width: 2.5rem !important;">
+                            <i class="iconfont icon-iconfontnvtouxiang" style="color:pink;font-size:40px "></i>
+                          </div>
+                          <div class="aui-list-item-inner">
+                              <div class="aui-list-item-text">
+                                  <div class="aui-list-item-title aui-font-size-14">张爱勤</div>
+                                  <div class="aui-list-item-right" style="font-weight:bold">001床</div>
+                              </div>
+                              <div class="aui-list-item-text">
+                                  <div class="aui-list-item-title aui-font-size-14">现金</div>
+                                  <div class="aui-list-item-right">54岁</div>
+                              </div>
+                          </div>
+                      </div>
+                  </li>
+                  <li class="aui-list-item aui-list-item-middle">
+                      <div class="aui-media-list-item-inner">
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-text">
+                                <div class="aui-list-item-title aui-font-size-14">主治医生</div>
+                                <div class="aui-list-item-right">张三</div>
+                            </div>
+                            <div class="aui-list-item-text">
+                                <div class="aui-list-item-title aui-font-size-14">主管护士</div>
+                                <div class="aui-list-item-right">李四</div>
+                            </div>
+                            <div class="aui-list-item-text">
+                              <span class="aui-ellipsis-2 aui-font-size-12">诊断: 全身疼，头也疼，眼睛也疼，脑袋大，身体酸软，全身无力，我估计是要gg思密达了</span>
+                            </div>
+                        </div>
+                      </div>
+                  </li>
+              </ul>
+          </div>
+        </div>
+      </div>
+      <div class="flex-item" tapmode>
+        <div class="aui-card-list" style="margin-bottom: 0rem !important;">
+          <div class="aui-card-list-header shirk-line">
+              <div>
+                <i class="iconfont icon-hongyuan" style="color:red"></i>
+                <i class="iconfont icon-hongyuan" style="color:orange"></i>
+              </div>
+          </div>
+          <div class="aui-card-list-content">
+              <ul class="aui-list aui-media-list">
+                  <li class="aui-list-item aui-list-item-middle">
+                      <div class="aui-media-list-item-inner">
+                          <div class="aui-list-item-media" style="width: 2.5rem !important;">
+                            <i class="iconfont icon-iconfontnvtouxiang" style="color:pink;font-size:40px "></i>
+                          </div>
+                          <div class="aui-list-item-inner">
+                              <div class="aui-list-item-text">
+                                  <div class="aui-list-item-title aui-font-size-14">张爱勤</div>
+                                  <div class="aui-list-item-right" style="font-weight:bold">001床</div>
+                              </div>
+                              <div class="aui-list-item-text">
+                                  <div class="aui-list-item-title aui-font-size-14">现金</div>
+                                  <div class="aui-list-item-right">54岁</div>
+                              </div>
+                          </div>
+                      </div>
+                  </li>
+                  <li class="aui-list-item aui-list-item-middle">
+                      <div class="aui-media-list-item-inner">
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-text">
+                                <div class="aui-list-item-title aui-font-size-14">主治医生</div>
+                                <div class="aui-list-item-right">张三</div>
+                            </div>
+                            <div class="aui-list-item-text">
+                                <div class="aui-list-item-title aui-font-size-14">主管护士</div>
+                                <div class="aui-list-item-right">李四</div>
+                            </div>
+                            <div class="aui-list-item-text">
+                              <span class="aui-ellipsis-2 aui-font-size-12">诊断: 全身疼，头也疼，眼睛也疼，脑袋大，身体酸软，全身无力，我估计是要gg思密达了</span>
+                            </div>
+                        </div>
+                      </div>
+                  </li>
+              </ul>
+          </div>
+        </div>
+      </div>
+      <div class="flex-item" tapmode>
+        <div class="aui-card-list" style="margin-bottom: 0rem !important;">
+          <div class="aui-card-list-header shirk-line">
+              <div>
+                <i class="iconfont icon-hongyuan" style="color:red"></i>
+                <i class="iconfont icon-hongyuan" style="color:orange"></i>
+              </div>
+          </div>
+          <div class="aui-card-list-content">
+              <ul class="aui-list aui-media-list">
+                  <li class="aui-list-item aui-list-item-middle">
+                      <div class="aui-media-list-item-inner">
+                          <div class="aui-list-item-media" style="width: 2.5rem !important;">
+                            <i class="iconfont icon-iconfontnvtouxiang" style="color:pink;font-size:40px "></i>
+                          </div>
+                          <div class="aui-list-item-inner">
+                              <div class="aui-list-item-text">
+                                  <div class="aui-list-item-title aui-font-size-14">张爱勤</div>
+                                  <div class="aui-list-item-right" style="font-weight:bold">001床</div>
+                              </div>
+                              <div class="aui-list-item-text">
+                                  <div class="aui-list-item-title aui-font-size-14">现金</div>
+                                  <div class="aui-list-item-right">54岁</div>
+                              </div>
+                          </div>
+                      </div>
+                  </li>
+                  <li class="aui-list-item aui-list-item-middle">
+                      <div class="aui-media-list-item-inner">
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-text">
+                                <div class="aui-list-item-title aui-font-size-14">主治医生</div>
+                                <div class="aui-list-item-right">张三</div>
+                            </div>
+                            <div class="aui-list-item-text">
+                                <div class="aui-list-item-title aui-font-size-14">主管护士</div>
+                                <div class="aui-list-item-right">李四</div>
+                            </div>
+                            <div class="aui-list-item-text">
+                              <span class="aui-ellipsis-2 aui-font-size-12">诊断: 全身疼，头也疼，眼睛也疼，脑袋大，身体酸软，全身无力，我估计是要gg思密达了</span>
+                            </div>
+                        </div>
+                      </div>
+                  </li>
+              </ul>
+          </div>
+        </div>
+      </div>
+      <div class="flex-item" tapmode>
+        <div class="aui-card-list" style="margin-bottom: 0rem !important;">
+          <div class="aui-card-list-header shirk-line">
+              <div>
+                <i class="iconfont icon-hongyuan" style="color:red"></i>
+                <i class="iconfont icon-hongyuan" style="color:orange"></i>
+              </div>
+          </div>
+          <div class="aui-card-list-content">
+              <ul class="aui-list aui-media-list">
+                  <li class="aui-list-item aui-list-item-middle">
+                      <div class="aui-media-list-item-inner">
+                          <div class="aui-list-item-media" style="width: 2.5rem !important;">
+                            <i class="iconfont icon-iconfontnvtouxiang" style="color:pink;font-size:40px "></i>
+                          </div>
+                          <div class="aui-list-item-inner">
+                              <div class="aui-list-item-text">
+                                  <div class="aui-list-item-title aui-font-size-14">张爱勤</div>
+                                  <div class="aui-list-item-right" style="font-weight:bold">001床</div>
+                              </div>
+                              <div class="aui-list-item-text">
+                                  <div class="aui-list-item-title aui-font-size-14">现金</div>
+                                  <div class="aui-list-item-right">54岁</div>
+                              </div>
+                          </div>
+                      </div>
+                  </li>
+                  <li class="aui-list-item aui-list-item-middle">
+                      <div class="aui-media-list-item-inner">
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-text">
+                                <div class="aui-list-item-title aui-font-size-14">主治医生</div>
+                                <div class="aui-list-item-right">张三</div>
+                            </div>
+                            <div class="aui-list-item-text">
+                                <div class="aui-list-item-title aui-font-size-14">主管护士</div>
+                                <div class="aui-list-item-right">李四</div>
+                            </div>
+                            <div class="aui-list-item-text">
+                              <span class="aui-ellipsis-2 aui-font-size-12">诊断: 全身疼，头也疼，眼睛也疼，脑袋大，身体酸软，全身无力，我估计是要gg思密达了</span>
+                            </div>
+                        </div>
+                      </div>
+                  </li>
+              </ul>
+          </div>
+        </div>
+      </div>
+      <div class="flex-item" tapmode>
+        <div class="aui-card-list" style="margin-bottom: 0rem !important;">
+          <div class="aui-card-list-header shirk-line">
+              <div>
+                <i class="iconfont icon-hongyuan" style="color:red"></i>
+                <i class="iconfont icon-hongyuan" style="color:orange"></i>
+              </div>
+          </div>
+          <div class="aui-card-list-content">
+              <ul class="aui-list aui-media-list">
+                  <li class="aui-list-item aui-list-item-middle">
+                      <div class="aui-media-list-item-inner">
+                          <div class="aui-list-item-media" style="width: 2.5rem !important;">
+                            <i class="iconfont icon-iconfontnvtouxiang" style="color:pink;font-size:40px "></i>
+                          </div>
+                          <div class="aui-list-item-inner">
+                              <div class="aui-list-item-text">
+                                  <div class="aui-list-item-title aui-font-size-14">张爱勤</div>
+                                  <div class="aui-list-item-right" style="font-weight:bold">001床</div>
+                              </div>
+                              <div class="aui-list-item-text">
+                                  <div class="aui-list-item-title aui-font-size-14">现金</div>
+                                  <div class="aui-list-item-right">54岁</div>
+                              </div>
+                          </div>
+                      </div>
+                  </li>
+                  <li class="aui-list-item aui-list-item-middle">
+                      <div class="aui-media-list-item-inner">
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-text">
+                                <div class="aui-list-item-title aui-font-size-14">主治医生</div>
+                                <div class="aui-list-item-right">张三</div>
+                            </div>
+                            <div class="aui-list-item-text">
+                                <div class="aui-list-item-title aui-font-size-14">主管护士</div>
+                                <div class="aui-list-item-right">李四</div>
+                            </div>
+                            <div class="aui-list-item-text">
+                              <span class="aui-ellipsis-2 aui-font-size-12">诊断: 全身疼，头也疼，眼睛也疼，脑袋大，身体酸软，全身无力，我估计是要gg思密达了</span>
+                            </div>
+                        </div>
+                      </div>
+                  </li>
+              </ul>
+          </div>
+        </div>
+      </div>
+      <div class="flex-item" tapmode>
+        <div class="aui-card-list" style="margin-bottom: 0rem !important;">
+          <div class="aui-card-list-header shirk-line">
+              <div>
+                <i class="iconfont icon-hongyuan" style="color:red"></i>
+                <i class="iconfont icon-hongyuan" style="color:orange"></i>
+              </div>
+          </div>
+          <div class="aui-card-list-content">
+              <ul class="aui-list aui-media-list">
+                  <li class="aui-list-item aui-list-item-middle">
+                      <div class="aui-media-list-item-inner">
+                          <div class="aui-list-item-media" style="width: 2.5rem !important;">
+                            <i class="iconfont icon-iconfontnvtouxiang" style="color:pink;font-size:40px "></i>
+                          </div>
+                          <div class="aui-list-item-inner">
+                              <div class="aui-list-item-text">
+                                  <div class="aui-list-item-title aui-font-size-14">张爱勤</div>
+                                  <div class="aui-list-item-right" style="font-weight:bold">001床</div>
+                              </div>
+                              <div class="aui-list-item-text">
+                                  <div class="aui-list-item-title aui-font-size-14">现金</div>
+                                  <div class="aui-list-item-right">54岁</div>
+                              </div>
+                          </div>
+                      </div>
+                  </li>
+                  <li class="aui-list-item aui-list-item-middle">
+                      <div class="aui-media-list-item-inner">
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-text">
+                                <div class="aui-list-item-title aui-font-size-14">主治医生</div>
+                                <div class="aui-list-item-right">张三</div>
+                            </div>
+                            <div class="aui-list-item-text">
+                                <div class="aui-list-item-title aui-font-size-14">主管护士</div>
+                                <div class="aui-list-item-right">李四</div>
+                            </div>
+                            <div class="aui-list-item-text">
+                              <span class="aui-ellipsis-2 aui-font-size-12">诊断: 全身疼，头也疼，眼睛也疼，脑袋大，身体酸软，全身无力，我估计是要gg思密达了</span>
+                            </div>
+                        </div>
+                      </div>
+                  </li>
+              </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    var persons = [];
+    apiready = function() {
+      // var header = $api.byId('aui-header');
+			// $api.fixStatusBar(header);
+      api.parseTapmode();
+      ExitApp();
+
+      //当查询完一次数据之后，将所有数据存储到到localstorage中，以对象数组的方式存放
+      //点击某一个床号，判断是否存在病人，如果存在病人，通过数据的序列，从localstorage
+      //中取出对应的数据，存放到单独的一个key中，后续的frame页面从该key中获取该病人的信息
+      //如果查询用户没有记录，需要在页面进行提示
+      //todo 退出时需要清空这些数据
+      //todo 避免异常退出，登录成功之后也清空一次
+      persons = [
+        {
+          "name":"病人1",
+          "sex":0, //0 这里表示女性
+          "age":"54岁",
+          "bedNo":"001床",
+          "feeType":"市医保",
+          "personNo":"00000001"
+        },
+        {
+          "name":"病人2",
+          "sex":1, //1 这里表示男性
+          "age":"52岁",
+          "bedNo":"002床",
+          "feeType":"省医保",
+          "personNo":"00000002"
+        }
+      ];
+      $api.setStorage('persons', persons);
+
+      // api.addEventListener({
+      //     name: 'main_refresh'
+      // }, function(ret, err){
+      //     alert("重新进行查询");
+      // });
+    };
+
+    function openPersonCenter(idx){
+      var allPersons = $api.getStorage('persons');
+      var person = persons[idx];
+      $api.setStorage('currentPerson', person);
+      $api.setStorage('currentIdx', idx); //左右箭头的时候需要
+      $api.setStorage('lastIdx', 1);
+
+      api.openDrawerLayout({
+            name: 'person_content',
+            url: './person_content.html',
+            animation:{
+                type:'flip'
+            },
+            leftPane:{
+                edge: api.winWidth-250,
+                name: 'person_menu',
+                url: './person_menu.html'
+            }
+        });
+    }
+    /**
+    * 打开用户信息页面
+    */
+    function openMenu(){
+      api.openDrawerPane({
+          type: 'right'
+      });
+    }
+
+    /**
+		 * 绑定退出事件
+		 */
+		function ExitApp() {
+			var ci = 0;
+			var time1, time2;
+			api.addEventListener({
+				name : 'keyback'
+			}, function(ret, err) {
+				if (ci == 0) {
+					time1 = new Date().getTime();
+					ci = 1;
+					api.toast({
+						msg : '再按一次返回键退出'
+					});
+				} else if (ci == 1) {
+					time2 = new Date().getTime();
+					if (time2 - time1 < 2000) {
+						api.closeWidget({
+							id : api.appId,
+							retData : {
+								name : 'closeWidget'
+							},
+							silent : true
+						});
+					} else {
+						ci = 0;
+						api.toast({
+							msg : '再按一次返回键退出'
+						});
+					}
+				}
+			});
+		}
+</script>
+
+</html>

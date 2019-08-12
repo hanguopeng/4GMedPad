@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>检查结果</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/tool_fixed.css" />
+    <link rel="stylesheet" type="text/css" href="../css/frm_inspection_result.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/page.css" />
+    <style type="text/css">
+        .font-controller{
+            font-size: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+<table width="90%" class="table font-controller" >
+    <thead>
+    <tr>
+        <th>
+            检查项目
+        </th>
+        <th>
+            送检医生
+        </th>
+        <th>
+            报告日期
+        </th>
+        <th>
+            送检日期
+        </th>
+    </tr>
+    </thead>
+    <tbody id="inspectionResult">
+
+    </tbody>
+</table>
+<div id="pageDivContainer"></div>
+<a href="#" class="search-person" tapmode onclick="openMyToolFrame()"></a>
+<script id="pageInfo-tmpl" type="text/template">
+    <div class="bottomPage">
+        <div>
+            <span>第</span>
+            <span>{{=(it.currPage-1) * it.pageSize + 1}}</span>
+            <span>到</span>
+            <span>{{=it.currPage * it.pageSize}}</span>
+            <span>条记录</span>
+            <span style="margin-left: 25px;">共</span>
+            <span>{{=it.totalCount}}</span>
+            <span>条记录</span>
+        </div>
+        <div id="pageNumContainer" class="pageNumContainer" data-currentPage="{{=it.currPage}}">
+            {{? parseInt(it.currPage)!=1}}<span onclick="firstPage();">首页</span>{{?}}
+            {{? parseInt(it.currPage)>1}}<span onclick="prePage();" class="prePage">上一页</span>{{?}}
+            <span class="pageNumItem active">{{=it.currPage}}</span>
+            {{? parseInt(it.totalPage)>parseInt(it.currPage)}}
+            <span class="pageNumItem" onclick="nextPage('{{=parseInt(it.currPage)+1}}');">
+                {{=parseInt(it.currPage)+1}}
+            </span>
+            {{?}}
+            {{? parseInt(it.totalPage)>parseInt(it.currPage)}}
+            <span class="nextPage" onclick="nextPage('{{=parseInt(it.currPage)+1}}');">下一页</span>
+            {{?}}
+        </div>
+
+    </div>
+</script>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/inspectionResult.js"></script>
+
+</html>

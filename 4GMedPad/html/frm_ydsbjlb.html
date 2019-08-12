@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>胰岛素泵记录单</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/tool_fixed.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/page.css" />
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+            margin: 1rem auto;
+            text-align: center;
+        }
+
+        table td, table th {
+            border: 1px solid #cad9ea;
+            color: #666;
+            height: 30px;
+        }
+
+        table thead th {
+            background-color: #CCE8EB;
+            width: 100px;
+        }
+
+        table tr {
+            background: #fff;
+        }
+
+        .trActive {
+            background: #F5FAFA;
+        }
+        .fong-size-controller{
+            font-size: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+<section class="aui-content-padded aui-text-center">
+    <h2>胰岛素泵记录单</h2>
+</section>
+<div class="aui-content">
+    <div class="aui-info aui-font-size-12 aui-padded-l-15 aui-padded-r-15" id="personInfo">
+
+    </div>
+</div>
+<div style="overflow-x:scroll;" class=" aui-padded-l-15 aui-padded-r-15 fong-size-controller">
+    <table class="table" style="width:1000px !important;">
+        <thead>
+        <tr>
+            <th rowspan="1">用泵时间</th>
+            <th rowspan="1">创建时间</th>
+            <th rowspan="1">护士签名</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+
+        </tbody>
+    </table>
+</div>
+<a href="#" class="search-person" tapmode onclick="openMyToolFrame()"></a>
+<script id="personInfo-tmpl" type="text/template">
+    <span>姓名:{{=it.name||''}}</span>
+    <span>性别:{{=(it.sex)||''}}</span>
+    <span>入院日期:{{=it.ryrq||''}}</span>
+    <span>科室:{{=it.ks||''}}</span>
+    <span>诊断:{{=it.diagnose||''}}</span>
+</script>
+<script id="content-tmpl" type="text/template">
+    <tr onclick="openDetailWin(this)" data-id="{{=it.id||''}}" data-userTime="{{=it.userTime||''}}">
+        <td>{{=it.userTime||''}}</td>
+        <td>{{=it.createTime||''}}</td>
+        <td>{{=it.nurseName||''}}</td>
+    </tr>
+</script>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/frm_ydsbjlb.js"></script>
+</html>

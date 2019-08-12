@@ -1,0 +1,159 @@
+/*1rem = 20px*/
+html, body {
+    height: 100%;
+}
+
+.full-body {
+    min-height: 100%;
+}
+
+.flex {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.flex .flex-item {
+    -webkit-box-flex: 1;
+    -webkit-box-flex: 1;
+    flex: 1;
+    text-align: center;
+}
+
+.page-item-title {
+    font-size: 1rem;
+    text-align: center;
+}
+
+.search-item-text {
+    padding-right: 0.5rem;
+    font-size: 0.5rem;
+}
+
+select.mySelect {
+    font-size: 0.5rem;
+    border-bottom: 1px double #ccc;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    width: 5rem;
+    padding: 0 0.5rem;
+}
+
+.tabContainer {
+    line-height: 2rem;
+    font-size: 0.6rem;
+}
+
+
+.tabContainer .tab-item.active {
+    color: #45afec;
+    padding-bottom: 3px;
+    border-bottom:1px solid #45afec;
+}
+
+table {
+    border-collapse: collapse;
+    text-align: center;
+    width: 100%;
+}
+
+table td, table th {
+    border: 1px solid #cad9ea;
+    color: #666;
+    height: 30px;
+    white-space: nowrap;
+    padding: 0px 0.25rem;
+}
+
+table thead th {
+    background-color: #289bd0;
+    color: #fff;
+    line-height: 2.5em;
+    font-size: 0.6rem;
+}
+
+table tr {
+    background: #fff;
+}
+
+.trActive {
+    background: #F5FAFA;
+}
+
+.adviceTable{
+    overflow-x: scroll;
+    font-size: 0.5rem;
+}
+.adviceTable::-webkit-scrollbar {/*滚动条整体样式*/
+    width: 1rem;     /*高宽分别对应横竖滚动条的尺寸*/
+    height: 0.2rem;
+}
+.adviceTable::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: #289bd0;
+}
+.adviceTable::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    background: #EDEDED;
+}
+.sign-block-container{
+    font-size: 0.5rem;
+    line-height: 1rem;
+}
+.sign-block-container:after{
+    content: '';
+    clear: both;
+    display:block;
+    height:0;
+}
+.sign-block-container .block-item{
+    padding-left: 1rem;
+    padding-right: 1.5rem;
+    display: inline-block;
+    float: left;
+}
+.block-item .sign-text{
+    display: inline-block;
+    float: left;
+    padding-right: 0.25rem;
+}
+.block-item .sign-block{
+    border-radius: 0.2rem;
+    height: 1rem;
+    width: 4rem;
+    display: inline-block;
+    float: left;
+}
+.block-item .sign-block.yzx{
+    background-color: #67c23a;
+}
+.block-item .sign-block.zxz{
+    background-color: #e6a23c;
+}
+.block-item .sign-block.ytz{
+    background-color: #909399;
+}
+.adviceRecordContainer{
+    width: 100%;
+    overflow-x: scroll;
+    font-size: 0.5rem;
+}
+tr.yzx,tr.yzx td{
+    background-color: #67c23a;
+    color: #fff;
+}
+tr.zxz,tr.zxz td{
+    background-color: #e6a23c;
+    color: #fff;
+}
+tr.ytz,tr.ytz td{
+    background-color: #909399;
+    color: #fff;
+}

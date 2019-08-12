@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>血糖检测单</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/tool_fixed.css" />
+    <link rel="stylesheet" type="text/css" href="../css/page.css" />
+    <style type="text/css">
+        table
+        {
+            border-collapse: collapse;
+            margin: 1rem auto;
+            text-align: center;
+        }
+        table td, table th
+        {
+            border: 1px solid #cad9ea;
+            color: #666;
+            height: 30px;
+        }
+        table thead th
+        {
+            background-color: #CCE8EB;
+            width: 100px;
+        }
+        table tr
+        {
+            background: #fff;
+        }
+        .trActive{
+          background: #F5FAFA;
+        }
+        .font-size-controller{
+            font-size: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+<section class="aui-content-padded aui-text-center">
+    <h2>血糖监测护理单</h2>
+</section>
+<div class="aui-content">
+    <div class="aui-info aui-font-size-12 aui-padded-l-15 aui-padded-r-15" id="personInfo">
+
+    </div>
+    <div class="aui-info aui-font-size-12 aui-padded-l-15 aui-padded-r-15">
+        <span>目标血糖-餐前半小时:4.4－6.1mmol/L</span>
+        <span>目标血糖-餐后（第一口食物后的2小时）：6.1－7.8mmol/L</span>
+    </div>
+    <div class="aui-info aui-font-size-12 aui-padded-l-15 aui-padded-r-15">
+
+    </div>
+</div>
+<table width="90%" class="table font-size-controller">
+    <thead>
+    <tr>
+        <th rowspan="3" style="width:200px !important;">
+            日期
+        </th>
+        <th colspan="9">
+            血糖
+        </th>
+    </tr>
+    <tr>
+        <th colspan="2">早餐</th>
+        <th colspan="2">中餐</th>
+        <th colspan="2">晚餐</th>
+        <th rowspan="2">睡前</th>
+        <th rowspan="2">空腹</th>
+        <th rowspan="2">随机</th>
+    </tr>
+    <tr>
+        <th>前0.5h</th>
+        <th>后2h</th>
+        <th>前0.5h</th>
+        <th>后2h</th>
+        <th>前0.5h</th>
+        <th>后2h</th>
+    </tr>
+    </thead>
+    <tbody id="tbody">
+
+    </tbody>
+</table>
+<div id="pageDivContainer"></div>
+<a href="#" class="search-person" tapmode onclick="openMyToolFrame()"></a>
+<script id="content-tmpl" type="text/template">
+    <tr onclick="openDetailWin(this)" data-id="{{=it.id||''}}">
+        <td>{{=it.rq||''}}</td>
+        <td>{{=it.breakfast1||''}}</td>
+        <td>{{=it.breakfast2||''}}</td>
+        <td>{{=it.lunch1||''}}</td>
+        <td>{{=it.lunch2||''}}</td>
+        <td>{{=it.dinner1||''}}</td>
+        <td>{{=it.dinner2||''}}</td>
+        <td>{{=it.beforeSleep||''}}</td>
+        <td>{{=it.emptyStomach||''}}</td>
+        <td>{{=it.random||''}}</td>
+    </tr>
+</script>
+<script id="personInfo-tmpl" type="text/template">
+    <span>姓名:{{=it.name||''}}</span>
+    <span>性别:{{=it.sex||''}}</span>
+    <span>年龄:{{=it.age||''}}</span>
+    <span>入院日期:{{=it.ryrq||''}}</span>
+    <span>科室:{{=it.ks||''}}</span>
+    <span>床号:{{=it.ch||''}}</span>
+    <span>住院号:{{=it.zyh||''}}</span>
+</script>
+<script id="pageInfo-tmpl" type="text/template">
+    <div class="bottomPage">
+        <div>
+            <span>第</span>
+            <span>{{=(it.currPage-1) * it.pageSize + 1}}</span>
+            <span>到</span>
+            <span>{{=it.currPage * it.pageSize}}</span>
+            <span>条记录</span>
+            <span style="margin-left: 25px;">共</span>
+            <span>{{=it.totalCount}}</span>
+            <span>条记录</span>
+        </div>
+        <div id="pageNumContainer" class="pageNumContainer" data-currentPage="{{=it.currPage}}">
+            {{? parseInt(it.currPage)!=1}}<span onclick="firstPage();">首页</span>{{?}}
+            {{? parseInt(it.currPage)>1}}<span onclick="prePage();" class="prePage">上一页</span>{{?}}
+            <span class="pageNumItem active">{{=it.currPage}}</span>
+            {{? parseInt(it.totalPage)>parseInt(it.currPage)}}
+            <span class="pageNumItem" onclick="nextPage('{{=parseInt(it.currPage)+1}}');">
+                {{=parseInt(it.currPage)+1}}
+            </span>
+            {{?}}
+            {{? parseInt(it.totalPage)>parseInt(it.currPage)}}
+            <span class="nextPage" onclick="nextPage('{{=parseInt(it.currPage)+1}}');">下一页</span>
+            {{?}}
+        </div>
+
+    </div>
+</script>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/bloodGlucose.js"></script>
+</html>
