@@ -1,5 +1,6 @@
 var person = $api.getStorage(storageKey.currentPerson);
 var patientId = person.id;
+var homepageId = person.homepageId;
 var page = 1;
 
 apiready = function () {
@@ -24,15 +25,33 @@ apiready = function () {
 };
 
 var searchFeeDetail = function(patientId,spage){
+    var params ={};
+    params.homepageId = homepageId;
+    params.bigKindNum = "";
+    params.limit = 10;
+    params.medCostId = 0;
+    params.page = spage;
+    params.patientId = patientId;
+    params.precedence = "";
+    params.start = 0;
     //alert(spage);
-    common.get({
-        url: config.costItemDetails+patientId + "&page="+spage,
-        isLoading: true,
+    common.post({
+        url: config.preCostList,
+        isLoading:true,
+        data:params,
         success:function(ret){
+            api.hideProgress();
+            $api.html($api.byId('tbody'),"");
+            if(ret&&ret.content){
+                //alert(JSON.stringify(ret.content))
+                var preCostTmpl = doT.template($api.text($api.byId('preCostDetailList')));
+                $api.html($api.byId('tbody'),preCostTmpl(ret.content));
 
-            /*$api.html($api.byId('tbody'),"");*/
-            var feeInfo = doT.template($api.text($api.byId('feeInfo-tmpl')));
-            $api.html($api.byId('searchInfo'),feeInfo(""));
+                var pageTmpl = doT.template($api.text($api.byId('pageDivContainer-tmpl')));
+                $api.html($api.byId('pageDivContainer'),pageTmpl(ret.content));
+
+            }
+
         }
     });
 };
@@ -48,44 +67,14 @@ var firstPage = function(){
 
 var prePage = function(){
     var currentPage = $api.attr($api.byId('pageNumContainer'),'data-currentPage');
-    spage = parseInt(currentPage) - 1;
-    searchFeeDetail(patientId,spage);
+    page = parseInt(currentPage) - 1;
+    searchFeeDetail(patientId,page);
 }
 
-var nextPage = function(npage){
+var nextPage = function(){
     var currentPage = $api.attr($api.byId('pageNumContainer'),'data-currentPage');
-    spage =npage;
-    searchFeeDetail(patientId,spage);
+    page = parseInt(currentPage) + 1;
+    searchFeeDetail(patientId,page);
 }
 
-function openFeeDetails() {
-    api.closeFrame({
-        name: 'frm_fee_detail'
-    });
 
-        //alert('1111');
-        api.openFrame({
-            name: 'frm_fee_detail',
-            url: './frm_fee_detail.html',
-            rect: {
-                x: api.winWidth - 600,
-                y: api.winHeight - api.frameHeight,
-                w: 600,
-                h: api.frameHeight
-            },
-            progress: {
-                type: "default",
-                title: "",
-                text: "正在加载数据"
-            },
-            animation: {
-                type: "flip",
-                subType: "from_bottom"
-            },
-            vScrollBarEnabled: true,
-            hScrollBarEnabled: false,
-            reload:true
-        });
-        //alert('222');
-
-}

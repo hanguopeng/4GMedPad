@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="../css/tool_fixed.css"/>
     <link rel="stylesheet" type="text/css" href="../css/page.css" />
     <style type="text/css">
+
         table {
             border-collapse: collapse;
             margin: 1rem auto;
@@ -20,6 +21,9 @@
             border: 1px solid #cad9ea;
             color: #666;
             height: 30px;
+            text-align:center;
+            vertical-align:middle;
+            padding: 20px;
         }
 
         table thead th {
@@ -80,9 +84,13 @@
             background: #EDEDED;
         }
         td {
-            width: 1px;
+
             white-space: nowrap; /* 自适应宽度*/
             word-break:  keep-all; /* 避免长单词截断，保持全部 */
+        }
+        .pageDivContainer{
+            margin-left: 3.5rem;
+            margin-top: 1.5rem;
         }
     </style>
 </head>
@@ -132,229 +140,63 @@
          </div>-->
     </div>
 </div>
-<div style="overflow-x:scroll;" class="aui-padded-l-15 aui-padded-r-15 feeDetailTable">
+<div style="overflow-x:scroll;" class="aui-padded-l-15 feeDetailTable" style="padding-right: 5rem;">
     <table class="table">
         <thead>
-        <tr>
-            <th>日期</th>
-            <th>单据号</th>
-            <th>科室</th>
-            <th>结算方式</th>
-            <th>结算号码</th>
-            <th>预交金额</th>
-            <th>结账金额</th>
-            <th>剩余金额</th>
-            <!--<th>未发药数量</th>-->
-            <th>摘要</th>
-            <th>实际票号</th>
-            <th>操作员姓名</th>
-        </tr>
+            <tr>
+                <th>日期</th>
+                <th>单据号</th>
+                <th>科室</th>
+                <th>结算方式</th>
+                <th>结算号码</th>
+                <th>预交金额</th>
+                <th>结账金额</th>
+                <th>剩余金额</th>
+                <!--<th>未发药数量</th>-->
+                <th>摘要</th>
+                <th>实际票号</th>
+                <th>操作员姓名</th>
+            </tr>
         </thead>
         <tbody id="tbody">
-            <tr class="feeDetails" tapmode onclick="openFeeDetails()">
-                <td>2019-06-19</td>
-                <td>T923424</td>
-                <td>血液肿瘤</td>
-                <td>银联卡</td>
-                <td>6652</td>
-                <td>90000.00</td>
-                <td>88075.75</td>
-                <td>1924.93</td>
-                <!--<td>未发药数量</td>-->
-                <td>工行6526</td>
-                <td>0000065486</td>
-                <td>李红</td>
-            </tr>
-            <tr class="feeDetails" tapmode  onclick="openFeeDetails()">
-                <td>2019-06-19</td>
-                <td>T923424</td>
-                <td>血液肿瘤</td>
-                <td>银联卡</td>
-                <td>6652</td>
-                <td>90000.00</td>
-                <td>88075.75</td>
-                <td>1924.93</td>
-                <!--<td>未发药数量</td>-->
-                <td>工行6526</td>
-                <td>0000065486</td>
-                <td>李红</td>
-            </tr>
-            <tr class="feeDetails" tapmode onclick="openFeeDetails()">
-                <td>2019-06-19</td>
-                <td>T923424</td>
-                <td>血液肿瘤</td>
-                <td>银联卡</td>
-                <td>6652</td>
-                <td>90000.00</td>
-                <td>88075.75</td>
-                <td>1924.93</td>
-                <!--<td>未发药数量</td>-->
-                <td>工行6526</td>
-                <td>0000065486</td>
-                <td>李红</td>
-            </tr><tr class="feeDetails" onclick="openFeeDetails()">
-                <td>2019-06-19</td>
-                <td>T923424</td>
-                <td>血液肿瘤</td>
-                <td>银联卡</td>
-                <td>6652</td>
-                <td>90000.00</td>
-                <td>88075.75</td>
-                <td>1924.93</td>
-                <!--<td>未发药数量</td>-->
-                <td>工行6526</td>
-                <td>0000065486</td>
-                <td>李红</td>
-            </tr><tr class="feeDetails" onclick="openFeeDetails()">
-                <td>2019-06-19</td>
-                <td>T923424</td>
-                <td>血液肿瘤</td>
-                <td>银联卡</td>
-                <td>6652</td>
-                <td>90000.00</td>
-                <td>88075.75</td>
-                <td>1924.93</td>
-                <!--<td>未发药数量</td>-->
-                <td>工行6526</td>
-                <td>0000065486</td>
-                <td>李红</td>
-            </tr><tr class="feeDetails" onclick="openFeeDetails()">
-                <td>2019-06-19</td>
-                <td>T923424</td>
-                <td>血液肿瘤</td>
-                <td>银联卡</td>
-                <td>6652</td>
-                <td>90000.00</td>
-                <td>88075.75</td>
-                <td>1924.93</td>
-                <!--<td>未发药数量</td>-->
-                <td>工行6526</td>
-                <td>0000065486</td>
-                <td>李红</td>
-            </tr><tr class="feeDetails" onclick="openFeeDetails()">
-                <td>2019-06-19</td>
-                <td>T923424</td>
-                <td>血液肿瘤</td>
-                <td>银联卡</td>
-                <td>6652</td>
-                <td>90000.00</td>
-                <td>88075.75</td>
-                <td>1924.93</td>
-                <!--<td>未发药数量</td>-->
-                <td>工行6526</td>
-                <td>0000065486</td>
-                <td>李红</td>
-            </tr><tr class="feeDetails" onclick="openFeeDetails()">
-                <td>2019-06-19</td>
-                <td>T923424</td>
-                <td>血液肿瘤</td>
-                <td>银联卡</td>
-                <td>6652</td>
-                <td>90000.00</td>
-                <td>88075.75</td>
-                <td>1924.93</td>
-                <!--<td>未发药数量</td>-->
-                <td>工行6526</td>
-                <td>0000065486</td>
-                <td>李红</td>
-            </tr>
-            <tr class="feeDetails" onclick="openFeeDetails()">
-                <td>2019-06-19</td>
-                <td>T923424</td>
-                <td>血液肿瘤</td>
-                <td>银联卡</td>
-                <td>6652</td>
-                <td>90000.00</td>
-                <td>88075.75</td>
-                <td>1924.93</td>
-                <!--<td>未发药数量</td>-->
-                <td>工行6526</td>
-                <td>0000065486</td>
-                <td>李红</td>
-            </tr><tr class="feeDetails" onclick="openFeeDetails()">
-                <td>2019-06-19</td>
-                <td>T923424</td>
-                <td>血液肿瘤</td>
-                <td>银联卡</td>
-                <td>6652</td>
-                <td>90000.00</td>
-                <td>88075.75</td>
-                <td>1924.93</td>
-                <!--<td>未发药数量</td>-->
-                <td>工行6526</td>
-                <td>0000065486</td>
-                <td>李红</td>
-            </tr><tr class="feeDetails" onclick="openFeeDetails()">
-                <td>2019-06-19</td>
-                <td>T923424</td>
-                <td>血液肿瘤</td>
-                <td>银联卡</td>
-                <td>6652</td>
-                <td>90000.00</td>
-                <td>88075.75</td>
-                <td>1924.93</td>
-                <!--<td>未发药数量</td>-->
-                <td>工行6526</td>
-                <td>0000065486</td>
-                <td>李红</td>
-            </tr><tr class="feeDetails" onclick="openFeeDetails()">
-                <td>2019-06-19</td>
-                <td>T923424</td>
-                <td>血液肿瘤</td>
-                <td>银联卡</td>
-                <td>6652</td>
-                <td>90000.00</td>
-                <td>88075.75</td>
-                <td>1924.93</td>
-                <!--<td>未发药数量</td>-->
-                <td>工行6526</td>
-                <td>0000065486</td>
-                <td>李红</td>
-            </tr><tr class="feeDetails" onclick="openFeeDetails()">
-                <td>2019-06-19</td>
-                <td>T923424</td>
-                <td>血液肿瘤</td>
-                <td>银联卡</td>
-                <td>6652</td>
-                <td>90000.00</td>
-                <td>88075.75</td>
-                <td>1924.93</td>
-                <!--<td>未发药数量</td>-->
-                <td>工行6526</td>
-                <td>0000065486</td>
-                <td>李红</td>
-            </tr><tr class="feeDetails" onclick="openFeeDetails()">
-                <td>2019-06-19</td>
-                <td>T923424</td>
-                <td>血液肿瘤</td>
-                <td>银联卡</td>
-                <td>6652</td>
-                <td>90000.00</td>
-                <td>88075.75</td>
-                <td>1924.93</td>
-                <!--<td>未发药数量</td>-->
-                <td>工行6526</td>
-                <td>0000065486</td>
-                <td>李红</td>
-            </tr><tr class="feeDetails" onclick="openFeeDetails()">
-                <td>2019-06-19</td>
-                <td>T923424</td>
-                <td>血液肿瘤</td>
-                <td>银联卡</td>
-                <td>6652</td>
-                <td>90000.00</td>
-                <td>88075.75</td>
-                <td>1924.93</td>
-                <!--<td>未发药数量</td>-->
-                <td>工行6526</td>
-                <td>0000065486</td>
-                <td>李红</td>
-            </tr>
+
         </tbody>
     </table>
 </div>
-<div id="pageDivContainer"></div>
+<div class="pageDivContainer aui-font-size-12" id="pageDivContainer"></div>
 <a href="#" class="search-person" tapmode onclick="openMyToolFrame()"></a>
+<script id="pageDivContainer-tmpl" type="text/template">
+    <div class="bottomPage">
+        <div>
+            <span>第</span>
+            <span>{{=(it.currPage-1) * it.pageSize + 1}}</span>
+            <span>到</span>
+            <span>{{=it.currPage * it.pageSize}}</span>
+            <span>条记录</span>
+            <span style="margin-left: 25px;">共</span>
+            <span>{{=it.totalCount}}</span>
+            <span>条记录</span>
+        </div>
+        <div id="pageNumContainer" class="pageNumContainer" data-currentPage="{{=it.currPage}}">
+            {{? parseInt(it.currPage)!=1}}
+            <span onclick="firstPage();">首页</span>
+            {{?}}
+            {{? parseInt(it.currPage)>1}}
+            <span onclick="prePage();" class="prePage">上一页</span>
+            {{?}}
+            <span class="pageNumItem active">{{=it.currPage}}</span>
+            {{? parseInt(it.totalPage)>parseInt(it.currPage)}}
+            <span class="pageNumItem" onclick="nextPage();">
+                {{=parseInt(it.currPage)+1}}
+                </span>
+            {{?}}
+            {{? parseInt(it.totalPage)>parseInt(it.currPage)}}
+            <span class="nextPage" onclick="nextPage();">下一页</span>
+            {{?}}
+        </div>
+
+    </div>
+</script>
 <script id="feeInfo-tmpl" type="text/template">
     <span>预交金额:预交款:</span>
     <!--<span>费用(元):{{=it.closedOrderMoney||''}}</span>-->
@@ -363,6 +205,28 @@
     <span>预结费用:</span>
     <span>自付费用:</span>
     <span>剩余款:</span>
+</script>
+<script id="preCostDetailList" type="text/template">
+    {{
+        for(var i=0;i<it.list.length;i++){
+            var item = it.list[i];
+    }}
+    <tr>
+        <td>{{=item.prepayDate||''}}</td>
+        <td>{{=item.prepayDocumentNo||''}}</td>
+        <td>{{=item.prepayDepartment||''}}</td>
+        <td>{{=item.prepaySettlementMethod||''}}</td>
+        <td>{{=item.prepaySettlementNo||''}}</td>
+        <td>{{=item.prepayAmountIn||''}}</td>
+        <td>{{=item.prepayAmountOf||''}}</td>
+        <td>{{=item.prepayResidualAmount||''}}</td>
+        <td>{{=item.prepayAbstract||''}}</td>
+        <td>{{=item.prepayActuaNo||''}}</td>
+        <td>{{=item.prepayOperatorName||''}}</td>
+    </tr>
+    {{
+        }
+    }}
 </script>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>

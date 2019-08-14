@@ -1,7 +1,11 @@
 var person = $api.getStorage(storageKey.currentPerson);
 var patientId = person.id;
+var homepageId = person.homepageId;
 var page = 1;
 var spage = 1;
+var haptime ;
+var feeitem ;
+var oraitem ;
 apiready = function () {
     api.parseTapmode();
     api.addEventListener({
@@ -59,13 +63,29 @@ apiready = function () {
         }
     })
 }*/
+var btntest = function(){
+    var haptime = $api.val($api.byId('hpp-time'));;
+    var feeitem = $api.val($api.byId('fee-item'));
+    var oraitem = $api.val($api.byId('ora-item'));
+    //alert('haptime: '+haptime+'  feeitem:'+feeitem+'  oraitem:'+oraitem);
+}
 
 var searchFeeDetail = function(patientId,spage){
-    //alert(spage);
-    common.get({
-        url: config.costItemDetails+patientId + "&page="+spage,
+
+    alert('haptime: '+haptime+'  feeitem:'+feeitem+'  oraitem:'+oraitem);
+    var params ={};
+    params.homepageId = homepageId;
+    params.page = spage;
+    params.patientId = patientId;
+    params.departmentName = oraitem;
+    params.costType = feeitem;
+    params.prepayDate = haptime;
+    common.post({
+        url: config.costListDetails,
         isLoading: true,
+        data:params,
         success:function(ret){
+            api.hideProgress();
             var totalCount = ret.content.totalCount;
             var pageSize = ret.content.pageSize;
             var totalPage = ret.content.totalPage;
@@ -79,39 +99,23 @@ var searchFeeDetail = function(patientId,spage){
             pageInfo(pageJson);
             $api.html($api.byId('tbody'),"");
             if(ret.content && ret.content.list && ret.content.list.length>0) {
-               /* ret.content.tnum = 0;
-                ret.content.tsubtotal = 0;
-                ret.content.tpackNum = 0;
-                ret.content.tnoSendNum = 0;
-                ret.content.tsendBackNum = 0;
-                ret.content.tselfPay = 0;
-                ret.content.ttallyPay = 0;
-                ret.content.tdiscountPay = 0;*/
-                for (var i = 0; i < ret.content.list.length; i++) {
-                    ret.content.list[i].id = i+1;
                     var trInfoTmpl = doT.template($api.text($api.byId('trInfo-tmpl')));
-                    $api.append($api.byId('tbody'), trInfoTmpl(ret.content.list[i]));
-                        /*ret.content.tnum = ret.content.tnum + Number(ret.content.list[i].num);
-                        ret.content.tsubtotal = ret.content.tsubtotal + Number(ret.content.list[i].subtotal);
-                        ret.content.tsubtotal = Math.round(ret.content.tsubtotal*100)/100 ;
-                        ret.content.tpackNum = ret.content.tpackNum + Number(ret.content.list[i].packNum);
-                        ret.content.tnoSendNum = ret.content.tnoSendNum + Number(ret.content.list[i].noSendNum);
-                        ret.content.tsendBackNum = ret.content.tsendBackNum + Number(ret.content.list[i].sendBackNum);
-                        ret.content.tselfPay = ret.content.tselfPay + Number(ret.content.list[i].selfPay);
-                        ret.content.tselfPay = Math.round(ret.content.tselfPay*100)/100;
-                        ret.content.ttallpay = ret.content.ttallpay + ret.content.list[i].tallpay;
-                        ret.content.ttallpay = Math.round(ret.content.ttallpay*100)/100;
-                        ret.content.tdiscountPay = ret.content.tdiscountPay + ret.content.list[i].discountPay;
-                        ret.content.tdiscountPay = Math.round(ret.content.tdiscountPay*100)/100;*/
-
-                }
-                /*var totalTmpl = doT.template($api.text($api.byId('total-tmpl')));
-                $api.html($api.byId('taotal'), totalTmpl(ret.content));*/
+                    $api.html($api.byId('tbody'), trInfoTmpl(ret.content.list));
             }
         }
     });
 };
 
+
+var searchTip = function(){
+     haptime = $api.val($api.byId('hpp-time'));;
+     feeitem = $api.val($api.byId('fee-item'));
+     oraitem = $api.val($api.byId('ora-item'));
+
+    //alert('haptime: '+haptime+'  feeitem:'+feeitem+'  oraitem:'+oraitem);
+    searchFeeDetail(patientId,page);
+
+}
 /*
 var costDetailInfo = function(patientId){
     common.get({
@@ -126,7 +130,7 @@ var costDetailInfo = function(patientId){
 */
 
 
-var pageInfo = function(pageJson){
+/*var pageInfo = function(pageJson){
     var pageInfoTmpl = doT.template($api.text($api.byId('pageInfo-tmpl')));
     $api.html($api.byId('pageDivContainer'), pageInfoTmpl(pageJson));
 }
@@ -156,4 +160,26 @@ var nextPage = function(npage){
     var currentPage = $api.attr($api.byId('pageNumContainer'),'data-currentPage');
     spage =npage;
     searchFeeDetail(patientId,spage);
+}*/
+
+var pageInfo = function(pageJson){
+    var pageInfoTmpl = doT.template($api.text($api.byId('pageInfo-tmpl')));
+    $api.html($api.byId('pageDivContainer'), pageInfoTmpl(pageJson));
+}
+
+var firstPage = function(){
+    page = 1;
+    searchFeeDetail(patientId,page);
+}
+
+var prePage = function(){
+    var currentPage = $api.attr($api.byId('pageNumContainer'),'data-currentPage');
+    page = parseInt(currentPage) - 1;
+    searchFeeDetail(patientId,page);
+}
+
+var nextPage = function(){
+    var currentPage = $api.attr($api.byId('pageNumContainer'),'data-currentPage');
+    page = parseInt(currentPage) + 1;
+    searchFeeDetail(patientId,page);
 }

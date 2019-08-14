@@ -23,11 +23,20 @@ apiready = function() {
 
     doctorAdvice(patientId);
 };
-function searcDet(){
+function search(){
     doctorAdvice(patientId);
 }
 
 var doctorAdvice = function(patientId){
+
+    var inUse
+    var reportFlag
+    if ($api.byId('inUse').checked){
+        inUse = 1
+    }
+    if ($api.byId('reportFlag').checked){
+        reportFlag = 1
+    }
 
     var typeTab = $api.attr($api.dom($api.byId('typeTabContainer'),'.active'),'id');
     var topName = $api.attr($api.byId(typeTab), 'value');
@@ -71,7 +80,9 @@ var doctorAdvice = function(patientId){
                 patientId:  patientId,   //病人ID
                 priorityCode:  priorityCode,    //医嘱优先级（期效）
                 homepageId: person.homepageId,
-                page: page
+                page: page,
+                inUse: inUse,   //在用医嘱，选中是1
+                reportFlag: reportFlag   //需要报告,  选中是1
             }),
             dataType: "json",
             success:function(ret){

@@ -35,19 +35,12 @@
         <div class="page-top">
             <div class="aui-row">
                 <div class="flex-item aui-font-size-12 aui-margin-t-10">
-                    <input type="checkbox" id="fyzfy" class="aui-margin-l-10" checked value="非医嘱费用">非医嘱费用
+                        <input type="checkbox" id="inUse" class="aui-margin-l-15 aui-margin-t-5" checked value="1">在用医嘱
 
-                    <input type="checkbox" id="wdzzsj" class="aui-margin-l-10" value="未到终止时间">未到终止时间
+                        <input type="checkbox" id="reportFlag" class="aui-margin-l-15 aui-margin-t-5" value="1">需要报告
 
-                    <input type="checkbox" id="czh" class="aui-margin-l-10" value="重整后">重整后
-
-                    <input type="checkbox" id="wjz" class="aui-margin-l-10" value="未记账">未记账
-
-                    <input type="checkbox" id="reportFlag" class="aui-margin-l-10" value="1">需要报告
-
-                    <input type="checkbox" id="bxybg" class="aui-margin-l-10" value="不需要报告">不需要报告
-
-                    <input type="button" class="aui-margin-l-10" onclick="searcDet()" value="查 询">
+                        <i class="aui-iconfont aui-icon-search aui-margin-l-15 aui-margin-t-5" onclick="search()"></i>
+                    <!--<input type="button" class="aui-margin-l-10" onclick="search()" value="查 询">-->
                 </div>
             </div>
             <div class="tabContainer flex aui-margin-t-5" id="typeTabContainer">
@@ -145,45 +138,45 @@
                 </table>
             </div>
         </div>
-</div>
-<div id="pageDivContainer"></div>
-<a href="#" class="search-person" tapmode onclick="openMyToolFrame()"></a>
-<script id="content-tmpl" type="text/template">
-    <tr>
-        {{?it.size>0}}
-        <td  rowspan="{{=it.size}}" style="color:{{=it.fieldENName}}">{{=it.priorityName||''}}</td>
-        <td  rowspan="{{=it.size}}"style="color:{{=it.fieldENName}}">{{=it.adviceStart||''}}</td>
-        {{??}}
-        {{?it.show}}
-        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.priorityName||''}}</td>
-        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.adviceStart||''}}</td>
-        {{?}}
-        {{?}}
-        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.icon||''}}</td>
-        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.name||''}}</td>
-        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.num||''}}</td>
-        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.dosage||''}}</td>
-        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.dateNum||''}}</td>
-        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.frequencyName||''}}</td>
-        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.usageName||''}}</td>
-        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.entrustment||''}}</td>
-        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.executionTime||''}}</td>
-        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.TerminationTime||''}}</td>
-        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.acceptOrgName||''}}</td>
-        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.executiveNature||''}}</td>
-        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.lastExcecutiveTime||''}}</td>
-        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.statusName||''}}</td>
-        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.doctorName||''}}</td>
-        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.foundTime||''}}</td>
-        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.nurseName||''}}</td>
-        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.checkTime||''}}</td>
-        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.stopDocName||''}}</td>
-        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.stopTime||''}}</td>
-        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.stopNurseName||''}}</td>
-        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.stopConfirm||''}}</td>
-        <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.drugs||''}}</td>
-    </tr>
-</script>
+    </div>
+    <div id="pageDivContainer" class="aui-font-size-12"></div>
+    <a href="#" class="search-person" tapmode onclick="openMyToolFrame()"></a>
+    <script id="content-tmpl" type="text/template">
+        <tr>
+            {{?it.size>0}}
+            <td  rowspan="{{=it.size}}" style="color:{{=it.fieldENName}}">{{=it.priorityName||''}}</td>
+            <td  rowspan="{{=it.size}}"style="color:{{=it.fieldENName}}">{{=it.adviceStart||''}}</td>
+            {{??}}
+            {{?it.show}}
+            <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.priorityName||''}}</td>
+            <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.adviceStart||''}}</td>
+            {{?}}
+            {{?}}
+            <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.icon||''}}</td>
+            <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.name||''}}</td>
+            <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.num||''}}</td>
+            <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.dosage||''}}</td>
+            <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.dateNum||''}}</td>
+            <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.frequencyName||''}}</td>
+            <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.usageName||''}}</td>
+            <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.entrustment||''}}</td>
+            <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.executionTime||''}}</td>
+            <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.TerminationTime||''}}</td>
+            <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.acceptOrgName||''}}</td>
+            <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.executiveNature||''}}</td>
+            <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.lastExcecutiveTime||''}}</td>
+            <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.statusName||''}}</td>
+            <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.doctorName||''}}</td>
+            <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.foundTime||''}}</td>
+            <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.nurseName||''}}</td>
+            <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.checkTime||''}}</td>
+            <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.stopDocName||''}}</td>
+            <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.stopTime||''}}</td>
+            <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.stopNurseName||''}}</td>
+            <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.stopConfirm||''}}</td>
+            <td onclick="openFeeDetails({{=it.id}})" style="color:{{=it.fieldENName}}">{{=it.drugs||''}}</td>
+        </tr>
+    </script>
     <script id="pageInfo-tmpl" type="text/template">
         <div class="bottomPage">
             <div>
@@ -226,7 +219,3 @@
 
 </script>
 </html>
-
-
-
-

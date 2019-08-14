@@ -11,21 +11,6 @@
     <link rel="stylesheet" type="text/css" href="../css/page.css" />
     <link rel="stylesheet" type="text/css" href="../css/tool_fixed.css" />
     <style>
-        .aui-searchbar-1 {
-            display: -webkit-box;
-            -webkit-box-pack: center;
-            -webkit-box-align: center;
-            height: 2.2rem;
-            overflow: hidden;
-            width: 32%;
-            background-color: #ebeced;
-            color: #9e9e9e;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            margin-left: 8rem;
-        }
-        .table-head{padding-right:17px;background-color:#999;color:#000;}
-        .table-body{width:100%; height:300px;overflow-y:scroll;}
         .table-head table,.table-body table{width:100%;}
         .table-body table tr:nth-child(2n+1){background-color:#f2f2f2;}
     </style>
@@ -33,8 +18,8 @@
 
 <body class="aui-font-size-12">
 <div class="tabContainer flex aui-margin-t-10" id="typeTabContainer">
-    <div id="yzjj" class="yzjj tab-item flex-item typeTab active" value="医嘱计价内容" onclick="changeTab(this)">医嘱计价内容</div>
-    <div id="yzfs" class="yzfs tab-item flex-item typeTab" value="医嘱发送记录" onclick="changeTab(this)">医嘱发送记录</div>
+    <div id="yzjj" class="yzjj tab-item flex-item typeTab " value="advice_fee" onclick="changeTab(this)">医嘱计价内容</div>
+    <div id="yzfs" class="yzfs tab-item flex-item typeTab active" value="advice_send" onclick="changeTab(this)">医嘱发送记录</div>
 </div>
 <div style="overflow-x:scroll;" class="aui-padded-l-15 feeDetailTable" style="padding-right: 5rem;">
     <table class="table">
@@ -45,7 +30,7 @@
     </table>
 </div>
 <div id="pageDivContainer" class="aui-margin-l-5"></div>
-<script id="thead1-tmpl" type="text/template">
+<script id="advice_fee_header" type="text/template">
     <tr>
         <th>计价医嘱</th>
         <th>类别</th>
@@ -59,7 +44,7 @@
         <th>收费方式</th>
     </tr>
 </script>
-<script id="thead2-tmpl" type="text/template">
+<script id="send_details_header" type="text/template">
     <tr>
         <th>发送时间</th>
         <th>单据号</th>
@@ -77,7 +62,7 @@
         <th>发送人</th>
     </tr>
 </script>
-<script id="trInfo1-tmpl" type="text/template">
+<script id="advice_fee_info" type="text/template">
     <tr>
         <td id="">护理医嘱-III级护理</td>
         <td>护理</td>
@@ -91,23 +76,30 @@
         <td>正常收取</td>
     </tr>
 </script>
-<script id="trInfo2-tmpl" type="text/template">
+<script id="send_details_info" type="text/template">
+    {{?it}}
+    {{
+    for(var i=0;i<it.length;i++) {
+    var item = it[i];
+    }}
     <tr>
-        <td>{{=data.sendTime||''}}</td>
-        <td>{{=data.costListId||''}}</td>
-        <td>{{=data.sendName||''}}</td>
-        <td>{{=data.costListType||''}}</td>
-        <td>{{=data.sendNum||''}}</td>
-        <td>{{=data.sendBillStatus||''}}</td>
-        <td>{{=data.executeStatus||''}}</td>
-        <td>{{=data.executeDepartment||''}}</td>
-        <td>{{=data.executor||''}}</td>
-        <td>{{=data.executeTime||''}}</td>
-        <td>{{=data.||''}}</td>
-        <td>{{=data.firstTime||''}}</td>
-        <td>{{=data.lastTime||''}}</td>
-        <td>{{=data.sentor||''}}</td>
+        <td>{{=item.sendTime||''}}</td>
+        <td>{{=item.costListId||''}}</td>
+        <td>{{=item.sendName||''}}</td>
+        <td>{{=item.costListType||''}}</td>
+        <td>{{=item.sendNum||''}}</td>
+        <td>{{=item.sendBillStatus||''}}</td>
+        <td>{{=item.executeStatus||''}}</td>
+        <td>{{=item.executeDepartment||''}}</td>
+        <td>{{=item.executor||''}}</td>
+        <td>{{=item.executeTime||''}}</td>
+        <td>{{=item.executeDesc||''}}</td>
+        <td>{{=item.firstTime||''}}</td>
+        <td>{{=item.lastTime||''}}</td>
+        <td>{{=item.sentor||''}}</td>
     </tr>
+    {{ } }}
+    {{?}}
 </script>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>

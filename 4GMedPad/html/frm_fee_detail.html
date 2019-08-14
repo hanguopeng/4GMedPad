@@ -10,12 +10,7 @@
     <link rel="stylesheet" type="text/css" href="../css/tool_fixed.css"/>
     <link rel="stylesheet" type="text/css" href="../css/page.css" />
     <style type="text/css">
-        .bottomPage{
-            color: #333333 !important;
-            display: flex;
-            justify-content: flex-start;
-            padding: 0.75rem 3rem;
-        }
+
         table {
             border-collapse: collapse;
             margin: 1rem auto;
@@ -26,6 +21,9 @@
             border: 1px solid #cad9ea;
             color: #666;
             height: 30px;
+            text-align:center;
+            vertical-align:middle;
+            padding: 20px;
         }
 
         table thead th {
@@ -86,10 +84,11 @@
             background: #EDEDED;
         }
         td {
-            width: 1px;
+
             white-space: nowrap; /* 自适应宽度*/
             word-break:  keep-all; /* 避免长单词截断，保持全部 */
         }
+
     </style>
 </head>
 
@@ -118,31 +117,42 @@
 
     </div>-->
     <div class="aui-font-size-12 flex">
-        <div class="flex-item">
+        <!--<div class="flex-item">
                 未结费用清单<input type="checkbox">
         </div>
         <div class="flex-item">
             <input type="checkbox">非医嘱费用
+        </div>-->
+        <div class="flex-item">
+            <select class="aui-font-size-12 searchInput aui-margin-l-5" name="" id="hpp-time" onchange="searchTip()">
+                <option value="">所有时间</option>
+                <option value="今天">今  天</option>
+                <option value="昨天">昨  天</option>
+                <option value="三天内">三天内</option>
+                <option value="一周内">一周内</option>
+                <option value="一月内">一月内</option>
+            </select>
         </div>
         <div class="flex-item">
-            <select class="aui-font-size-12 searchInput aui-margin-l-5" name="" id="">
+            <select class="aui-font-size-12 searchInput aui-margin-l-5" name="" id="fee-item" onchange="searchTip()">
                 <option value="">所有费目</option>
-                <option value="长期医嘱">1</option>
-                <option value="临时医嘱">2</option>
-                <option value="输液">3</option>
-                <option value="口服药物">4</option>
+                <option value="检查费">检查</option>
+                <option value="化验费">化验</option>
+                <option value="中成费">中成</option>
+                <option value="其他费">其他</option>
             </select>
         </div>
         <div class="flex-item">
-            <select class="aui-font-size-12 searchInput aui-margin-l-5" name="" id="">
+            <select class="aui-font-size-12 searchInput aui-margin-l-5" name="" id="ora-item" onchange="searchTip()">
                 <option value="">所有科室</option>
-                <option value="长期医嘱">1</option>
-                <option value="临时医嘱">2</option>
-                <option value="输液">3</option>
+                <option value="长期医嘱">ICU监护病房</option>
+                <option value="临时医嘱">呼吸科</option>
+                <option value="输液">血液肿瘤科</option>
                 <option value="口服药物">4</option>
             </select>
         </div>
-        <div class="flex-item">
+
+       <!-- <div class="flex-item">
             <select class="aui-font-size-12 searchInput aui-margin-l-5" name="" id="">
                 <option value="">第一次费用</option>
                 <option value="长期医嘱">1</option>
@@ -150,7 +160,7 @@
                 <option value="输液">3</option>
                 <option value="口服药物">4</option>
             </select>
-        </div>
+        </div>-->
        <!-- <div class="flex-item">
             <span>医嘱优先级</span>
             <select class="aui-font-size-12 searchInput aui-margin-l-5" name="" id="yzyzj">
@@ -170,50 +180,50 @@
        <!-- <div class="flex-item">
         </div>-->
     </div>
-    <div class="aui-font-size-12 flex aui-margin-t-15">
+    <!--<div class="aui-font-size-12 flex aui-margin-t-15">
         <div class="flex-item">
         <input type="checkbox">不包含体检费用
         </div>
         <div class="flex-item">
         <input type="checkbox">仅显示销账单据
         </div>
-    </div>
+    </div>-->
 </div>
 <div style="overflow-x:scroll;" class="aui-padded-l-15 feeDetailTable" style="padding-right: 5rem;">
     <table class="table">
         <thead>
-        <tr>
-            <th>发生日期</th>
-            <th>单据号</th>
-            <th>开单人</th>
-            <th>开单科室</th>
-            <th>执行科室</th>
-            <th>项目</th>
-            <th>规格</th>
-            <th>费目</th>
-            <!--<th>未发药数量</th>-->
-            <th>数量</th>
-            <th>标准单价</th>
-            <th>标准金额</th>
-            <th>未结金额</th>
-            <!--<th>接收科室</th>-->
-            <th>类型</th>
-            <th>医保大类</th>
-            <th>操作员</th>
-            <th>登记时间</th>
-            <th>项目编码</th>
-            <th>保险编码</th>
-            <th>项目说明</th>
-            <th>摘要</th>
-            <th>执行状态</th>
-        </tr>
+            <tr>
+                <th>发生日期</th>
+                <th>单据号</th>
+                <th>开单人</th>
+                <th>开单科室</th>
+                <th>执行科室</th>
+                <th>项目</th>
+                <th>规格</th>
+                <th>费目</th>
+                <!--<th>未发药数量</th>-->
+                <th>数量</th>
+                <th>标准单价</th>
+                <th>标准金额</th>
+                <th>未结金额</th>
+                <!--<th>接收科室</th>-->
+                <th>类型</th>
+                <th>医保大类</th>
+                <th>操作员</th>
+                <th>登记时间</th>
+                <th>项目编码</th>
+                <th>保险编码</th>
+                <th>项目说明</th>
+                <th>摘要</th>
+                <th>执行状态</th>
+            </tr>
         </thead>
         <tbody id="tbody">
 
         </tbody>
     </table>
 </div>
-<div id="pageDivContainer" class="aui-margin-l-5"></div>
+<div id="pageDivContainer" class="aui-margin-l-5 aui-font-size-12"></div>
 <!--<a href="#" class="search-person" tapmode onclick="openMyToolFrame()"></a>-->
 <!--<script id="feeInfo-tmpl" type="text/template">
     <span>预交金额(元):{{=it.prepayMoney||''}}</span>
@@ -226,31 +236,36 @@
     <span>余额(元):{{=it.balance||''}}</span>
 </script>-->
 <script id="trInfo-tmpl" type="text/template">
+    {{
+        for(var i=0;i<it.length;i++){
+            var item = it[0];
+    }}
     <tr>
-        <td id="order0">{{='2019-06-20'}}</td>
-        <td>{{='121212'}}</td>
-        <td>{{='121212'}}</td>
-        <td>{{='121212'}}</td>
-        <td>{{='121212'}}</td>
-        <td>{{='121212'}}</td>
-        <td>{{='121212'}}</td>
-        <td>{{='121212'}}</td>
-        <!--<td>{{=it.noSendNum||''}}</td>-->
-        <td>{{='121212'}}</td>
-        <td>{{='121212'}}</td>
-        <td>{{='121212'}}</td>
-        <td>{{='121212'}}</td>
-        <!--<td>接收科室</td>-->
-        <td>{{='121212'}}</td>
-        <td>{{='121212'}}</td>
-        <td>{{='121212'}}</td>
-        <td>{{='121212'}}</td>
-        <td>{{='121212'}}</td>
-        <td>{{='121212'}}</td>
-        <td>{{='121212'}}</td>
-        <td>{{='121212'}}</td>
-        <td>{{='121212'}}</td>
+        <td>{{=item.costListDate||''}}</td>
+        <td>{{=item.costListId||''}}</td>
+        <td>{{=item.costListOperator||''}}</td>
+        <td>{{=item.costListDepartment||''}}</td>
+        <td>{{=item.costListDepartmentDo||''}}</td>
+        <td>{{=item||''}}</td>
+        <td>{{=item.costListSpecifications||''}}</td>
+        <td>{{=item.costType||''}}</td>
+        <td>{{=item.costListNum||''}}</td>
+        <td>{{=item.costListPrice||''}}</td>
+        <td>{{=item.costListMoney||''}}</td>
+        <td>{{=item.costListMoneyNo||''}}</td>
+        <td>{{=item.costListType||''}}</td>
+        <td>{{=item.costList||''}}</td>
+        <td>{{=item.operator||''}}</td>
+        <td>{{=item.date||''}}</td>
+        <td>{{=item.projectNo||''}}</td>
+        <td>{{=item.insuranceNo||''}}</td>
+        <td>{{=item.desc||''}}</td>
+        <td>{{=item.abstracts||''}}</td>
+        <td>{{=item.costListId||''}}</td>
     </tr>
+    {{
+        }
+    }}
 </script>
 <!--<script id="total-tmpl" type="text/template">
     <tr>
@@ -278,27 +293,30 @@
 <script id="pageInfo-tmpl" type="text/template">
     <div class="bottomPage">
         <div>
-
-        </div>
-        <div id="pageNumContainer" class="pageNumContainer aui-font-size-12" data-currentPage="{{=it.currPage}}">
-            <!--<span>第</span>
+            <span>第</span>
             <span>{{=(it.currPage-1) * it.pageSize + 1}}</span>
             <span>到</span>
             <span>{{=it.currPage * it.pageSize}}</span>
             <span>条记录</span>
             <span style="margin-left: 25px;">共</span>
             <span>{{=it.totalCount}}</span>
-            <span>条记录</span>-->
+            <span>条记录</span>
+        </div>
+        <div id="pageNumContainer" class="pageNumContainer" data-currentPage="{{=it.currPage}}">
+            {{? parseInt(it.currPage)!=1}}
             <span onclick="firstPage();">首页</span>
+            {{?}}
+            {{? parseInt(it.currPage)>1}}
             <span onclick="prePage();" class="prePage">上一页</span>
+            {{?}}
             <span class="pageNumItem active">{{=it.currPage}}</span>
             {{? parseInt(it.totalPage)>parseInt(it.currPage)}}
-            <span class="pageNumItem" onclick="nextPage('{{=parseInt(it.currPage)+1}}');">
-                            {{=parseInt(it.currPage)+1}}
-                        </span>
+            <span class="pageNumItem" onclick="nextPage();">
+                {{=parseInt(it.currPage)+1}}
+                </span>
             {{?}}
             {{? parseInt(it.totalPage)>parseInt(it.currPage)}}
-            <span class="nextPage" onclick="nextPage('{{=parseInt(it.currPage)+1}}');">下一页</span>
+            <span class="nextPage" onclick="nextPage();">下一页</span>
             {{?}}
         </div>
 
