@@ -72,7 +72,7 @@ var btntest = function(){
 
 var searchFeeDetail = function(patientId,spage){
 
-    alert('haptime: '+haptime+'  feeitem:'+feeitem+'  oraitem:'+oraitem);
+    //alert('haptime: '+haptime+'  feeitem:'+feeitem+'  oraitem:'+oraitem);
     var params ={};
     params.homepageId = homepageId;
     params.page = spage;

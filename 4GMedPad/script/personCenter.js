@@ -78,18 +78,43 @@ var searchLastExamineInfo = function(patientId){
         }
     } else {
         common.get({
-            url: config.patientLastExamineUrl+patientId,
+            url: config.patientLastExamineUrl+patientId+"/"+homepageId,
             isLoading: true,
             success:function(ret){
-                $api.text($api.byId('tiwen'), ret.content.temperature||'-');
-                $api.text($api.byId('huxi'), ret.content.breathe||'-');
-                $api.text($api.byId('maibo'), ret.content.pulse||'-');
-                $api.text($api.byId('xueya'), (ret.content.bloodPressureLow||'-')+"/"+(ret.content.bloodPressureHigh||'-'));
-                $api.text($api.byId('xinlv'), ret.content.heartRate||'-');
+                if(ret.content.pulse){
+                    $api.text($api.byId('maibo'), ret.content.pulse.measureValue||'');
+                }else{
+                    $api.text($api.byId('maibo'), '');
+                }
+                if(ret.content.temperature){
+                    $api.text($api.byId('tiwen'), ret.content.temperature.measureValue||'');
+                }else{
+                    $api.text($api.byId('tiwen'), '');
+                }
+                if(ret.content.breathRate){
+                    $api.text($api.byId('huxi'), ret.content.breathRate.measureValue||'');
+                }else{
+                    $api.text($api.byId('huxi'), '');
+                }
+                if(ret.content.bloodPressure){
+                    $api.text($api.byId('xueya'), (ret.content.bloodPressure.measureValue||''));
+                }else{
+                    $api.text($api.byId('xueya'), '');
+                }
+                if(ret.content.heartRate){
+                    $api.text($api.byId('xinlv'), ret.content.heartRate.measureValue||'');
+                }else{
+                    $api.text($api.byId('xinlv'), '');
+                }
+
+
+
             }
         });
     }
 };
+
+
 /*费用信息查询*/
 var costDetailInfo = function(patientId){
     if ($api.getStorage(storageKey.offlineFlag) == "on") {
@@ -166,7 +191,9 @@ apiready = function() {
             name: 'group'
         });
     });
-    //searchLastExamineInfo(patientId);
+    searchLastExamineInfo(patientId);
+    var mxcxTmpl = doT.template($api.text($api.byId('mxcx-tmpl')));
+    $api.html($api.byId('mxcx'), mxcxTmpl(person));
     searchPatientDetail(patientId);
     costDetailInfo(patientId);
 

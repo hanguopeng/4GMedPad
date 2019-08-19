@@ -24,7 +24,7 @@
         <!--左侧-->
         <div class="aui-col-xs-4 full-body">
             <div class="sign-info-intro">
-                <div class="block-head">
+                <!--<div class="block-head">
                     过敏史
                 </div>
                 <div class="block-content-container aui-padded-t-10 aui-padded-b-10">
@@ -33,8 +33,8 @@
 
                         </div>
                     </div>
-                </div>
-                <!--<div class="block-content-container aui-padded-t-10 aui-padded-b-10">
+                </div>-->
+                <div class="block-content-container aui-padded-t-10 aui-padded-b-10">
                     <div class="flex aui-content">
                         <div class="flex-item sign-item">
                             <div class="sign-circular temperature" id="tiwen"></div>
@@ -57,7 +57,7 @@
                             <div class="sign-txt aui-padded-t-5 aui-ellipsis-1">心率(次/分)</div>
                         </div>
                     </div>
-                </div>-->
+                </div>
             </div>
             <div class="diagnosis-info-intro">
                 <div class="block-head">
@@ -119,6 +119,10 @@
                         <div class="basics-info-item aui-font-size-9 aui-padded-b-3">
                             <span class="key">联系电话:</span>
                             <span class="value" id="contactsMobile"></span>
+                        </div>
+                        <div class="basics-info-item aui-font-size-9 aui-padded-b-3">
+                            <span class="key">过敏史:</span>
+                            <span class="value" id="drugAllergy"></span>
                         </div>
                         <!--<div class="basics-info-item">
                             <span class="key">住院号:</span>
@@ -237,121 +241,8 @@
                 <div class="block-head">
                     明细查阅
                 </div>
-                <div class="block-content-container aui-padded-t-10 aui-padded-b-10 aui-padded-l-15">
-                    <div class="flex aui-padded-l-15">
-                        <!--<div class="btn-item" tapmode onclick="changeFrmGrp(1);">-->
-                            <!--<div class="btn-img">-->
-                                <!--<img src="../image/person_center/tiwendan.png">-->
-                            <!--</div>-->
-                            <!--<div class="btn-txt aui-padded-t-10 aui-ellipsis-1">-->
-                                <!--体温单-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="btn-item">
-                            <div class="btn-img">
-                                &lt;!&ndash;<img src="../image/person_center/blcy.png">&ndash;&gt;
-                                <img src="../image/person_center/bingli.png">
-                            </div>
-                            <div class="btn-txt aui-padded-t-10 aui-ellipsis-1">
-                                病历查阅
-                            </div>
-                        </div>-->
-                        <div class="btn-item" tapmode onclick="changeFrmGrp(3);">
-                            <div class="btn-img">
-                                <!--<img src="../image/person_center/jcjg.png">-->
-                                <img src="../image/person_center/jiancha.png">
-                            </div>
-                            <div class="btn-txt aui-padded-t-10 aui-ellipsis-1">
-                                检查结果
-                            </div>
-                        </div>
-                        <div class="btn-item" tapmode onclick="changeFrmGrp(2);">
-                            <div class="btn-img">
-                                <!--<img src="../image/person_center/hyjg.png">-->
-                                <img src="../image/person_center/huayan-.png">
-                            </div>
-                            <div class="btn-txt aui-padded-t-10 aui-ellipsis-1">
-                                化验结果
-                            </div>
-                        </div>
+                <div class="block-content-container aui-padded-t-10 aui-padded-b-10 aui-padded-l-15" id="mxcx">
 
-                        <!--<div class="btn-item" tapmode onclick="changeFrmGrp(4);">-->
-                            <!--<div class="btn-img">-->
-                                <!--&lt;!&ndash;<img src="../image/person_center/xtjcjl.png">&ndash;&gt;-->
-                                <!--<img src="../image/person_center/iconxtact.png">-->
-                            <!--</div>-->
-                            <!--<div class="btn-txt aui-padded-t-10">-->
-                                <!--血糖监测单-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <div class="btn-item" tapmode onclick="changeFrmGrp(5);">
-                            <div class="btn-img">
-                                <!--<img src="../image/person_center/fymx.png">-->
-                                <img src="../image/person_center/money.png">
-                            </div>
-                            <div class="btn-txt aui-padded-t-10 aui-ellipsis-1">
-                                预结费用清单
-                            </div>
-                        </div>
-                        <div class="btn-item" tapmode onclick="changeFrmGrp(16);">
-                            <div class="btn-img">
-                                <!--<img src="../image/person_center/fymx.png">-->
-                                <img src="../image/person_center/money.png">
-                            </div>
-                            <div class="btn-txt aui-padded-t-10 aui-ellipsis-1">
-                                费用明细
-                            </div>
-                        </div>
-                        <!--<div class="btn-item" tapmode onclick="changeFrmGrp(6);">-->
-                            <!--<div class="btn-img">-->
-                                <!--&lt;!&ndash;<img src="../image/person_center/hljl.png">&ndash;&gt;-->
-                                <!--<img src="../image/person_center/huli.png">-->
-                            <!--</div>-->
-                            <!--<div class="btn-txt aui-padded-t-10 aui-ellipsis-1">-->
-                                <!--护理记录-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="btn-item" tapmode onclick="changeFrmGrp(11);">
-                            <div class="btn-img">
-                                <img src="../image/person_center/smtz.png">
-                            </div>
-                            <div class="btn-txt aui-padded-t-10 aui-ellipsis-1">
-                                生命体征
-                            </div>
-                        </div>
-                        <div class="btn-item" tapmode onclick="changeFrmGrp(12);">
-                            <div class="btn-img">
-                                <img src="../image/person_center/ydsb.png">
-                            </div>
-                            <div class="btn-txt aui-padded-t-10 aui-ellipsis-1">
-                                胰岛素泵
-                            </div>
-                        </div>
-                        <div class="btn-item" tapmode onclick="changeFrmGrp(13);">
-                            <div class="btn-img">
-                                <img src="../image/person_center/xtjc.png">
-                            </div>
-                            <div class="btn-txt aui-padded-t-10 aui-ellipsis-1">
-                                血糖监测表
-                            </div>
-                        </div>
-                        <div class="btn-item" tapmode onclick="changeFrmGrp(14);">
-                            <div class="btn-img">
-                                <img src="../image/person_center/xyzlbw.png">
-                            </div>
-                            <div class="btn-txt aui-padded-t-10 aui-ellipsis-1">
-                                血液肿瘤科病重(病危)患者护理记录单
-                            </div>
-                        </div>
-                        <div class="btn-item" tapmode onclick="changeFrmGrp(15);">
-                            <div class="btn-img">
-                                <img src="../image/person_center/gkbw.png">
-                            </div>
-                            <div class="btn-txt aui-padded-t-10 aui-ellipsis-1">
-                                骨科病重(病危)患者护理记录单
-                            </div>
-                        </div>
-                    </div>-->
                 </div>
             </div>
             <!--医嘱相关-->
@@ -443,7 +334,127 @@
     </div>
 </div>
 </body>
+<script type="text/template" id="mxcx-tmpl">
+    <div class="flex aui-padded-l-15">
+        <div class="btn-item" tapmode onclick="changeFrmGrp(1);">
+            <div class="btn-img">
+                <img src="../image/person_center/tiwendan.png">
+            </div>
+            <div class="btn-txt aui-padded-t-10 aui-ellipsis-1">
+                体温单
+            </div>
+        </div>
+        <!--<div class="btn-item">
+            <div class="btn-img">
+                &lt;!&ndash;<img src="../image/person_center/blcy.png">&ndash;&gt;
+                <img src="../image/person_center/bingli.png">
+            </div>
+            <div class="btn-txt aui-padded-t-10 aui-ellipsis-1">
+                病历查阅
+            </div>
+        </div>-->
+        <div class="btn-item" tapmode onclick="changeFrmGrp(3);">
+            <div class="btn-img">
+                <!--<img src="../image/person_center/jcjg.png">-->
+                <img src="../image/person_center/jiancha.png">
+            </div>
+            <div class="btn-txt aui-padded-t-10 aui-ellipsis-1">
+                检查结果
+            </div>
+        </div>
+        <div class="btn-item" tapmode onclick="changeFrmGrp(2);">
+            <div class="btn-img">
+                <!--<img src="../image/person_center/hyjg.png">-->
+                <img src="../image/person_center/huayan-.png">
+            </div>
+            <div class="btn-txt aui-padded-t-10 aui-ellipsis-1">
+                化验结果
+            </div>
+        </div>
+
+        <!--<div class="btn-item" tapmode onclick="changeFrmGrp(4);">
+            <div class="btn-img">
+                &lt;!&ndash;<img src="../image/person_center/xtjcjl.png">&ndash;&gt;
+                <img src="../image/person_center/iconxtact.png">
+            </div>
+            <div class="btn-txt aui-padded-t-10">
+                血糖监测单
+            </div>
+        </div>-->
+        <div class="btn-item" tapmode onclick="changeFrmGrp(5);">
+            <div class="btn-img">
+                <!--<img src="../image/person_center/fymx.png">-->
+                <img src="../image/person_center/money.png">
+            </div>
+            <div class="btn-txt aui-padded-t-10 aui-ellipsis-1">
+                预结费用清单
+            </div>
+        </div>
+        <div class="btn-item" tapmode onclick="changeFrmGrp(16);">
+            <div class="btn-img">
+                <!--<img src="../image/person_center/fymx.png">-->
+                <img src="../image/person_center/money.png">
+            </div>
+            <div class="btn-txt aui-padded-t-10 aui-ellipsis-1">
+                费用明细
+            </div>
+        </div>
+        <!--<div class="btn-item" tapmode onclick="changeFrmGrp(6);">-->
+        <!--<div class="btn-img">-->
+        <!--&lt;!&ndash;<img src="../image/person_center/hljl.png">&ndash;&gt;-->
+        <!--<img src="../image/person_center/huli.png">-->
+        <!--</div>-->
+        <!--<div class="btn-txt aui-padded-t-10 aui-ellipsis-1">-->
+        <!--护理记录-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="btn-item" tapmode onclick="changeFrmGrp(11);">
+            <div class="btn-img">
+                <img src="../image/person_center/smtz.png">
+            </div>
+            <div class="btn-txt aui-padded-t-10 aui-ellipsis-1">
+                生命体征
+            </div>
+        </div>-->
+        <div class="btn-item" tapmode onclick="changeFrmGrp(12);">
+            <div class="btn-img">
+                <img src="../image/person_center/ydsb.png">
+            </div>
+            <div class="btn-txt aui-padded-t-10 aui-ellipsis-1">
+                胰岛素泵
+            </div>
+        </div>
+        <div class="btn-item" tapmode onclick="changeFrmGrp(13);">
+            <div class="btn-img">
+                <img src="../image/person_center/xtjc.png">
+            </div>
+            <div class="btn-txt aui-padded-t-10 aui-ellipsis-1">
+                血糖监测表
+            </div>
+        </div>
+        {{? it.organizationName=='血液肿瘤科病房'}}
+        <div class="btn-item" tapmode id="wzhzhljld">
+            <div class="btn-img" onclick="changeFrmGrp(14);">
+                <img src="../image/person_center/xyzlbw.png">
+            </div>
+            <div class="btn-txt aui-padded-t-10 aui-ellipsis-1">
+                血液肿瘤科病重(病危)患者护理记录单
+            </div>
+        </div>
+        {{??}}
+        <div class="btn-item" tapmode onclick="changeFrmGrp(15);">
+            <div class="btn-img">
+                <img src="../image/person_center/gkbw.png">
+            </div>
+            <div class="btn-txt aui-padded-t-10 aui-ellipsis-1">
+                骨科病重(病危)患者护理记录单
+            </div>
+        </div>
+        {{?}}
+    </div>
+</script>
 <script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
 <script type="text/javascript" src="../script/config.js"></script>
 <script type="text/javascript" src="../script/common.js"></script>
 <script type="text/javascript" src="../script/personCenter.js"></script>

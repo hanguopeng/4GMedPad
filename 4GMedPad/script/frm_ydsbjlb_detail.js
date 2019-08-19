@@ -26,6 +26,7 @@ var ydsbjlbDetailCommon = function(id){
         isLoading: true,
         success:function(ret){
             $api.html($api.byId('tbody'),"");
+            $api.html($api.byId('tbody1'),"");
             var contentTmpl = doT.template($api.text($api.byId('content-tmpl')));
             var contentTmpl1 = doT.template($api.text($api.byId('content-tmpl1')));
             if(ret.content) {

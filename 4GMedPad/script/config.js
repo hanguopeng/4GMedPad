@@ -1,9 +1,9 @@
 var cmcServer="http://doclever.cn:8090/mock/5ad3f5ff995b693f603c9eeb";
-// var tempChartServer = "http://172.17.100.1:8085"; //pad里面体温单的路径
-// var localServer = "http://192.168.1.141:8085/cmc-server";
+var tempChartServer = "http://192.168.1.126:8001"; //pad里面体温单的路径
+ var localServer = "http://192.168.1.126:8085/cmc-server";
 
-var tempChartServer = "http://192.168.43.51:8085"; //pad里面体温单的路径
-var localServer = "http://192.168.43.228:8085/cmc-server";
+//var tempChartServer = "http://172.17.100.2:8085"; //pad里面体温单的路径
+//var localServer = "http://172.17.100.2:8083/cmc-server";
 var config={
     //功能类
     duration:3000,
@@ -11,7 +11,7 @@ var config={
     //versionUpdateUrl:"http://doclever.cn:8090/mock/5ad3f5ff995b693f603c9eeb/sys/checkVersion",
     medAssayUrl: localServer+"/med/assay?patientId=", //化验结果
     patientDetailUrl: localServer+"/med/patient/", //病人详情
-    patientLastExamineUrl: localServer+"/nur/nurseLog/lastExamine/", //护理检查信息
+    patientLastExamineUrl: localServer+"/nur/nurseTemperatureChart/getSignValue/", //护理检查信息
     costSituationUrl: localServer+"/med/cost/situation/", //费用情况
     transfuseSituationUrl: localServer+"/med/transfuse/situation/", //输液情况---暂未使用
     accessoryQueryUrl: localServer+"/med/wardRound", //附件分页查询
@@ -41,6 +41,7 @@ var config={
     queryAdviceList: localServer+"/med/advice/queryAdviceList",  // 医嘱记录
     querySendList: localServer+"/med/V4gMedicalAdviceSendList/padSendList", //医嘱发送记录
     costListDetails: localServer+"/med/cost/padCostList",//费用明细查询
+    medCostTotal: localServer+"/med/advice/queryAdviceCost/",//费用明细查询
 
     //护理文书类
     smtzjcjldUrl: localServer+"/nur/VitalSigns",   //生命体征检测记录单

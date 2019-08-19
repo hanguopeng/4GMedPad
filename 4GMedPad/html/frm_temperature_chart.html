@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0,minimum-scale=1.0, user-scalable=1">
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
     <title>体温单</title>
     <link rel="stylesheet" type="text/css" href="../css/aui.css" />
@@ -40,8 +40,9 @@
         api.parseTapmode();
         var person = $api.getStorage(storageKey.currentPerson);
         var patientId = person.id;
-
-        document.getElementById("external-frame").src=config.chartUrl+$api.getStorage(storageKey.token)+"&visitType=pad&patientId="+patientId;
+        var homepageId = person.homepageId;
+        //alert(JSON.stringify(person));
+        document.getElementById("external-frame").src=config.chartUrl+$api.getStorage(storageKey.token)+"&visitType=pad&patientId="+patientId+"&homePageID="+homepageId;
         //alert(config.chartUrl+$api.getStorage(storageKey.token)+"&visitType=pad&patientId="+patientId);
 
         api.addEventListener({

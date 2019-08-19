@@ -17,13 +17,24 @@ apiready = function() {
 };
 // 医嘱记录详情
 var adviceFeeDeatils = function(adviceId){
+    $api.html($api.byId("tbody"), "");
     $api.html($api.byId("thead"), "");
     var contentTmpl = doT.template($api.text($api.byId('advice_fee_header')));
     $api.html($api.byId('thead'), contentTmpl(''));
+    common.get({
+        url: config.medCostTotal + adviceId,
+        isLoading: true,
+        success:function(ret){
+            api.hideProgress();
+            if(ret&&ret.content&&ret.content.list){
+                var content = ret.content.list;
 
-    $api.html($api.byId("tbody"), "");
-    var contentTmpl = doT.template($api.text($api.byId('advice_fee_info')));
-    $api.html($api.byId('tbody'), contentTmpl(''));
+            var contentTmplate = doT.template($api.text($api.byId('advice_fee_info')));
+                $api.html($api.byId('tbody'), contentTmplate(content));
+        }
+        }
+    })
+
     /*common.get({
         url:"",
         isLoading:false,

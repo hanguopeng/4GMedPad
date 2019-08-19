@@ -26,6 +26,7 @@
         <thead id="thead">
         </thead>
         <tbody id="tbody">
+
         </tbody>
     </table>
 </div>
@@ -63,18 +64,25 @@
     </tr>
 </script>
 <script id="advice_fee_info" type="text/template">
+    {{
+         for(var i=0;i<it.length;i++) {
+            var item = it[i];
+    }}
     <tr>
-        <td id="">护理医嘱-III级护理</td>
-        <td>护理</td>
-        <td>III级护理</td>
-        <td>日</td>
-        <td>1</td>
-        <td>9.000000</td>
-        <td>胸泌甲状腺</td>
-        <td></td>
-        <td></td>
-        <td>正常收取</td>
+        <td id="">{{=item.costAdvice||''}}</td>
+        <td>{{=item.costType||''}}</td>
+        <td>{{=item.payItems||''}}</td>
+        <td>{{=item.costUnit||''}}</td>
+        <td>{{=item.sno||''}}</td>
+        <td>{{=item.costPrice||''}}</td>
+        <td>{{=item.executeDepartment||''}}</td>
+        <td>{{=item.priceType||''}}</td>
+        <td>{{=item.subItem||''}}</td>
+        <td>{{=item.chargeMode||''}}</td>
     </tr>
+    {{
+        }
+    }}
 </script>
 <script id="send_details_info" type="text/template">
     {{?it}}
