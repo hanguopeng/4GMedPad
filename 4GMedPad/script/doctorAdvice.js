@@ -87,6 +87,7 @@ var doctorAdvice = function(patientId){
             dataType: "json",
             success:function(ret){
                 api.hideProgress();
+                //alert(JSON.stringify(ret.content))
                 $api.html($api.byId('tbody'),"");
                 var contentTmpl = doT.template($api.text($api.byId('content-tmpl')));
                 if(ret&&ret.content){

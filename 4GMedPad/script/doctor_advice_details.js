@@ -26,6 +26,7 @@ var adviceFeeDeatils = function(adviceId){
         isLoading: true,
         success:function(ret){
             api.hideProgress();
+            //alert(JSON.stringify(ret.content))
             if(ret&&ret.content&&ret.content.list){
                 var content = ret.content.list;
 
@@ -65,9 +66,11 @@ var sendDetails = function(adviceId){
         dataType: "json",
         success: function (ret) {
             api.hideProgress();
+
             $api.html($api.byId("tbody"), "");
             var contentTmpl = doT.template($api.text($api.byId('send_details_info')));
             $api.html($api.byId('tbody'), contentTmpl(ret.content.list));
+            //alert(JSON.stringify(ret));
         }
     });
 

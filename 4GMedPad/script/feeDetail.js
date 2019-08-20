@@ -96,6 +96,7 @@ var searchFeeDetail = function(patientId,spage){
                 totalPage:totalPage,
                 currPage:currPage,
             };
+            //alert(JSON.stringify(ret))
             pageInfo(pageJson);
             $api.html($api.byId('tbody'),"");
             if(ret.content && ret.content.list && ret.content.list.length>0) {

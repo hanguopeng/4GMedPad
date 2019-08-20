@@ -8,10 +8,12 @@
     <title>费用明细</title>
     <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
     <link rel="stylesheet" type="text/css" href="../css/tool_fixed.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/doctor_advice.css"/>
+
     <link rel="stylesheet" type="text/css" href="../css/page.css" />
     <style type="text/css">
 
-        table {
+        /*table {
             border-collapse: collapse;
             margin: 1rem auto;
             text-align: center;
@@ -33,7 +35,7 @@
 
         table tr {
             background: #fff;
-        }
+        }*/
 
         .trActive {
             background: #F5FAFA;
@@ -83,11 +85,11 @@
             border-radius: 10px;
             background: #EDEDED;
         }
-        td {
+        /*td {
 
-            white-space: nowrap; /* 自适应宽度*/
-            word-break:  keep-all; /* 避免长单词截断，保持全部 */
-        }
+            white-space: nowrap; !* 自适应宽度*!
+            word-break:  keep-all; !* 避免长单词截断，保持全部 *!
+        }*/
 
     </style>
 </head>
@@ -142,7 +144,7 @@
                 <option value="其他费">其他</option>
             </select>
         </div>
-        <div class="flex-item">
+       <!-- <div class="flex-item">
             <select class="aui-font-size-12 searchInput aui-margin-l-5" name="" id="ora-item" onchange="searchTip()">
                 <option value="">所有科室</option>
                 <option value="长期医嘱">ICU监护病房</option>
@@ -150,7 +152,7 @@
                 <option value="输液">血液肿瘤科</option>
                 <option value="口服药物">4</option>
             </select>
-        </div>
+        </div>-->
 
        <!-- <div class="flex-item">
             <select class="aui-font-size-12 searchInput aui-margin-l-5" name="" id="">
@@ -189,8 +191,12 @@
         </div>
     </div>-->
 </div>
-<div style="overflow-x:scroll;" class="aui-padded-l-15 feeDetailTable" style="padding-right: 5rem;">
+<div style="overflow-x:scroll;" class="aui-padded-l-15 feeDetailTable table-head adviceTable aui-margin-t-10" style="padding-right: 5rem;">
     <table class="table">
+        <colgroup>
+            <col style="width: 80px;" />
+            <col />
+        </colgroup>
         <thead>
             <tr>
                 <th>发生日期</th>
@@ -208,7 +214,7 @@
                 <th>未结金额</th>
                 <!--<th>接收科室</th>-->
                 <th>类型</th>
-                <th>医保大类</th>
+  <!--              <th>医保大类</th>-->
                 <th>操作员</th>
                 <th>登记时间</th>
                 <th>项目编码</th>
@@ -218,6 +224,7 @@
                 <th>执行状态</th>
             </tr>
         </thead>
+        <colgroup><col style="width: 80px;" /><col /></colgroup>
         <tbody id="tbody">
 
         </tbody>
@@ -238,7 +245,7 @@
 <script id="trInfo-tmpl" type="text/template">
     {{
         for(var i=0;i<it.length;i++){
-            var item = it[0];
+            var item = it[i];
     }}
     <tr>
         <td>{{=item.costListDate||''}}</td>
@@ -246,17 +253,20 @@
         <td>{{=item.costListOperator||''}}</td>
         <td>{{=item.costListDepartment||''}}</td>
         <td>{{=item.costListDepartmentDo||''}}</td>
-        <td>{{=item||''}}</td>
+        <td>{{=item.costListType||''}}</td>
         <td>{{=item.costListSpecifications||''}}</td>
         <td>{{=item.costType||''}}</td>
-        <td>{{=item.costListNum||''}}</td>
+
+        <td>{{=item.costListNum||''}}  {{=item.costListUnit||''}}</td>
         <td>{{=item.costListPrice||''}}</td>
         <td>{{=item.costListMoney||''}}</td>
         <td>{{=item.costListMoneyNo||''}}</td>
-        <td>{{=item.costListType||''}}</td>
-        <td>{{=item.costList||''}}</td>
+
+        <td>{{=item.costLisType1||''}}</td>
+<!--        <td>{{=item.costList||''}}</td>-->
         <td>{{=item.operator||''}}</td>
         <td>{{=item.date||''}}</td>
+
         <td>{{=item.projectNo||''}}</td>
         <td>{{=item.insuranceNo||''}}</td>
         <td>{{=item.desc||''}}</td>
