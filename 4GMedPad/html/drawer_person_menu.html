@@ -42,149 +42,155 @@
   <div id="personInfo" class="aui-info aui-margin-t-10 aui-padded-l-10 aui-padded-r-10">
 
   </div>
-  <div class="aui-content">
+  <div class="aui-content" id="ul-list">
 
-    <ul class="aui-list aui-list-in">
-            <li class="aui-list-item"  onclick="randomSwitchBtn(this,'doc',0)">
-                <div class="aui-list-item-label-icon">
-                    <i class="aui-iconfont aui-icon-home"></i>
-                </div>
-                <div class="aui-list-item-inner">
-                    信息中心
-                </div>
-            </li>
-            <li class="aui-list-item"  onclick="randomSwitchBtn(this,'doc',1)">
-                <div class="aui-list-item-label-icon">
-                    <i class="iconfont icon-icontw"></i>
-                </div>
-                <div class="aui-list-item-inner">
-                    体温单
-                </div>
-            </li>
-            <li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',3)">
-                <div class="aui-list-item-label-icon">
-                    <i class="iconfont icon-jiankangjianchajieguohuizong"></i>
-                </div>
-                <div class="aui-list-item-inner">
-                    检查结果
-                </div>
-            </li>
-            <li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',2)">
-                <div class="aui-list-item-label-icon">
-                    <i class="iconfont icon-wodehuayandan"></i>
-                </div>
-                <div class="aui-list-item-inner">
-                    化验结果
-                </div>
-            </li>
 
-            <!--<li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',4)">-->
-                <!--<div class="aui-list-item-label-icon">-->
-                    <!--<i class="iconfont icon-font48"></i>-->
-                <!--</div>-->
-                <!--<div class="aui-list-item-inner">-->
-                    <!--血糖监测单-->
-                <!--</div>-->
-            <!--</li>-->
-            <li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',5)">
-                <div class="aui-list-item-label-icon">
-                    <i class="iconfont icon-feiyong"></i>
-                </div>
-                <div class="aui-list-item-inner">
-                    费用明细
-                </div>
-            </li>
-            <!--<li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',10)">
-                <div class="aui-list-item-label-icon">
-                    <i class="iconfont icon-chayue"></i>
-                </div>
-                <div class="aui-list-item-inner">
-                    病历查阅
-                </div>
-            </li>-->
-            <!--<li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',6)">-->
-                <!--<div class="aui-list-item-label-icon">-->
-                    <!--<i class="iconfont icon-hulixinxi"></i>-->
-                <!--</div>-->
-                <!--<div class="aui-list-item-inner">-->
-                    <!--护理记录-->
-                <!--</div>-->
-            <!--</li>-->
-            <li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',11)">
-                <div class="aui-list-item-label-icon">
-                    <i class="iconfont icon-hulixinxi"></i>
-                </div>
-                <div class="aui-list-item-inner">
-                    生命体征
-                </div>
-            </li>
-            <li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',12)">
-                <div class="aui-list-item-label-icon">
-                    <i class="iconfont icon-hongyuan"></i>
-                </div>
-                <div class="aui-list-item-inner">
-                    胰岛素泵
-                </div>
-            </li>
-            <li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',13)">
-                <div class="aui-list-item-label-icon">
-                    <i class="iconfont icon-xtjcb"></i>
-                </div>
-                <div class="aui-list-item-inner">
-                    血糖监测表
-                </div>
-            </li>
-            <li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',14)">
-                <div class="aui-list-item-label-icon">
-                    <i class="iconfont icon-iconfontnvtouxiang"></i>
-                </div>
-                <div class="aui-list-item-inner">
-                    血液肿瘤科病重(病危)患者护理记录单
-                </div>
-            </li>
-            <li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',15)">
-                <div class="aui-list-item-label-icon">
-                    <i class="iconfont icon-nanxing"></i>
-                </div>
-                <div class="aui-list-item-inner">
-                    骨科病重(病危)患者护理记录单
-                </div>
-            </li>
-            <li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',7)">
-                <div class="aui-list-item-label-icon">
-                    <i class="iconfont icon-microphone"></i>
-                </div>
-                <div class="aui-list-item-inner">
-                    查房语音
-                </div>
-            </li>
-            <li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',8)">
-                <div class="aui-list-item-label-icon">
-                    <i class="iconfont icon-jiantou"></i>
-                </div>
-                <div class="aui-list-item-inner">
-                    查房记事本
-                </div>
-            </li>
-            <li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',9)">
-                <div class="aui-list-item-label-icon">
-                    <i class="iconfont icon-jiankangjianchajieguohuizong"></i>
-                </div>
-                <div class="aui-list-item-inner">
-                    医嘱记录
-                </div>
-            </li>
-            <li class="aui-list-item" onclick="download()">
-                <div class="aui-list-item-label-icon">
-                    <i class="iconfont icon-xiazai"></i>
-                </div>
-                <div class="aui-list-item-inner">
-                    病例下载
-                </div>
-            </li>
-        </ul>
   </div>
 </body>
+<script type="text/template" id="ul-tmpl">
+    <ul class="aui-list aui-list-in">
+        <li class="aui-list-item"  onclick="randomSwitchBtn(this,'doc',0)">
+            <div class="aui-list-item-label-icon">
+                <i class="aui-iconfont aui-icon-home"></i>
+            </div>
+            <div class="aui-list-item-inner">
+                信息中心
+            </div>
+        </li>
+        <li class="aui-list-item"  onclick="randomSwitchBtn(this,'doc',1)">
+            <div class="aui-list-item-label-icon">
+                <i class="iconfont icon-icontw"></i>
+            </div>
+            <div class="aui-list-item-inner">
+                体温单
+            </div>
+        </li>
+        <li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',3)">
+            <div class="aui-list-item-label-icon">
+                <i class="iconfont icon-jiankangjianchajieguohuizong"></i>
+            </div>
+            <div class="aui-list-item-inner">
+                检查结果
+            </div>
+        </li>
+        <li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',2)">
+            <div class="aui-list-item-label-icon">
+                <i class="iconfont icon-wodehuayandan"></i>
+            </div>
+            <div class="aui-list-item-inner">
+                化验结果
+            </div>
+        </li>
+
+        <!--<li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',4)">-->
+        <!--<div class="aui-list-item-label-icon">-->
+        <!--<i class="iconfont icon-font48"></i>-->
+        <!--</div>-->
+        <!--<div class="aui-list-item-inner">-->
+        <!--血糖监测单-->
+        <!--</div>-->
+        <!--</li>-->
+        <li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',5)">
+            <div class="aui-list-item-label-icon">
+                <i class="iconfont icon-feiyong"></i>
+            </div>
+            <div class="aui-list-item-inner">
+                费用明细
+            </div>
+        </li>
+        <!--<li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',10)">
+            <div class="aui-list-item-label-icon">
+                <i class="iconfont icon-chayue"></i>
+            </div>
+            <div class="aui-list-item-inner">
+                病历查阅
+            </div>
+        </li>-->
+        <!--<li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',6)">-->
+        <!--<div class="aui-list-item-label-icon">-->
+        <!--<i class="iconfont icon-hulixinxi"></i>-->
+        <!--</div>-->
+        <!--<div class="aui-list-item-inner">-->
+        <!--护理记录-->
+        <!--</div>-->
+        <!--</li>-->
+        <!--<li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',11)">
+            <div class="aui-list-item-label-icon">
+                <i class="iconfont icon-hulixinxi"></i>
+            </div>
+            <div class="aui-list-item-inner">
+                生命体征
+            </div>
+        </li>-->
+        <li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',12)">
+            <div class="aui-list-item-label-icon">
+                <i class="iconfont icon-hongyuan"></i>
+            </div>
+            <div class="aui-list-item-inner">
+                胰岛素泵
+            </div>
+        </li>
+        <li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',13)">
+            <div class="aui-list-item-label-icon">
+                <i class="iconfont icon-xtjcb"></i>
+            </div>
+            <div class="aui-list-item-inner">
+                血糖监测表
+            </div>
+        </li>
+        {{? it.organizationName.indexOf('血液肿瘤科病房')!= -1}}
+        <li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',14)">
+            <div class="aui-list-item-label-icon">
+                <i class="iconfont icon-iconfontnvtouxiang"></i>
+            </div>
+            <div class="aui-list-item-inner">
+                血液肿瘤科病重(病危)患者护理记录单
+            </div>
+        </li>
+        {{?? it.organizationName.indexOf('骨外科') != -1}}
+        <li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',15)">
+            <div class="aui-list-item-label-icon">
+                <i class="iconfont icon-nanxing"></i>
+            </div>
+            <div class="aui-list-item-inner">
+                骨科病重(病危)患者护理记录单
+            </div>
+        </li>
+        {{?}}
+        <li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',7)">
+            <div class="aui-list-item-label-icon">
+                <i class="iconfont icon-microphone"></i>
+            </div>
+            <div class="aui-list-item-inner">
+                查房语音
+            </div>
+        </li>
+        <li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',8)">
+            <div class="aui-list-item-label-icon">
+                <i class="iconfont icon-jiantou"></i>
+            </div>
+            <div class="aui-list-item-inner">
+                查房记事本
+            </div>
+        </li>
+        <li class="aui-list-item" onclick="randomSwitchBtn(this,'doc',9)">
+            <div class="aui-list-item-label-icon">
+                <i class="iconfont icon-jiankangjianchajieguohuizong"></i>
+            </div>
+            <div class="aui-list-item-inner">
+                医嘱记录
+            </div>
+        </li>
+        <li class="aui-list-item" onclick="download()">
+            <div class="aui-list-item-label-icon">
+                <i class="iconfont icon-xiazai"></i>
+            </div>
+            <div class="aui-list-item-inner">
+                病例下载
+            </div>
+        </li>
+    </ul>
+</script>
 <script id="info-tpl" type="text/template">
   <div class="aui-info-item aui-text-white">
     {{? it.sex=="1"}}
@@ -214,6 +220,9 @@
       var person = $api.getStorage(storageKey.currentPerson);
       var personInfo = doT.template($api.text($api.byId('info-tpl')));
       $api.html($api.byId('personInfo'), personInfo(person));
+
+        var conTmpl = doT.template($api.text($api.byId('ul-tmpl')));
+        $api.html($api.byId('ul-list'), conTmpl(person));
     }
 
     /**

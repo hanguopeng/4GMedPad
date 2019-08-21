@@ -26,7 +26,7 @@ var bloodGlucose = function(patientId){
           templateList:[{"templateCode":"xyzlkwzhzhld","templateVersion":1}]
         }),
         success:function(ret){
-            alert(JSON.stringify(ret));
+            //alert(JSON.stringify(ret));
             $api.html($api.byId('tbody'),"");
             var contentTmpl = doT.template($api.text($api.byId('content-tmpl')));
             if(ret.content && ret.content && ret.content.length>0) {

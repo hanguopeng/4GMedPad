@@ -176,7 +176,7 @@ function openFeeDetails(adviceId) {
             x: 0,
             y: api.winHeight - 300,
             w: api.winWidth,
-            h: api.frameHeight
+            h: api.winHeight-280
         },
         progress: {
             type: "default",
@@ -191,7 +191,7 @@ function openFeeDetails(adviceId) {
             adviceId: adviceId
         },
         vScrollBarEnabled: true,
-        hScrollBarEnabled: false,
+        hScrollBarEnabled: true,
         reload:true
     });
 

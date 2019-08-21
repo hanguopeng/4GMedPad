@@ -26,6 +26,7 @@
         width:24%;
         box-sizing: border-box;
         margin: 10px 0.5% 0px 0.5%;
+
       }
       .forbid{
         color: white !important;
@@ -150,7 +151,7 @@
 {{~it.list:info:index}}
   {{? info.id
 }}
-  <div class="flex-item" tapmode onclick="openPersonCenter({{= index }})">
+  <div class="flex-item" tapmode onclick="openPersonCenter({{= index }})" style="border-radius:2px;!important;">
     <div class="aui-card-list" style="margin-bottom: 0rem !important;">
         <div class="aui-card-list-header shirk-line">
             <div class="aui-list-item-right aui-font-size-10" style="font-size:16px;font-weight:bolder;float:left;margin-left:1rem">{{= info.medBedName}}</div>
@@ -212,7 +213,7 @@
     </div>
   </div>
   {{??}}
-  <div class="flex-item" tapmode="forbid">
+  <div class="flex-item" tapmode="forbid" >
     <div class="aui-card-list" style="margin-bottom: 0rem !important;">
         <div class="aui-card-list-header shirk-line">
             <div class="aui-list-item-right aui-font-size-10" style="font-size:16px;font-weight:bolder;float:left;margin-left:1rem">{{= info.medBedName}}</div>

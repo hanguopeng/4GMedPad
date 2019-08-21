@@ -66,7 +66,6 @@ var sendDetails = function(adviceId){
         dataType: "json",
         success: function (ret) {
             api.hideProgress();
-
             $api.html($api.byId("tbody"), "");
             var contentTmpl = doT.template($api.text($api.byId('send_details_info')));
             $api.html($api.byId('tbody'), contentTmpl(ret.content.list));

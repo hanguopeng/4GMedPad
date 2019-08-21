@@ -432,7 +432,7 @@
                 血糖监测表
             </div>
         </div>
-        {{? it.organizationName=='血液肿瘤科病房'}}
+        {{? it.organizationName.indexOf('血液肿瘤') != -1}}
         <div class="btn-item" tapmode id="wzhzhljld">
             <div class="btn-img" onclick="changeFrmGrp(14);">
                 <img src="../image/person_center/xyzlbw.png">
@@ -441,7 +441,7 @@
                 血液肿瘤科病重(病危)患者护理记录单
             </div>
         </div>
-        {{??}}
+        {{?? it.organizationName.indexOf('骨外科') != -1}}
         <div class="btn-item" tapmode onclick="changeFrmGrp(15);">
             <div class="btn-img">
                 <img src="../image/person_center/gkbw.png">
