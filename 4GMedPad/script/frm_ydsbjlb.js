@@ -16,7 +16,7 @@ apiready = function() {
 
 var ydsbjlbCommon = function(){
     common.get({
-        url: config.ydsbjlbUrl + patientId,
+        url: config.ydsbjlbUrl + patientId + '&homepageId=' + person.homepageId,
         isLoading: true,
         success:function(ret){
             $api.html($api.byId('tbody'),"");
