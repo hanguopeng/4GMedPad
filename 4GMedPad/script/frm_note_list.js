@@ -572,7 +572,7 @@ function pagerCloudSearch(){
         uurl = "&recordTime="+recordTime+"&recordPerson="+recodPerson;
     }
   common.get({
-    url:config.accessoryQueryUrl+"?localId="+dataId+"&type="+accessoryType.note+"&patientId="+person.id+"&page="+cloudPage+"&limit="+pageSize+uurl,
+    url:config.accessoryQueryUrl+"?localId="+dataId+"&type="+accessoryType.note+"&createUserId=" + userId+"&patientId="+person.id+"&page="+cloudPage ,
       /*"&limit="+pageSize+*/
     isLoading:true,
     success:function(ret){
