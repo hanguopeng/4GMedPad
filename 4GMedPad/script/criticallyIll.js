@@ -1,5 +1,6 @@
 var person = $api.getStorage(storageKey.currentPerson);
 var patientId = person.id;
+var homepageId = person.homepageId
 var registerNumber= person.registerNumber
 var page = 1;
 
@@ -15,13 +16,14 @@ apiready = function() {
     bloodGlucose(patientId);
     personInfo();
 };
-var requestUrl = config.criticallyIllQuery+"?registerNumber="+registerNumber;
+var requestUrl = config.criticallyIllQuery;
 var bloodGlucose = function(patientId){
-    common.get({
+    common.post({
         url: requestUrl,
         isLoading: true,
         data:JSON.stringify({
           patientId: person.id,
+          homepageId:homepageId,
           page: page,
           templateList:[{"templateCode":"xyzlkwzhzhld","templateVersion":1}]
         }),

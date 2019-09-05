@@ -5,7 +5,6 @@ var page = 1;
 var spage = 1;
 var haptime ;
 var feeitem ;
-var oraitem ;
 apiready = function () {
     api.parseTapmode();
     api.addEventListener({
@@ -77,7 +76,6 @@ var searchFeeDetail = function(patientId,spage){
     params.homepageId = homepageId;
     params.page = spage;
     params.patientId = patientId;
-    params.departmentName = oraitem;
     params.costType = feeitem;
     params.prepayDate = haptime;
     common.post({
@@ -111,7 +109,6 @@ var searchFeeDetail = function(patientId,spage){
 var searchTip = function(){
      haptime = $api.val($api.byId('hpp-time'));;
      feeitem = $api.val($api.byId('fee-item'));
-     oraitem = $api.val($api.byId('ora-item'));
 
     //alert('haptime: '+haptime+'  feeitem:'+feeitem+'  oraitem:'+oraitem);
     searchFeeDetail(patientId,page);

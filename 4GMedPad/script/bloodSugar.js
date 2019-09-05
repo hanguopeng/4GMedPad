@@ -1,5 +1,6 @@
 var person = $api.getStorage(storageKey.currentPerson);
 var patientId = person.id;
+var homepageId = person.homepageId;
 var registerNumber= person.registerNumber
 var page = 1;
 
@@ -15,10 +16,10 @@ apiready = function() {
     bloodGlucose(patientId);
     personInfo();
 };
-var requestUrl = config.bloodSugarDetail+"?registerNumber="+registerNumber;
+var requestUrl = config.bloodSugarDetail + "?medPatientId=" + patientId + "&homepageId=" + homepageId ;
 var bloodGlucose = function(patientId){
     common.get({
-        url: requestUrl,
+        url: requestUrl ,
         isLoading: true,
         data:JSON.stringify({
           patientId: person.id,

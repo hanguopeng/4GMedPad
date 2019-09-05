@@ -1,6 +1,6 @@
 var cmcServer="http://doclever.cn:8090/mock/5ad3f5ff995b693f603c9eeb";
 //var tempChartServer = "http://192.168.1.126:8001"; //pad里面体温单的路径
-//var localServer = "http://192.168.1.126:8085/cmc-server";
+//var localServer = "http://192.168.43.228:8085/cmc-server";
 
 var tempChartServer = "http://172.17.100.2:8085"; //pad里面体温单的路径
 var localServer = "http://172.17.100.2:8083/cmc-server";
@@ -49,7 +49,7 @@ var config={
     bloodSugarDetail: localServer+"/nur/bloodSugar/",//血糖检测表查询
     bloodGlucoseDetail: localServer+"/nur/nurseLog/", //血糖监测明细
     boneCriticallyIllQuery: localServer+"/nur/boneCriticallyIll/",//骨科病重(病危)患者护理记录单查询
-    criticallyIllQuery: localServer+"/nur/criticallyIll/",//血液肿瘤科病重(病危)患者护理记录单查询
+    criticallyIllQuery: localServer+"/nur/nursePlan/listDetails/json",//血液肿瘤科病重(病危)患者护理记录单查询
     patientSearchUrl: localServer+"/med/patient/padList",//根据条件查询所有病人信息
     ydsbjlbUrl: localServer+"/nur/nursePlan/selectInsulin?patientId=",   //胰岛素泵列表
     ydsbjlbDetailsUrl: localServer+"/nur/nursePlan/selectInsulin/detail?id=",   //胰岛素泵详情
