@@ -104,6 +104,9 @@ var doctorAdvice = function(patientId){
                     if (ret.content.list&&ret.content.list.length>0){
                         for(var i=0;i<ret.content.list.length;i++){
                             var item = ret.content.list[i];
+                            if (!isEmpty(item.dosage)){
+                                item.name = item.name + "，每次" + item.dosage
+                            }
                             // 判断是否有关联医嘱
                             if (item.sonBoList && item.sonBoList.length>0){
                                 // 合并医嘱的标志
@@ -115,6 +118,9 @@ var doctorAdvice = function(patientId){
                                 $api.append($api.byId('tbody'), contentTmpl(item));
                                 for (var j = 0;j<item.sonBoList.length;j++){
                                     var data = item.sonBoList[j];
+                                    if (!isEmpty(data.dosage)){
+                                        data.name = data.name + "，每次" + data.dosage
+                                    }
                                     data.show = false
                                     if (j===item.sonBoList.length-1){
                                         data.icon = "└";
