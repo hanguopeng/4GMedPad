@@ -8,7 +8,7 @@
     <title>费用明细列表</title>
     <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
     <link rel="stylesheet" type="text/css" href="../css/tool_fixed.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/page.css" />
+    <link rel="stylesheet" type="text/css" href="../css/page.css"/>
     <style type="text/css">
         table {
             border-collapse: collapse;
@@ -30,6 +30,7 @@
         table tr {
             background: #fff;
         }
+
         .flex {
             display: -webkit-box;
             display: -webkit-flex;
@@ -49,35 +50,39 @@
             text-align: center;
         }
 
-        input.searchInput,select.searchInput {
+        input.searchInput, select.searchInput {
             display: inline-block;
             border-bottom: 1px double #b9b9b9;
             width: auto;
             height: 1.5rem;
         }
 
-        .feeDetailTable{
+        .feeDetailTable {
             overflow-x: scroll;
             font-size: 0.5rem;
         }
-        .feeDetailTable::-webkit-scrollbar {/*滚动条整体样式*/
-            width: 1rem;     /*高宽分别对应横竖滚动条的尺寸*/
+
+        .feeDetailTable::-webkit-scrollbar { /*滚动条整体样式*/
+            width: 1rem; /*高宽分别对应横竖滚动条的尺寸*/
             height: 0.2rem;
         }
-        .feeDetailTable::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+
+        .feeDetailTable::-webkit-scrollbar-thumb { /*滚动条里面小方块*/
             border-radius: 10px;
-            -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+            -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
             background: #289bd0;
         }
-        .feeDetailTable::-webkit-scrollbar-track {/*滚动条里面轨道*/
-            -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+
+        .feeDetailTable::-webkit-scrollbar-track { /*滚动条里面轨道*/
+            -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
             border-radius: 10px;
             background: #EDEDED;
         }
+
         td {
             width: 1px;
             white-space: nowrap; /* 自适应宽度*/
-            word-break:  keep-all; /* 避免长单词截断，保持全部 */
+            word-break: keep-all; /* 避免长单词截断，保持全部 */
         }
     </style>
 </head>
@@ -138,37 +143,37 @@
 <script id="content-tmpl" type="text/template">
     <tr onclick="openFeeDetails({{=item.id}})">
         {{?it.size>0}}
-        <td  rowspan="{{=it.size}}" style="color:{{=it.fieldENName}}">{{=it.priorityName||''}}</td>
-        <td  rowspan="{{=it.size}}"style="color:{{=it.fieldENName}}">{{=it.adviceStart||''}}</td>
+        <td rowspan="{{=it.size}}" style="color:{{=it.fieldENName}}">{{=it.priorityName||''}}</td>
+        <td rowspan="{{=it.size}}" style="color:{{=it.fieldENName}}">{{=it.adviceStart||''}}</td>
         {{??}}
         {{?it.show}}
-        <td  style="color:{{=it.fieldENName}}">{{=it.priorityName||''}}</td>
-        <td  style="color:{{=it.fieldENName}}">{{=it.adviceStart||''}}</td>
+        <td style="color:{{=it.fieldENName}}">{{=it.priorityName||''}}</td>
+        <td style="color:{{=it.fieldENName}}">{{=it.adviceStart||''}}</td>
         {{?}}
         {{?}}
-        <td  style="color:{{=it.fieldENName}}">{{=it.icon||''}}</td>
-        <td  style="color:{{=it.fieldENName}}">{{=it.name||''}}</td>
-        <td  style="color:{{=it.fieldENName}}">{{=it.num||''}}</td>
-        <td  style="color:{{=it.fieldENName}}">{{=it.dosage||''}}</td>
-        <td  style="color:{{=it.fieldENName}}">{{=it.dateNum||''}}</td>
-        <td  style="color:{{=it.fieldENName}}">{{=it.frequencyName||''}}</td>
-        <td  style="color:{{=it.fieldENName}}">{{=it.usageName||''}}</td>
-        <td  style="color:{{=it.fieldENName}}">{{=it.entrustment||''}}</td>
-        <td  style="color:{{=it.fieldENName}}">{{=it.executionTime||''}}</td>
-        <td  style="color:{{=it.fieldENName}}">{{=it.TerminationTime||''}}</td>
-        <td  style="color:{{=it.fieldENName}}">{{=it.acceptOrgName||''}}</td>
-        <td  style="color:{{=it.fieldENName}}">{{=it.executiveNature||''}}</td>
-        <td  style="color:{{=it.fieldENName}}">{{=it.lastExcecutiveTime||''}}</td>
-        <td  style="color:{{=it.fieldENName}}">{{=it.statusName||''}}</td>
-        <td  style="color:{{=it.fieldENName}}">{{=it.doctorName||''}}</td>
-        <td  style="color:{{=it.fieldENName}}">{{=it.foundTime||''}}</td>
-        <td  style="color:{{=it.fieldENName}}">{{=it.nurseName||''}}</td>
-        <td  style="color:{{=it.fieldENName}}">{{=it.checkTime||''}}</td>
-        <td  style="color:{{=it.fieldENName}}">{{=it.stopDocName||''}}</td>
-        <td  style="color:{{=it.fieldENName}}">{{=it.stopTime||''}}</td>
-        <td  style="color:{{=it.fieldENName}}">{{=it.stopNurseName||''}}</td>
-        <td  style="color:{{=it.fieldENName}}">{{=it.stopConfirm||''}}</td>
-        <td  style="color:{{=it.fieldENName}}">{{=it.drugs||''}}</td>
+        <td style="color:{{=it.fieldENName}}">{{=it.icon||''}}</td>
+        <td style="color:{{=it.fieldENName}}">{{=it.name||''}}</td>
+        <td style="color:{{=it.fieldENName}}">{{=it.num||''}}</td>
+        <td style="color:{{=it.fieldENName}}">{{=it.dosage||''}}</td>
+        <td style="color:{{=it.fieldENName}}">{{=it.dateNum||''}}</td>
+        <td style="color:{{=it.fieldENName}}">{{=it.frequencyName||''}}</td>
+        <td style="color:{{=it.fieldENName}}">{{=it.usageName||''}}</td>
+        <td style="color:{{=it.fieldENName}}">{{=it.entrustment||''}}</td>
+        <td style="color:{{=it.fieldENName}}">{{=it.executionTime||''}}</td>
+        <td style="color:{{=it.fieldENName}}">{{=it.TerminationTime||''}}</td>
+        <td style="color:{{=it.fieldENName}}">{{=it.acceptOrgName||''}}</td>
+        <td style="color:{{=it.fieldENName}}">{{=it.executiveNature||''}}</td>
+        <td style="color:{{=it.fieldENName}}">{{=it.lastExcecutiveTime||''}}</td>
+        <td style="color:{{=it.fieldENName}}">{{=it.statusName||''}}</td>
+        <td style="color:{{=it.fieldENName}}">{{=it.doctorName||''}}</td>
+        <td style="color:{{=it.fieldENName}}">{{=it.foundTime||''}}</td>
+        <td style="color:{{=it.fieldENName}}">{{=it.nurseName||''}}</td>
+        <td style="color:{{=it.fieldENName}}">{{=it.checkTime||''}}</td>
+        <td style="color:{{=it.fieldENName}}">{{=it.stopDocName||''}}</td>
+        <td style="color:{{=it.fieldENName}}">{{=it.stopTime||''}}</td>
+        <td style="color:{{=it.fieldENName}}">{{=it.stopNurseName||''}}</td>
+        <td style="color:{{=it.fieldENName}}">{{=it.stopConfirm||''}}</td>
+        <td style="color:{{=it.fieldENName}}">{{=it.drugs||''}}</td>
     </tr>
 </script>
 <script id="feeInfo-tmpl" type="text/template">

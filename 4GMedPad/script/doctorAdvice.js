@@ -147,6 +147,7 @@ var doctorAdvice = function(patientId){
     }
 };
 var changeTab = function(obj,code){
+    page = 1;
     var active = $api.hasCls(obj,'active');
     if(!active){
         $api.removeCls($api.byId('all'), 'active');

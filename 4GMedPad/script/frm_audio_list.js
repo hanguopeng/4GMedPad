@@ -176,7 +176,6 @@ function pagerCloudSearch(){
   if(""!=recordTime || ""!=recordPerson){
         uurl = "&recordTime="+recordTime+"&recordPerson="+recordPerson;
   }
-    //alert(uurl);
   common.get({
     url:config.accessoryQueryUrl+"?localId="+dataId+"&type="+accessoryType.audio+"&patientId="+person.id+"&limit="+pageSize+"&page="+cloudPage+uurl,
     isLoading:true,
