@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0bf6782a-8439-4a1a-89eb-6985fa4aaa72" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/html/camera_test.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/frm_camera_list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script/camera.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script/frm_camera_list.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/drawer_person_content.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/drawer_person_content.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/frm_fee_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/frm_fee_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/frm_fee_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/frm_fee_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/script/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script/doctorAdvice.js" beforeDir="false" afterPath="$PROJECT_DIR$/script/doctorAdvice.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script/frm_audio_list.js" beforeDir="false" afterPath="$PROJECT_DIR$/script/frm_audio_list.js" afterDir="false" />
-    </list>
+    <list default="true" id="0bf6782a-8439-4a1a-89eb-6985fa4aaa72" name="Default Changelist" comment="" />
     <list id="80a3237f-18d1-4e7e-9ca4-3beb3f7efe58" name="ignoreList" comment="" />
     <list id="008324b3-47a1-4c56-b8c1-4664b1c48a20" name="医嘱" comment="" />
     <list id="70ca52e9-9657-4cc1-92b1-73051c08c2ef" name="检查化验" comment="" />
@@ -46,11 +34,6 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html/frm_boneCriticallyIll.html">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html/frm_criticallyIll.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2451">
@@ -75,7 +58,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html/frm_fee_detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
+            <state relative-caret-position="4845">
               <caret line="255" column="43" selection-start-line="255" selection-start-column="43" selection-end-line="255" selection-end-column="43" />
               <folding>
                 <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -85,11 +68,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html/frm_person_center.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="587">
-              <caret line="468" column="17" lean-forward="true" selection-start-line="468" selection-start-column="17" selection-end-line="468" selection-end-column="17" />
+            <state relative-caret-position="226">
+              <caret line="449" column="31" lean-forward="true" selection-start-line="449" selection-start-column="31" selection-end-line="449" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -97,8 +80,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html/frm_doctor_advice.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="874">
-              <caret line="46" column="98" selection-start-line="46" selection-start-column="98" selection-end-line="46" selection-end-column="98" />
+            <state relative-caret-position="354">
+              <caret line="160" column="34" selection-start-line="160" selection-start-column="34" selection-end-line="160" selection-end-column="34" />
               <folding>
                 <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#col#0;n#colgroup#0;n#table#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -108,11 +91,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script/doctorAdvice.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2774">
-              <caret line="146" column="51" selection-start-line="146" selection-start-column="51" selection-end-line="146" selection-end-column="51" />
+            <state relative-caret-position="491">
+              <caret line="185" column="32" lean-forward="true" selection-start-line="185" selection-start-column="32" selection-end-line="185" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/script/config.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1197">
+              <caret line="63" column="60" selection-start-line="63" selection-start-column="4" selection-end-line="63" selection-end-column="60" />
             </state>
           </provider>
         </entry>
@@ -120,8 +112,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html/frm_doctor_advice_details.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2223">
-              <caret line="117" column="61" selection-start-line="117" selection-start-column="61" selection-end-line="117" selection-end-column="61" />
+            <state relative-caret-position="323">
+              <caret line="32" column="56" lean-forward="true" selection-start-line="32" selection-start-column="56" selection-end-line="32" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -222,7 +214,6 @@
         <option value="$PROJECT_DIR$/html/frm_analysis_result.html" />
         <option value="$PROJECT_DIR$/html/frm_inspection_result.html" />
         <option value="$PROJECT_DIR$/script/frm_ydsbjlb_detail.js" />
-        <option value="$PROJECT_DIR$/html/frm_doctor_advice_details.html" />
         <option value="$PROJECT_DIR$/script/config.js" />
         <option value="$PROJECT_DIR$/script/personCenter.js" />
         <option value="$USER_HOME$/Desktop/dist/config/index.js" />
@@ -235,9 +226,10 @@
         <option value="$PROJECT_DIR$/html/frm_doctor_advice.html" />
         <option value="$PROJECT_DIR$/script/doctor_advice_details.js" />
         <option value="$PROJECT_DIR$/html/frm_fee_list.html" />
-        <option value="$PROJECT_DIR$/script/doctorAdvice.js" />
         <option value="$PROJECT_DIR$/html/frm_fee_detail.html" />
         <option value="$PROJECT_DIR$/html/frm_person_center.html" />
+        <option value="$PROJECT_DIR$/script/doctorAdvice.js" />
+        <option value="$PROJECT_DIR$/html/frm_doctor_advice_details.html" />
       </list>
     </option>
   </component>
@@ -259,7 +251,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -270,17 +261,13 @@
             <path>
               <item name="4GMedPad" type="b2602c69:ProjectViewProjectNode" />
               <item name="4GMedPad" type="462c0819:PsiDirectoryNode" />
-              <item name="html" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="4GMedPad" type="b2602c69:ProjectViewProjectNode" />
-              <item name="4GMedPad" type="462c0819:PsiDirectoryNode" />
               <item name="script" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -289,7 +276,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1565570497841" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -361,17 +348,17 @@
       <workItem from="1566176260505" duration="9824000" />
       <workItem from="1568685569273" duration="3325000" />
       <workItem from="1568720944858" duration="71000" />
+      <workItem from="1571014984929" duration="193000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="239884000" />
+    <option name="totallyTimeSpent" value="240077000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18336888" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18550107" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="DB Browser" order="2" weight="0.32995737" />
       <window_info id="Project Explorer" order="3" />
@@ -631,13 +618,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/script/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1197">
-          <caret line="63" column="60" selection-start-line="63" selection-start-column="4" selection-end-line="63" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html/frm_main_content.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-346">
@@ -684,6 +664,9 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/html/frm_tools.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/html/frm_boneCriticallyIll.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -705,29 +688,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html/frm_doctor_advice.html">
+    <entry file="file://$PROJECT_DIR$/html/frm_fee_detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="874">
-          <caret line="46" column="98" selection-start-line="46" selection-start-column="98" selection-end-line="46" selection-end-column="98" />
+        <state relative-caret-position="4845">
+          <caret line="255" column="43" selection-start-line="255" selection-start-column="43" selection-end-line="255" selection-end-column="43" />
           <folding>
-            <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#col#0;n#colgroup#0;n#table#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#col#0;n#colgroup#1;n#table#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/script/doctorAdvice.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2774">
-          <caret line="146" column="51" selection-start-line="146" selection-start-column="51" selection-end-line="146" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/frm_doctor_advice_details.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2223">
-          <caret line="117" column="61" selection-start-line="117" selection-start-column="61" selection-end-line="117" selection-end-column="61" />
         </state>
       </provider>
     </entry>
@@ -745,24 +713,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html/frm_tools.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/frm_fee_detail.html">
+    <entry file="file://$PROJECT_DIR$/html/frm_person_center.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="255" column="43" selection-start-line="255" selection-start-column="43" selection-end-line="255" selection-end-column="43" />
+        <state relative-caret-position="226">
+          <caret line="449" column="31" lean-forward="true" selection-start-line="449" selection-start-column="31" selection-end-line="449" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1197">
+          <caret line="63" column="60" selection-start-line="63" selection-start-column="4" selection-end-line="63" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/frm_doctor_advice_details.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="32" column="56" lean-forward="true" selection-start-line="32" selection-start-column="56" selection-end-line="32" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/frm_doctor_advice.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="354">
+          <caret line="160" column="34" selection-start-line="160" selection-start-column="34" selection-end-line="160" selection-end-column="34" />
           <folding>
-            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#col#0;n#colgroup#0;n#table#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#col#0;n#colgroup#1;n#table#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html/frm_person_center.html">
+    <entry file="file://$PROJECT_DIR$/script/doctorAdvice.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="587">
-          <caret line="468" column="17" lean-forward="true" selection-start-line="468" selection-start-column="17" selection-end-line="468" selection-end-column="17" />
+        <state relative-caret-position="491">
+          <caret line="185" column="32" lean-forward="true" selection-start-line="185" selection-start-column="32" selection-end-line="185" selection-end-column="32" />
         </state>
       </provider>
     </entry>

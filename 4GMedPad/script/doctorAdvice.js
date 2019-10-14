@@ -183,7 +183,7 @@ function openFeeDetails(adviceId) {
             x: 0,
             y: api.winHeight - 300,
             w: api.winWidth,
-            h: api.winHeight-280
+            h: api.winHeight-250
         },
         progress: {
             type: "default",
