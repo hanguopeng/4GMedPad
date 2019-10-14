@@ -59,7 +59,22 @@ function immersive(header) {
         style: 'light'
     });
 }
-
+//退出登录
+function closeWin(){
+    api.confirm({
+        title: '退出登录',
+        msg: '是否退出登录？',
+        buttons: ['确定', '取消']
+    }, function(ret, err) {
+        var index = ret.buttonIndex;
+        if(index===1){
+                common.clearStorage();
+                api.closeToWin({
+                    name: 'root'
+                });
+        }
+    });
+}
 /**
  * 获取登录人员信息
  */
