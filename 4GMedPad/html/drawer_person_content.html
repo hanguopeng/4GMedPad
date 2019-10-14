@@ -26,20 +26,20 @@
 <script id="header-tpl" type="text/template">
   <span class="aui-iconfont aui-icon-left aui-btn" style="font-weight:bold" onclick="prePerson()" tapmode="active"></span>
   {{? it.person.sex == "1"}}
-    <img class="aui-btn" style="color:pink;font-size:40px" tapmode onclick="backHome()" src="../image/u64.png">
+    <img class="aui-btn" style="color:pink;font-size:35px" tapmode onclick="backHome()" src="../image/u64.png">
   {{??}}
-    <img class="aui-btn" style="color:blue;font-size:40px" tapmode onclick="backHome()" src="../image/u37.png">
+    <img class="aui-btn" style="color:blue;font-size:35px" tapmode onclick="backHome()" src="../image/u37.png">
   {{?}}
 
   <span class="aui-iconfont aui-icon-right aui-btn" style="font-weight:bold" onclick="nextPerson()"></span>
   <div class="aui-content aui-font-size-12">
-    <span class="aui-margin-r-10">{{=it.person.name || '--'}}</span>
-    <span class="aui-margin-r-10">{{=it.person.age || '--'}}</span>
-    <span class="aui-margin-r-10">{{?it.person.sex=="1"}}男{{??it.person.sex=="2"}}女{{??}}--{{?}}
+    <span class="aui-margin-r-5">{{=it.person.name || '--'}}</span>
+    <span class="aui-margin-r-5">{{=it.person.age || '--'}}</span>
+    <span class="aui-margin-r-5">{{?it.person.sex=="1"}}男{{??it.person.sex=="2"}}女{{??}}--{{?}}
     </span>
-    <span class="aui-margin-r-10">{{=it.person.medBedName || it.person.med_bed_name || '--'}}床</span>
-    <span class="aui-margin-r-10">{{=it.person.registerNumber || it.person.register_number || '--'}}</span>
-    <span class="aui-margin-r-5">医保:{{=it.person.costType || it.person.cost_Type || '--'}}</span>
+    <span class="aui-margin-r-5">{{=it.person.medBedName || it.person.med_bed_name || '--'}}床</span>
+    <span class="aui-margin-r-5">{{=it.person.registerNumber || it.person.register_number || '--'}}</span>
+    <span class="">医保:{{=it.person.costType || it.person.cost_Type || '--'}}</span>
   </div>
 </script>
 <script type="text/javascript" src="../script/api.js"></script>
