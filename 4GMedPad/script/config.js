@@ -42,7 +42,9 @@ var config={
     querySendList: localServer+"/med/V4gMedicalAdviceSendList/padSendList", //医嘱发送记录
     costListDetails: localServer+"/med/cost/padCostList",//费用明细查询
     medCostTotal: localServer+"/med/advice/queryAdviceCost/",//费用明细查询
+    // 20191016 添加注册、修改密码功能
     changePassword: localServer+"/sys/user/password", //修改密码
+    register: localServer+"/sys/user/register", //注册
 
     //护理文书类
     smtzjcjldUrl: localServer+"/nur/VitalSigns",   //生命体征检测记录单
