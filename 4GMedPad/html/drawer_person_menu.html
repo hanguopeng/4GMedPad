@@ -189,6 +189,14 @@
                     医嘱记录
                 </div>
             </li>
+            <li class="aui-list-item" onclick="updatePassword()">
+                <div class="aui-list-item-label-icon">
+                    <i class="aui-iconfont aui-icon-unlock"></i>
+                </div>
+                <div class="aui-list-item-inner">
+                    修改密码
+                </div>
+            </li>
             <!--<li class="aui-list-item" onclick="download()">
                 <div class="aui-list-item-label-icon">
                     <i class="iconfont icon-xiazai"></i>
@@ -260,6 +268,18 @@
             name: 'win_download',
             url: '../html/win_download.html',
             reload: true
+        });
+    }
+    //修改密码
+    function updatePassword() {
+        api.openWin({
+            name: 'updatePassword',
+            bounces: false,
+            slidBackEnabled: false,
+            reload: true,
+            url: './updatePassword.html',
+            vScrollBarEnabled: true,
+            hScrollBarEnabled: false
         });
     }
 </script>

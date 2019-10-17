@@ -70,14 +70,14 @@
                 记事本
             </div>
         </li>
-        <li class="aui-list-item" onclick="updatePassword()">
+        <!--<li class="aui-list-item" onclick="updatePassword()">
             <div class="aui-list-item-label-icon">
                 <i class="aui-iconfont aui-icon-unlock"></i>
             </div>
             <div class="aui-list-item-inner">
                 修改密码
             </div>
-        </li>
+        </li>-->
         <li class="aui-list-item" onclick="closeWin()">
             <div class="aui-list-item-label-icon">
                 <i class="iconfont icon-nanxing"></i>
@@ -152,17 +152,7 @@
         });
     }
 
-    function updatePassword() {
-        api.openWin({
-            name: 'updatePassword',
-            bounces: false,
-            slidBackEnabled: false,
-            reload: true,
-            url: './updatePassword.html',
-            vScrollBarEnabled: true,
-            hScrollBarEnabled: false
-        });
-    }
+
 
 </script>
 
