@@ -72,9 +72,18 @@
               </div>
               </li>
           </ul>
-          <div class="" style="color: #a3a4a3;margin-top: 0.8rem">
+          <!--<div class="" style="color: #a3a4a3;margin-top: 0.8rem">
+            <div style="color: white;float: left;margin-left: 20%" onclick="register()">注册
+            </div>
             <input class="aui-checkbox" type="checkbox" id="remMe">
             记住用户名
+          </div>-->
+          <div class="aui-row aui-padded-5 operatorContainer">
+            <div style="color: white;float: left; padding-left: 20%" onclick="register()">注册
+            </div>
+            <div style="color: white;float: right;">
+              <input id="remMe" sclass="aui-checkbox" type="checkbox" type="checkbox">记住用户名
+            </div>
           </div>
           <div id="loginBtn" class="aui-btn aui-btn-info aui-btn-block  aui-btn-sm aui-margin-t-5" tapmode onclick="login()" style="height: 40px;border-radius:10px;background:linear-gradient(to left, #23f8e5,#57f2fc)">登录</div>
         </div>
@@ -389,6 +398,18 @@
                 });
             }
         });
+    }
+    function register(){
+      // 点击注册跳转注册页面
+      api.openWin({
+        name: 'register',
+        bounces: false,
+        slidBackEnabled : false,
+        reload:true,
+        url: './register.html',
+        vScrollBarEnabled:false,
+        hScrollBarEnabled:false
+      });
     }
 
 
