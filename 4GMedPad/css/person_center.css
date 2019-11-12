@@ -68,6 +68,9 @@ html,body{
 .sign-item .sign-circular.heartRate{
     background-color: #269fd6;
 }
+.sign-item .sign-circular.painPower{
+    background-color: #1dd8ba;
+}
 .sign-item .sign-txt{
     font-size: 0.4rem;
 }

@@ -1,6 +1,6 @@
 var cmcServer="http://doclever.cn:8090/mock/5ad3f5ff995b693f603c9eeb";
 //var tempChartServer = "http://192.168.1.126:8001"; //pad里面体温单的路径
-//var localServer = "http://192.168.1.125:8085/cmc-server";
+//var localServer = "http://192.168.43.200:8085/cmc-server";
 
 var tempChartServer = "http://172.17.100.2:8085"; //pad里面体温单的路径
 var localServer = "http://172.17.100.2:8083/cmc-server";

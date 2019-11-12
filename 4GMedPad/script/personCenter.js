@@ -57,7 +57,7 @@ var searchPatientDetail = function(patientId){
 };
 /*护理检查信息*/
 var searchLastExamineInfo = function(patientId){
-    if ($api.getStorage(storageKey.offlineFlag) == "on") {
+    if ($api.getStorage(storageKey.offlineFlag) === "on") {
         //离线
         var sql = "select * from " + cmcdb.dbNurLastExamine +
             " where medPatientId = '" + patientId + "'";
@@ -68,12 +68,13 @@ var searchLastExamineInfo = function(patientId){
         });
         //console.log("nurLastExamine=" + JSON.stringify(nurLastExamine));
 
-        if(nurLastExamine.data.length==1){
+        if(nurLastExamine.data.length===1){
             $api.text($api.byId('tiwen'), nurLastExamine.data[0].temperature||'-');
             $api.text($api.byId('huxi'), nurLastExamine.data[0].breathe||'-');
             $api.text($api.byId('maibo'), nurLastExamine.data[0].pulse||'-');
             $api.text($api.byId('xueya'), (nurLastExamine.data[0].bloodPressureLow||'-')+"/"+(nurLastExamine.data[0].bloodPressureHigh||'-'));
             $api.text($api.byId('xinlv'), nurLastExamine.data[0].heartRate||'-');
+            $api.text($api.byId('ttqd'), nurLastExamine.data[0].heartRate||'-');
         }else{
         }
     } else {
@@ -105,6 +106,11 @@ var searchLastExamineInfo = function(patientId){
                     $api.text($api.byId('xinlv'), ret.content.heartRate.measureValue||'');
                 }else{
                     $api.text($api.byId('xinlv'), '');
+                }
+                if(ret.content.painIntensity){
+                    $api.text($api.byId('ttqd'), ret.content.painIntensity.measureValue||'');
+                }else{
+                    $api.text($api.byId('ttqd'), '');
                 }
 
 

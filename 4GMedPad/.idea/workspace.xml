@@ -33,7 +33,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script/config.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="912">
@@ -51,11 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html/frm_analysis_result.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
+            <state relative-caret-position="178">
+              <caret line="66" column="59" selection-start-line="66" selection-start-column="59" selection-end-line="66" selection-end-column="59" />
             </state>
           </provider>
         </entry>
@@ -216,7 +216,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="90" />
     <option name="y" value="36" />
     <option name="width" value="975" />
@@ -239,6 +239,11 @@
               <item name="4GMedPad" type="b2602c69:ProjectViewProjectNode" />
               <item name="4GMedPad" type="462c0819:PsiDirectoryNode" />
               <item name="html" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="4GMedPad" type="b2602c69:ProjectViewProjectNode" />
+              <item name="4GMedPad" type="462c0819:PsiDirectoryNode" />
+              <item name="script" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -327,7 +332,7 @@
       <workItem from="1568720944858" duration="71000" />
       <workItem from="1571014984929" duration="193000" />
       <workItem from="1571206359246" duration="23000" />
-      <workItem from="1571295590862" duration="2645000" />
+      <workItem from="1571295590862" duration="3316000" />
     </task>
     <task id="LOCAL-00001" summary="修改密码">
       <created>1571295662470</created>
@@ -350,17 +355,23 @@
       <option name="project" value="LOCAL" />
       <updated>1571300841890</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="化验结果 添加快捷图标">
+      <created>1571304423680</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1571304423680</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="242745000" />
+    <option name="totallyTimeSpent" value="243416000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18976545" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18976545" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="DB Browser" order="2" weight="0.32995737" />
       <window_info id="Project Explorer" order="3" />
@@ -379,7 +390,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Console" order="7" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" visible="true" weight="0.2806236" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="9" visible="true" weight="0.2806236" />
       <window_info anchor="bottom" id="DB Execution Console" order="10" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
       <window_info anchor="bottom" id="Terminal" order="12" />
@@ -434,7 +445,8 @@
     <MESSAGE value="修改密码" />
     <MESSAGE value="修改密码换到左边栏" />
     <MESSAGE value="config补全url" />
-    <option name="LAST_COMMIT_MESSAGE" value="config补全url" />
+    <MESSAGE value="化验结果 添加快捷图标" />
+    <option name="LAST_COMMIT_MESSAGE" value="化验结果 添加快捷图标" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$USER_HOME$/Documents/WeChat Files/hangp1992/FileStorage/File/2019-08/frm_doctor_advice_details.html">
@@ -455,13 +467,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
           <caret line="12" column="55" lean-forward="true" selection-end-line="134" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/script/common.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="214" column="37" selection-start-line="214" selection-start-column="34" selection-end-line="214" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -742,13 +747,6 @@
         <state relative-caret-position="-2885" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/script/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="912">
-          <caret line="48" column="11" lean-forward="true" selection-start-line="48" selection-start-column="11" selection-end-line="48" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html/drawer_person_menu.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="271">
@@ -756,10 +754,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/script/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="9" selection-start-column="9" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/html/frm_analysis_result.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
+        <state relative-caret-position="178">
+          <caret line="66" column="59" selection-start-line="66" selection-start-column="59" selection-end-line="66" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="912">
+          <caret line="48" column="11" lean-forward="true" selection-start-line="48" selection-start-column="11" selection-end-line="48" selection-end-column="11" />
         </state>
       </provider>
     </entry>

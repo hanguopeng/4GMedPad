@@ -29,15 +29,21 @@ function search(){
 
 var doctorAdvice = function(patientId){
 
-    var inUse
-    var reportFlag
+    var inUse = null;
+    var reportFlag = null;
+    var nonArrivalFlag = null;
     if ($api.byId('inUse').checked){
         inUse = 1
     }
     if ($api.byId('reportFlag').checked){
         reportFlag = 1
     }
-
+    if($api.byId('nonArrival').checked){
+        nonArrivalFlag = 1
+    }
+    console.log(inUse+ "   ===========================")
+    console.log(reportFlag+ "   ===========================")
+    console.log(nonArrivalFlag+ "   ===========================")
     var typeTab = $api.attr($api.dom($api.byId('typeTabContainer'),'.active'),'id');
     var topName = $api.attr($api.byId(typeTab), 'value');
     if ($api.getStorage(storageKey.offlineFlag) == "on") {
@@ -82,7 +88,8 @@ var doctorAdvice = function(patientId){
                 homepageId: person.homepageId,
                 page: page,
                 inUse: inUse,   //在用医嘱，选中是1
-                reportFlag: reportFlag   //需要报告,  选中是1
+                reportFlag: reportFlag,   //需要报告,  选中是1
+                nonArrival: nonArrivalFlag  //未到终止时间
             }),
             dataType: "json",
             success:function(ret){
