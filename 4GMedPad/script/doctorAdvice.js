@@ -125,6 +125,7 @@ var doctorAdvice = function(patientId){
                                 $api.append($api.byId('tbody'), contentTmpl(item));
                                 for (var j = 0;j<item.sonBoList.length;j++){
                                     var data = item.sonBoList[j];
+                                    data.fieldENName = item.fieldENName
                                     if (!isEmpty(data.dosage)){
                                         data.name = data.name + "，每次" + data.dosage
                                     }
